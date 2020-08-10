@@ -45,4 +45,9 @@ namespace ECommerce_App.Models.Services
             return list;
         }
     }
+
+    public enum Manufacturer
+    {
+        
+    }
 }
