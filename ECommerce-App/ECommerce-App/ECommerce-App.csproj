@@ -5,4 +5,11 @@
     <RootNamespace>ECommerce_App</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Products\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
