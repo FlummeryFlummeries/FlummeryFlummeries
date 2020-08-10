@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="wwwroot\Styles\" />
   </ItemGroup>
 
 </Project>
