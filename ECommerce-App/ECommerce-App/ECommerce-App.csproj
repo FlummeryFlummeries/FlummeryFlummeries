@@ -7,9 +7,7 @@
 
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Products\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Styles\" />
   </ItemGroup>
 
 </Project>
