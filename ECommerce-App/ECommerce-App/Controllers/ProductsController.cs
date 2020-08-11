@@ -31,8 +31,8 @@ namespace ECommerce_App.Controllers
 
         public IActionResult Details(string search)
         {
-            List<Product> result = _product.GetProduct(search);
-            return View(result);
+            List<Product> list = _product.GetProduct(search);
+            return View(list);
         }
     }
 }

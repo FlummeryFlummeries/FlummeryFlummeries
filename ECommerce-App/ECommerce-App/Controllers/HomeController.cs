@@ -11,7 +11,6 @@ namespace ECommerce_App.Controllers
     {
         public IActionResult Index()
         {
-
             return View();
         }
     }
