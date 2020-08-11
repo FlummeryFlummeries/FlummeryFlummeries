@@ -5,59 +5,55 @@
     Layout = "_Layout";
 }
 
-<div>
-    <h2>Products</h2>
-    <div class="forms">
-        <form asp-controller="Products" asp-action="Sorted">
-            <select name="type">
-                <option value="" disabled selected hidden>Sort By</option>
-                <option value="alphabetical">Alphabetical (A-Z)</option>
-                <option value="alphabeticalRev">Alphabetical (Z-A)</option>
-                <option value="manufacturer">Manufacturer (A-Z)</option>
-                <option value="manufacturerRev">Manufacturer (Z-A)</option>                
-            </select>
+<h2>Products</h2>
+<div class="forms">
+    <form asp-controller="Products" asp-action="Sorted">
+        <select name="type">
+            <option value="" disabled selected hidden>Sort By</option>
+            <option value="alphabetical">Alphabetical (A-Z)</option>
+            <option value="alphabeticalRev">Alphabetical (Z-A)</option>
+            <option value="manufacturer">Manufacturer (A-Z)</option>
+            <option value="manufacturerRev">Manufacturer (Z-A)</option>                
+        </select>
+        <button type="submit" class="btn btn-dark">Sort Alphabetically</button>
+    </form>
 
-            <button type="submit" class="btn btn-dark">Sort Alphabetically</button>
-        </form>
-        <form asp-controller="Products" asp-action="Details">
-            <div class="form-row align-items-center">
-                <div class="col-auto">
-                    <label class="sr-only" for="search"></label>
-                    <input type="text" class="form-control mb-2" name="search" placeholder="All-Bran" required />
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-dark">Search By Name</button>
-                </div>
+    <form asp-controller="Products" asp-action="Details">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="search"></label>
+                <input type="text" class="form-control mb-2" name="search" placeholder="All-Bran" required />
             </div>
-        </form>
-    </div>
-
-
-
-    <div class="card-columns">
-        @foreach (var item in Model)
-        {
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">Manufacturer : @item.Manufacturer</p>
-                    <p class="card-text">Type : @(item.Type == "C" ? "Cold" : "Hot")</p>
-                    <p class="card-text">Calories : @item.Calories</p>
-                    <p class="card-text">Protein : @item.Protein</p>
-                    <p class="card-text">Fat : @item.Fat</p>
-                    <p class="card-text">Sodium : @item.Sodium</p>
-                    <p class="card-text">Fiber : @item.Fiber</p>
-                    <p class="card-text">Carbs : @item.Carbs</p>
-                    <p class="card-text">Sugar : @item.Sugar</p>
-                    <p class="card-text">Potassium : @item.Potassium</p>
-                    <p class="card-text">Vitamins : @item.Vitamins</p>
-                    <p class="card-text">Shelf : @item.Shelf</p>
-                    <p class="card-text">Weight : @item.Weight</p>
-                    <p class="card-text">Cups : @item.Cups</p>
-                    <p class="card-text">Rating : @item.Rating</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-dark">Search By Name</button>
             </div>
-        }
-    </div>
+        </div>
+    </form>
+</div>
+
+<div class="card-columns">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">Manufacturer : @item.Manufacturer</p>
+                <p class="card-text">Type : @(item.Type == "C" ? "Cold" : "Hot")</p>
+                <p class="card-text">Calories : @item.Calories</p>
+                <p class="card-text">Protein : @item.Protein</p>
+                <p class="card-text">Fat : @item.Fat</p>
+                <p class="card-text">Sodium : @item.Sodium</p>
+                <p class="card-text">Fiber : @item.Fiber</p>
+                <p class="card-text">Carbs : @item.Carbs</p>
+                <p class="card-text">Sugar : @item.Sugar</p>
+                <p class="card-text">Potassium : @item.Potassium</p>
+                <p class="card-text">Vitamins : @item.Vitamins</p>
+                <p class="card-text">Shelf : @item.Shelf</p>
+                <p class="card-text">Weight : @item.Weight</p>
+                <p class="card-text">Cups : @item.Cups</p>
+                <p class="card-text">Rating : @item.Rating</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    }
 </div>

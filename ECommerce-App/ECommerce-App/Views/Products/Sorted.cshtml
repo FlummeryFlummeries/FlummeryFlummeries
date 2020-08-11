@@ -6,19 +6,30 @@
 }
 
 <h2>Products</h2>
+<div class="forms">
+    <form asp-controller="Products" asp-action="Sorted">
+        <select name="type">
+            <option value="" disabled selected hidden>Sort By</option>
+            <option value="alphabetical">Alphabetical (A-Z)</option>
+            <option value="alphabeticalRev">Alphabetical (Z-A)</option>
+            <option value="manufacturer">Manufacturer (A-Z)</option>
+            <option value="manufacturerRev">Manufacturer (Z-A)</option>
+        </select>
 
-<form asp-controller="Products" asp-action="Details">
-    <div class="form-row align-items-center">
-        <div class="col-auto">
-            <label class="sr-only" for="search"></label>
-            <input type="text" class="form-control mb-2" name="search" placeholder="All-Bran" required />
+        <button type="submit" class="btn btn-dark">Sort Alphabetically</button>
+    </form>
+    <form asp-controller="Products" asp-action="Details">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="search"></label>
+                <input type="text" class="form-control mb-2" name="search" placeholder="All-Bran" required />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-dark">Search By Name</button>
+            </div>
         </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-dark">Search By Name</button>
-        </div>
-    </div>
-</form>
-
+    </form>
+</div>
 
 <div class="card-columns">
     @foreach (var item in Model)

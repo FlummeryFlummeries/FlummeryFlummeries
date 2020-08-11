@@ -8,10 +8,6 @@ namespace ECommerce_App.Models.Services
 {
     public class ProductsRepository : IProduct
     {
-        /// <summary>
-        /// Read the data from the Cereal csv file
-        /// </summary>
-        /// <returns>List of all data formatted to Products</returns>
         public List<Product> GetProducts()
         {
             string path = Environment.CurrentDirectory;
@@ -70,23 +66,18 @@ namespace ECommerce_App.Models.Services
             return list;
         }
 
-        /// <summary>
-        /// Read the data from the Cereal csv file
-        /// </summary>
-        /// <returns>Details of specific item</returns>
-        public Product GetProduct(string search)
+        public List<Product> GetProduct(string search)
         {
-            List<Product> list = GetProducts();
-            Product result = list.Where(x => x.Name == search).FirstOrDefault();
+            List<Product> result = GetProducts().Where(x => x.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase)).ToList();
             return result;
         }
 
         /// <summary>
-        /// Get the manufacturer based on the first letter
+        /// Private helper method. Get the manufacturer based on the first letter
         /// </summary>
         /// <param name="input">Letter for Manufacturer</param>
         /// <returns>Name of manufacturer</returns>
-        public string GetManufacturer(string input)
+        private string GetManufacturer(string input)
         {
             string result = "";
             switch (input)
