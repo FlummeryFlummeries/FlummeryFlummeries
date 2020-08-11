@@ -6,7 +6,7 @@
 <h1>Welcome to the ECommerce App!</h1>
 <h2>Click below to view our products.</h2>
 
-
-<form asp-controller="Products">
-    <button type="submit" class="btn btn-dark">View All Products</button>
-</form>
+<div class="page-links">
+    <a asp-controller="Products" class="btn btn-dark" role="button">View Our Products</a>
+    <a href="/Account/Register" class="btn btn-dark" role="button">Create an Account</a>
+</div>
