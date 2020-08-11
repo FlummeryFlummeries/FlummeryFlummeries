@@ -24,6 +24,6 @@ namespace ECommerce_App.Models
         /// Read the data from the Cereal csv file
         /// </summary>
         /// <returns>Details of specific item</returns>
-        Product GetProduct(string search);
+        List<Product> GetProduct(string search);
     }
 }

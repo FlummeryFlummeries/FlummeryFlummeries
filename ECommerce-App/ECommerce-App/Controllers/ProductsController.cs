@@ -29,9 +29,9 @@ namespace ECommerce_App.Controllers
             return View(list);
         }
 
-        public IActionResult Details (string search)
+        public IActionResult Details(string search)
         {
-            Product result = _product.GetProduct(search);
+            List<Product> result = _product.GetProduct(search);
             return View(result);
         }
     }

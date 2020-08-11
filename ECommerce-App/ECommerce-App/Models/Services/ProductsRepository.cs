@@ -74,10 +74,9 @@ namespace ECommerce_App.Models.Services
         /// Read the data from the Cereal csv file
         /// </summary>
         /// <returns>Details of specific item</returns>
-        public Product GetProduct(string search)
+        public List<Product> GetProduct(string search)
         {
-            List<Product> list = GetProducts();
-            Product result = list.Where(x => x.Name == search).FirstOrDefault();
+            List<Product> result = GetProducts().Where(x => x.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase)).ToList();
             return result;
         }
 
