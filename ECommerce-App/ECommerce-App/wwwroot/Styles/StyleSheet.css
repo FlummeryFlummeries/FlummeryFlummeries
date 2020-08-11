@@ -1,9 +1,27 @@
 ﻿body {
-    background-color: azure;
+    background-color: #212121;
     text-align: center;
     color: red;
 }
 
 h1 {
-    color: red;
+    font-size: 4em;
+    color: tan;
 }
+
+h2 {
+    color: tan;
+    font-size: 2.5em;
+}
+
+main {
+    text-align: center;
+}
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: fit-content;
+}
+

@@ -23,18 +23,16 @@ namespace ECommerce_App.Controllers
             return View(list);
         }
 
-        public IActionResult Details(List<Product> list)
+        public IActionResult Sorted(string type)
         {
-            list.Sort((x, y) => string.Compare(x.Name, y.Name));
+            List<Product> list = _product.SortProducts(type);
             return View(list);
         }
 
-        public IActionResult Sorted(List<Product> list, string search)
+        public IActionResult Details (string search)
         {
-            var result = list.Where(x => x.Name == search);
+            Product result = _product.GetProduct(search);
             return View(result);
         }
-
-
     }
 }

@@ -25,7 +25,7 @@ namespace ECommerce_App.Models.Services
                 list.Add(new Product()
                 {
                     Name = split[0],
-                    Manufacturer = split[1],
+                    Manufacturer = GetManufacturer(split[1]),
                     Type = split[2],
                     Calories = int.Parse(split[3]),
                     Protein = int.Parse(split[4]),
@@ -44,10 +44,78 @@ namespace ECommerce_App.Models.Services
             }
             return list;
         }
-    }
 
-    public enum Manufacturer
-    {
-        
+        public List<Product> SortProducts(string type)
+        {
+            List<Product> list = GetProducts();
+            switch (type)
+            {
+                case "alphabetical":
+                    list.Sort((x, y) => string.Compare(x.Name, y.Name));
+                    break;
+                case "alphabeticalRev":
+                    list.Sort((x, y) => string.Compare(x.Name, y.Name));
+                    list.Reverse();
+                    break;
+                case "manufacturer":
+                    list.Sort((x, y) => string.Compare(x.Manufacturer, y.Manufacturer));
+                    break;
+                case "manufacturerRev":
+                    list.Sort((x, y) => string.Compare(x.Manufacturer, y.Manufacturer));
+                    list.Reverse();
+                    break;
+                default:
+                    break;
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Read the data from the Cereal csv file
+        /// </summary>
+        /// <returns>Details of specific item</returns>
+        public Product GetProduct(string search)
+        {
+            List<Product> list = GetProducts();
+            Product result = list.Where(x => x.Name == search).FirstOrDefault();
+            return result;
+        }
+
+        /// <summary>
+        /// Get the manufacturer based on the first letter
+        /// </summary>
+        /// <param name="input">Letter for Manufacturer</param>
+        /// <returns>Name of manufacturer</returns>
+        public string GetManufacturer(string input)
+        {
+            string result = "";
+            switch (input)
+            {
+                case "A":
+                    result = "American Home Food Products";
+                    break;
+                case "G":
+                    result = "General Mills";
+                    break;
+                case "K":
+                    result = "Kelloggs";
+                    break;
+                case "N":
+                    result = "Nabisco";
+                    break;
+                case "P":
+                    result = "Post";
+                    break;
+                case "Q":
+                    result = "Quaker Oats";
+                    break;
+                case "R":
+                    result = "Ralston Purina";
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
     }
 }
