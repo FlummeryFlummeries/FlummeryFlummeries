@@ -23,10 +23,11 @@ namespace ECommerce_App.Controllers
             return View(list);
         }
 
-        public IActionResult Sorted(string type)
+        [HttpPost]
+        public IActionResult Index(string type)
         {
             List<Product> list = _product.SortProducts(type);
-            return View(list);
+            return View("Index", list);
         }
 
         public IActionResult Details(string search)
