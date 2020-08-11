@@ -27,7 +27,7 @@ namespace ECommerce_App.Controllers
         public IActionResult Index(string type)
         {
             List<Product> list = _product.SortProducts(type);
-            return View("Index", list);
+            return View(list);
         }
 
         public IActionResult Details(string search)
