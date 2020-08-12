@@ -24,70 +24,78 @@ namespace ECommerce_App.Data
                     Id = 1,
                     Name = "Job Jelly",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 1525,
                     Weight = 0.5m,
                     Compliment = "I can't believe you managed to pull that off. Good job."
                 },
                 new Flummery
                 {
                     Id = 2,
-                    Name = "Job Jelly",
+                    Name = "Tied for First",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 1300,
                     Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Compliment = "That tie looks great on you! Is it new?"
                 },
                 new Flummery
                 {
                     Id = 3,
-                    Name = "Job Jelly",
+                    Name = "Tryion",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 900,
                     Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Compliment = "Oh wow, you really tried your hardest on that!"
                 },
                 new Flummery
                 {
                     Id = 4,
-                    Name = "Job Jelly",
+                    Name = "Baby Cowboy",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 912,
                     Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Compliment = "That chili would be pretty spicy to an infant."
                 },
                 new Flummery
                 {
                     Id = 5,
-                    Name = "Job Jelly",
+                    Name = "Polka",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 2100,
                     Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Compliment = "Stylish if your grandparents dressed you."
                 },
                 new Flummery
                 {
                     Id = 6,
-                    Name = "Job Jelly",
+                    Name = "Lark on the Wing",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 1792,
                     Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Compliment = "What a nice sorting algorithm."
                 },
                 new Flummery
                 {
                     Id = 7,
-                    Name = "Job Jelly",
+                    Name = "Scarce Flour",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 1135,
                     Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Compliment = "Yeah, that's a nice loaf of quarantine sourdough."
                 },
                 new Flummery
                 {
                     Id = 8,
                     Name = "Job Jelly",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 1280,
                     Weight = 0.5m,
                     Compliment = "I can't believe you managed to pull that off. Good job."
                 },
@@ -96,7 +104,8 @@ namespace ECommerce_App.Data
                     Id = 9,
                     Name = "Job Jelly",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 615,
                     Weight = 0.5m,
                     Compliment = "I can't believe you managed to pull that off. Good job."
                 },
@@ -105,7 +114,8 @@ namespace ECommerce_App.Data
                     Id = 10,
                     Name = "Job Jelly",
                     Manufacturer = "Acme Baking",
-                    Calories = 3000,
+                    Price = 9.99m,
+                    Calories = 1952,
                     Weight = 0.5m,
                     Compliment = "I can't believe you managed to pull that off. Good job."
                 }

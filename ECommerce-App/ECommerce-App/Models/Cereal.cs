@@ -11,6 +11,8 @@ namespace ECommerce_App.Models
 
         override public string Manufacturer { get; set; }
 
+        override public decimal Price { get; set; }
+
         public string Type { get; set; }
 
         public int Calories { get; set; }

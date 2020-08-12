@@ -13,6 +13,8 @@ namespace ECommerce_App.Models.ViewModels
 
         public string Manufacturer { get; set; }
 
+        public  decimal Price { get; set; }
+
         public int Calories { get; set; }
 
         public decimal Weight { get; set; }

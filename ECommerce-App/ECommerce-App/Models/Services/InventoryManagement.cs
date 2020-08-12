@@ -13,6 +13,12 @@ namespace ECommerce_App.Models.Services
     {
         private StoreDbContext _context;
 
+        /// <summary>
+        /// Instantiates an InventoryManagment object.
+        /// </summary>
+        /// <param name="context">
+        /// StoreDBContext: an object that inherits from DbContext
+        /// </param>
         public InventoryManagement(StoreDbContext context)
         {
             _context = context;
@@ -123,6 +129,15 @@ namespace ECommerce_App.Models.Services
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Private helper method. Converts a FlummeryVM to a Flmmery entity object.
+        /// </summary>
+        /// <param name="flummeryVM">
+        /// FlummeryVM: a FlummeryVM object to be converted
+        /// </param>
+        /// <returns>
+        /// Flummery: a Flummery entity object, converted
+        /// </returns>
         private Flummery ConvertFlummeryVMToEntity(FlummeryVM flummeryVM)
         {
             return new Flummery
@@ -136,6 +151,15 @@ namespace ECommerce_App.Models.Services
             };
         }
 
+        /// <summary>
+        /// Private helper method. Converts a Flummery entity to a FlmmeryVM entity object.
+        /// </summary>
+        /// <param name="flummeryVM">
+        /// Flummery: a Flummery entity object to be converted
+        /// </param>
+        /// <returns>
+        /// FlummeryVM: a FlummeryVM object, converted
+        /// </returns>
         private FlummeryVM ConvertFlummeryEntityToVM(Flummery flummery)
         {
             return new FlummeryVM
