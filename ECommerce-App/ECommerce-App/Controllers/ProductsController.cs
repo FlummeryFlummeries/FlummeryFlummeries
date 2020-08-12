@@ -20,20 +20,25 @@ namespace ECommerce_App.Controllers
         public IActionResult Index()
         {
             List<Product> list = _product.GetProducts();
-            return View(list);
+            return View(ConvertProductListToCereal(list));
         }
 
         [HttpPost]
         public IActionResult Index(string type)
         {
             List<Product> list = _product.SortProducts(type);
-            return View(list);
+            return View(ConvertProductListToCereal(list));
         }
 
         public IActionResult Details(string search)
         {
             List<Product> list = _product.GetProduct(search);
-            return View(list);
+            return View(ConvertProductListToCereal(list));
+        }
+
+        private List<Cereal> ConvertProductListToCereal(List<Product> productsCastableToCereal)
+        {
+            return productsCastableToCereal.Cast<Cereal>().ToList();
         }
     }
 }
