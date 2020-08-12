@@ -11,7 +11,6 @@ using ECommerce_App.Models.Services;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 
@@ -36,25 +35,25 @@ namespace ECommerce_App.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.Persistent, false);
+            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.Persistent, false);
 
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError("", "Invalid Username or Password");
+
+            ModelState.AddModelError("", "Invalid Email or Password");
             return Page();
         }
 
         public class LoginViewModel
         {
             [Required]
+            //[Display("Email Address")]
             [EmailAddress]
             public string Email { get; set; }
 
+            // These are like server side versions of adding required and type="password" to the inputs on the front end
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }

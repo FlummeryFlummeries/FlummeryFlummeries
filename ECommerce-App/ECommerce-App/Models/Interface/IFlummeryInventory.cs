@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Models.Interface
 {
-    interface IInventory
+    public interface IFlummeryInventory
     {
         /// <summary>
         /// Gets a list of all FlummeryVM objects saved to the database.
@@ -15,6 +15,17 @@ namespace ECommerce_App.Models.Interface
         /// Task<List<FlummeryVM>>: a List of FlummeryVMs in a Task object
         /// </returns>
         Task<List<FlummeryVM>> GetAllFlummeries();
+
+        /// <summary>
+        /// Gets a FlummeryVM by its id.
+        /// </summary>
+        /// <param name="id">
+        /// int: the id of a FlummeryVM
+        /// </param>
+        /// <returns>
+        /// Task<FlummeryVM>: a FlummeryVM in a Task object if the id exists, null if not
+        /// </returns>
+        Task<FlummeryVM> GetFlummeryBy(int id);
 
         /// <summary>
         /// Gets a list of all FlummeryVM objects that match the search term.
