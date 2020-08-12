@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Models.ViewModels
 {
-    public class FlummeryVM
+    public class FlummeryVM : ProductVM
     {
-        public int Id { get; set; }
+        override public int Id { get; set; }
 
-        public string Name { get; set; }
+        override public string Name { get; set; }
 
-        public string Manufacturer { get; set; }
+        override public string Manufacturer { get; set; }
 
-        public  decimal Price { get; set; }
+        override public  decimal Price { get; set; }
 
         public int Calories { get; set; }
 

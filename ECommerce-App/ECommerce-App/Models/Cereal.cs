@@ -7,6 +7,8 @@ namespace ECommerce_App.Models
 {
     public class Cereal : Product
     {
+        override public int Id { get; set; }
+
         override public string Name { get; set; }
 
         override public string Manufacturer { get; set; }

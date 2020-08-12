@@ -13,8 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce_App
@@ -41,7 +39,7 @@ namespace ECommerce_App
 
             services.AddDbContext<UserDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
+                options.UseSqlServer(Config.GetConnectionString("UserConnection"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()

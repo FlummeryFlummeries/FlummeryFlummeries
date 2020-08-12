@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ECommerce_App.Models
+namespace ECommerce_App.Models.ViewModels
 {
-    abstract public class Product
+    abstract public class ProductVM
     {
         abstract public int Id { get; set; }
 

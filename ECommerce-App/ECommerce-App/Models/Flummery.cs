@@ -7,7 +7,7 @@ namespace ECommerce_App.Models
 {
     public class Flummery : Product
     {
-        public int Id { get; set; }
+        public override int Id { get; set; }
 
         public override string Name { get; set; }
 
