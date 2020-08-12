@@ -14,13 +14,13 @@
     <header>
         @if (SignInManager.IsSignedIn(User))
         {
-            <span> Hello @User.Claims.First(x => x.Type == "FullName").Value</span>
-            <form asp-page="/Account/Logout" method="post"> <button type="submit"> LOGOUT</button></form>
+            <div> Hello @User.Claims.First(x => x.Type == "FullName").Value</div>
+            <form asp-page="/Account/Logout" method="post"> <button class="btn btn-dark" type="submit">Logout</button></form>
         }
         else
         {
-            <a asp-page="/Account/Login">Login</a>
-            <a asp-page="/Account/Register">Register</a>
+            <a asp-page="/Account/Login" class="btn btn-dark" role="button">Login</a>
+            <a asp-page="/Account/Register" class="btn btn-dark" role="button">Create an Account</a>
         }
     </header>
 

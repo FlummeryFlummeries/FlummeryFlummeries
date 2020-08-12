@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CerealECommerce.Pages.Account
+namespace ECommerce_App.Pages.Account
 {
     public class LogoutModel : PageModel
     {
@@ -15,9 +15,9 @@ namespace CerealECommerce.Pages.Account
         {
             _signInManager = signIn;
         }
+
         public void OnGet()
         {
-
         }
 
         public async Task<IActionResult> OnPost()
