@@ -41,6 +41,8 @@ namespace ECommerce_App.Pages.Account
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            ModelState.AddModelError("", "Invalid Email or Password");
             return Page();
         }
 
