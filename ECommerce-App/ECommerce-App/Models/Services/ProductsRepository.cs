@@ -18,7 +18,7 @@ namespace ECommerce_App.Models.Services
             foreach (var item in myFile)
             {
                 string[] split = item.Split(",");
-                list.Add(new Product()
+                list.Add(new Cereal()
                 {
                     Name = split[0],
                     Manufacturer = GetManufacturer(split[1]),

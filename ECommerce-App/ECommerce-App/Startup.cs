@@ -12,23 +12,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce_App
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Config { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration config)
         {
-            Configuration = configuration;
+            Config = config;
         }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<StoreDbContext>(options =>
+            {
+                options.UseSqlServer(Config.GetConnectionString("StoreConnection"));
+            });
 
             services.AddDbContext<UserDbContext>(options =>
             {
