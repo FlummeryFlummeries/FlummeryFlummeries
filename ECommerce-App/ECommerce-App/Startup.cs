@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.AspNetCore.Identity;
+using ECommerce_App.Models.Interface;
 
 namespace ECommerce_App
 {
@@ -47,6 +48,8 @@ namespace ECommerce_App
                     .AddDefaultTokenProviders();
 
             services.AddTransient<IProduct, ProductsRepository>();
+            services.AddTransient<IInventory, InventoryManagement>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

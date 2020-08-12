@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Models.Interface
 {
-    interface IInventory
+    public interface IInventory
     {
         /// <summary>
         /// Gets a list of all FlummeryVM objects saved to the database.
