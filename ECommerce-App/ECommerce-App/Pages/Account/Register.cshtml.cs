@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
@@ -12,10 +13,12 @@ namespace ECommerce_App.Pages.Account
     public class RegisterModel : PageModel
     {
         private UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signInManager;
 
-        public RegisterModel(UserManager<ApplicationUser> userManager)
+        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [BindProperty]
@@ -28,21 +31,24 @@ namespace ECommerce_App.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-            if (Input.Password != Input.ConfirmPassword) return Page();
-            ApplicationUser user = new ApplicationUser()
+            if (ModelState.IsValid)
             {
-                Email = Input.Email,
-                UserName = Input.Email,
-                FirstName = Input.FirstName,
-                LastName = Input.LastName
-            };
+                ApplicationUser user = new ApplicationUser()
+                {
+                    Email = Input.Email,
+                    UserName = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName
+                };
 
-            var registered = await _userManager.CreateAsync(user, Input.Password);
-            if (registered.Succeeded)
-            {
-                return new LocalRedirectResult("/../..");
+                var registered = await _userManager.CreateAsync(user, Input.Password);
+                if (registered.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, Input.Persistent);
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            
             return Page();
         }
 
@@ -50,11 +56,29 @@ namespace ECommerce_App.Pages.Account
 
         public class RegisterViewModel
         {
+            [Required]
+            //[Display("Email Address")]
+            [EmailAddress]
             public string Email { get; set; }
-            public string Password { get; set; }
-            public string ConfirmPassword { get; set; }
+
+
+            [Required]
             public string FirstName { get; set; }
+
+            [Required]
             public string LastName { get; set; }
+
+            // These are like server side versions of adding required and type="password" to the inputs on the front end
+            [Required]
+            [DataType(DataType.Password)]
+            public string Password { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]
+            [Compare("Password")]
+            public string ConfirmPassword { get; set; }
+
+            public bool Persistent { get; set; }
         }
     }
 }
