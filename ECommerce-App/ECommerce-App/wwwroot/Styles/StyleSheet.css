@@ -32,4 +32,11 @@ main {
 form {
     padding-top: 0.25em;
     padding-bottom: 0.5em;
+    margin: 10px auto;
+}
+
+.page-links > a{
+    display: block;
+    width: 160px;
+    margin: 15px auto 0px;
 }

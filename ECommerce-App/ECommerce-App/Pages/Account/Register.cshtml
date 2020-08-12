@@ -1,0 +1,43 @@
+﻿@page
+@model ECommerce_App.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout";
+}
+
+<h1>Register</h1>
+
+
+<form method="post">
+    <div class="form-row justify-content-center">
+        <div class="col-md-2 mb-3">
+            <label asp-for="@Model.Input.FirstName" for="validationCustom01">First name</label>
+            <input asp-for="@Model.Input.FirstName" type="text" class="form-control" id="validationCustom01" placeholder="First name" required>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label asp-for="@Model.Input.LastName" for="validationCustom02">Last name</label>
+            <input asp-for="@Model.Input.LastName" type="text" class="form-control" id="validationCustom02" placeholder="Last name" required>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label asp-for="@Model.Input.Email for=" validationCustom02">Email</label>
+            <input asp-for="@Model.Input.Email type=" text" class="form-control" id="validationCustom02" placeholder="Email Address" required>
+        </div>
+    </div>
+    <div class="form-row row2 justify-content-center">
+        <div class="col-md-3 mb-3">
+            <label asp-for="@Model.Input.Password" for="validationCustom03">Password</label>
+            <input asp-for="@Model.Input.Password" type="password" class="form-control" id="validationCustom03" placeholder="Password" required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="@Model.Input.ConfirmPassword" for="validationCustom04">Confirm Password</label>
+            <input asp-for="@Model.Input.ConfirmPassword" type="password" class="form-control" id="validationCustom04" placeholder="Confirm Password" required>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+<div class="page-links">
+    <p>Already have an account?</p>
+    <a asp-page="/Account/Login" class="btn btn-dark" role="button">Login</a>
+    <a asp-controller="Home" class="btn btn-dark" role="button">Return Home</a>
+</div>
