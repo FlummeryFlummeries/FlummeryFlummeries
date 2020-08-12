@@ -5,16 +5,15 @@
     Layout = "_Layout";
 }
 
-<h1>Welcome to the ECommerce App!</h1>
+<h1>Welcome to the Flummery Flummeries!</h1>
 <h2>Click below to view our products.</h2>
 
-
 <div class="page-links">
-    <a asp-controller="Products" class="btn btn-dark" role="button">View Our Products</a>
+    <a asp-controller="Products" class="btn btn-dark" role="button">View Our Products (Non-Flums)</a>
 </div>
 
-<h2>Or try a few of our suggestions</h2>
 
+<h2>Or try a few of our suggested Flummeries</h2>
 <div class="container-fluid mt-4">
     <div class="row justify-content-center">
         @foreach (var item in Model)
