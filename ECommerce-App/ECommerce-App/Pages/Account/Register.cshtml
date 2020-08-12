@@ -7,19 +7,6 @@
 
 <h1>Register</h1>
 
-@*<form method="post">
-        <label asp-for="@Model.Input.Email"></label>
-        <input asp-for="@Model.Input.Email" />
-        <label asp-for="@Model.Input.FirstName"></label>
-        <input asp-for="@Model.Input.FirstName" />
-        <label asp-for="@Model.Input.LastName"></label>
-        <input asp-for="@Model.Input.LastName" />
-        <label asp-for="@Model.Input.Password"></label>
-        <input asp-for="@Model.Input.Password" />
-        <label asp-for="@Model.Input.ConfirmPassword"></label>
-        <input asp-for="@Model.Input.ConfirmPassword" />
-        <button type="submit">SUBMIT</button>
-    </form>*@
 
 <form method="post">
     <div class="form-row justify-content-center">
@@ -49,6 +36,8 @@
     <button class="btn btn-primary" type="submit">Register</button>
 </form>
 
-<form asp-controller="Home">
-    <button type="submit" class="btn btn-dark">Return Home</button>
-</form>
+<div class="page-links">
+    <p>Already have an account?</p>
+    <a asp-page="/Account/Login" class="btn btn-dark" role="button">Login</a>
+    <a asp-controller="Home" class="btn btn-dark" role="button">Return Home</a>
+</div>
