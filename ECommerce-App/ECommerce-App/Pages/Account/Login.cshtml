@@ -8,6 +8,7 @@
 <h1>Login</h1>
 
 <form method="post">
+    <div asp-validation-summary="All"></div>
     <div class="form-row justify-content-center">
         <div class="col-md-6 mb-3">
             <label asp-for="@Model.Input.Email for=" validationCustom02">Email</label>
@@ -19,6 +20,10 @@
             <label asp-for="@Model.Input.Password" for="validationCustom03">Password</label>
             <input asp-for="@Model.Input.Password" type="password" class="form-control" id="validationCustom03" placeholder="Password" required>
         </div>
+    </div>
+    <div class="persistenceCheck">
+        <input asp-for="@Model.Input.Persistent" />
+        <label asp-for="@Model.Input.Persistent">Remember me</label>
     </div>
     <button class="btn btn-primary" type="submit">Login</button>
 </form>
