@@ -1,7 +1,5 @@
 # Lab 26 - ECommerce App
 
-## SUBTITLE (if necessary)
-
 *Authors: Paul Rest & Nicco Ryan*
 
 ----
@@ -40,9 +38,13 @@ Select ```Debug``` -> ```Start Without Debugging```
 
 ### Version
 
-v1.0
+v1.1
 
 ### Change Log
+
+#### 2020-08-11
+- Added InventoryManagement service.
+- Added user registration and login.
 
 #### 2020-08-10
 - Initial version using CSV for products.
