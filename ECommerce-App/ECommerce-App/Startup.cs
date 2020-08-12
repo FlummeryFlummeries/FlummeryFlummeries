@@ -53,7 +53,7 @@ namespace ECommerce_App
             });
 
             services.AddTransient<IProduct, ProductsRepository>();
-            services.AddTransient<IInventory, InventoryManagement>();
+            services.AddTransient<IFlummeryInventory, FlummeryInventoryManagement>();
 
         }
 

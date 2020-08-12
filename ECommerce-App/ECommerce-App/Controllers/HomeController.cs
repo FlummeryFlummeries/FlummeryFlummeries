@@ -12,9 +12,9 @@ namespace ECommerce_App.Controllers
 {
     public class HomeController : Controller
     {
-        public IInventory _inventory { get; set; }
+        public IFlummeryInventory _inventory { get; set; }
 
-        public HomeController(IInventory inventory)
+        public HomeController(IFlummeryInventory inventory)
         {
             _inventory = inventory;
         }
