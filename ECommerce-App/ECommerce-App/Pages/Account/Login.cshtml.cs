@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -34,19 +35,30 @@ namespace ECommerce_App.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.Persistent, false);
 
             if (result.Succeeded)
             {
-                return new LocalRedirectResult("/../..");
+                return RedirectToAction("Index", "Home");
             }
+
+            ModelState.AddModelError("", "Invalid Email or Password");
             return Page();
         }
 
         public class LoginViewModel
         {
+            [Required]
+            //[Display("Email Address")]
+            [EmailAddress]
             public string Email { get; set; }
+
+            // These are like server side versions of adding required and type="password" to the inputs on the front end
+            [Required]
+            [DataType(DataType.Password)]
             public string Password { get; set; }
+
+            public bool Persistent { get; set; }
         }
     }
 }

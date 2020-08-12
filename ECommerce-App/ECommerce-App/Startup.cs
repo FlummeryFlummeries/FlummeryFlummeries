@@ -41,7 +41,7 @@ namespace ECommerce_App
 
             services.AddDbContext<UserDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
+                options.UseSqlServer(Config.GetConnectionString("UserConnection"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
