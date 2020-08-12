@@ -44,3 +44,20 @@ form {
 header {
     margin-top: 30px;
 }
+
+.home-header{
+    background-color:blanchedalmond;
+    border-radius: 5px;
+    border: dotted 2px;
+    width: 60%;
+    margin: 20px auto 20px;
+    padding-bottom: 15px;
+}
+
+header {
+    border-radius: 5px;
+    padding: 6px;
+    float: right;
+    background: rgba(160, 219, 108, 0.6);
+}
+
