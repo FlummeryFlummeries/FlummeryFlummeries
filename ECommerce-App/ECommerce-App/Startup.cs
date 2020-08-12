@@ -47,6 +47,11 @@ namespace ECommerce_App
                     .AddEntityFrameworkStores<UserDbContext>()
                     .AddDefaultTokenProviders();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
+
             services.AddTransient<IProduct, ProductsRepository>();
             services.AddTransient<IInventory, InventoryManagement>();
 
