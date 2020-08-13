@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ECommerce_App.Models.Services;
 using ECommerce_App.Models.Interface;
+using Microsoft.AspNetCore.Http;
 
 namespace ECommerce_App.Pages.ImageUpload
 {
@@ -24,7 +25,8 @@ namespace ECommerce_App.Pages.ImageUpload
 
         public void OnPost()
         {
-            _imageService.UploadImage();
+            var file = HttpContext.Request.Form.Files[0];
+            _imageService.UploadImage(file);
         }
     }
 }

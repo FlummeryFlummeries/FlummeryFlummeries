@@ -14,5 +14,7 @@ namespace ECommerce_App.Models
         abstract public string Manufacturer { get; set; }
 
         abstract public decimal Price { get; set; }
+
+        abstract public string ImageUrl { get; set; }
     }
 }
