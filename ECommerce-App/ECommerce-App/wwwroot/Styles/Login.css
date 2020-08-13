@@ -7,7 +7,7 @@
 .card {
     height: 300px;
     margin: auto auto;
-    width: 40%;
+    width: 350px;
     background-color: rgba(61, 47, 54, 0.65) !important;
 }
 
@@ -29,18 +29,18 @@ input:focus{
 }
 
 .remember input {
-    width: 20px;
-    height: 20px;
-    margin: 5px auto;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    margin: 0 5px 0 0;
+    vertical-align: bottom;
+    position: relative;
+    top: -5px;
 }
 
-.login-btn {
-    background-color: azure;
-    color: black;
-    width: 100px;
-}
-
-.login_btn:hover {
-    color: black;
-    background-color: white;
+.remember label {
+    margin: 20px 5px 40px 15px;
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
 }
