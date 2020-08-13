@@ -32,26 +32,28 @@
     </form>*@
 
 <div class="container">
-    <div class="card-body">
+    <div class="card">
         <form method="post">
             <div asp-validation-summary="All"></div>
             <div class="input-group form-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                 </div>
-                <input asp-for="@Model.Input.Email" type="text" class="form-control" placeholder="Email Address">
+                <input asp-for="@Model.Input.Email" type="text" class="form-control" id="validationCustom02" placeholder="Email Address" required >
             </div>
             <div class="input-group form-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input asp-for="@Model.Input.Password" type="password" class="form-control" placeholder="Password">
+                <input asp-for="@Model.Input.Password" type="password" class="form-control" id="validationCustom03" placeholder="Password" required >
             </div>
             <div class="row align-items-center remember">
-                <input asp-for="@Model.Input.Persistent">Remember Me
+                <label asp-for="@Model.Input.Persistent">
+                    <input asp-for="@Model.Input.Persistent">Remember me
+                </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Login" class="btn float-right login_btn">
+                <input type="submit" value="Login" class="btn btn-light">
             </div>
         </form>
     </div>

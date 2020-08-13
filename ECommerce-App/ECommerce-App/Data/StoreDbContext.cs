@@ -112,12 +112,12 @@ namespace ECommerce_App.Data
                 new Flummery
                 {
                     Id = 10,
-                    Name = "Job Jelly",
+                    Name = "Lark on the Wing",
                     Manufacturer = "Acme Baking",
                     Price = 9.99m,
-                    Calories = 1952,
+                    Calories = 1792,
                     Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Compliment = "What a nice sorting algorithm."
                 }
             );
         }

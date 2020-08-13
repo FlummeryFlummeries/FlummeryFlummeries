@@ -23,9 +23,19 @@ namespace ECommerce_App.Controllers
             List<FlummeryVM> all = await _inventory.GetAllFlummeries();
             List<FlummeryVM> selected = new List<FlummeryVM>();
             Random rand = new Random();
+            List<int> usedNums = new List<int>();
             for (int i = 0; i < 4; i++)
             {
-                selected.Add(all[rand.Next(all.Count()-1)]); 
+                int newNum = rand.Next(all.Count() - 1);
+                if (usedNums.Contains(newNum))
+                {
+                    i--;
+                }
+                else
+                {
+                    usedNums.Add(newNum);
+                    selected.Add(all[rand.Next(all.Count()-1)]); 
+                }
             }
 
             return View(selected);
