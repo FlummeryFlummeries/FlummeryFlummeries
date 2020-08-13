@@ -53,6 +53,11 @@ namespace ECommerce_App.Pages.Account
 
                     return RedirectToAction("Index", "Home");
                 }
+                ModelState.AddModelError("", "Invalid Registration. Email may already be in use.");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid Registration. Please try again.");
             }
             return Page();
         }
@@ -62,16 +67,18 @@ namespace ECommerce_App.Pages.Account
         public class RegisterViewModel
         {
             [Required]
-            //[Display("Email Address")]
+            [Display(Name = "Email Address")]
             [EmailAddress]
             public string Email { get; set; }
 
 
             [Required]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Required]
             public string LastName { get; set; }
+            [Display(Name = "Last Name")]
 
             // These are like server side versions of adding required and type="password" to the inputs on the front end
             [Required]
@@ -81,6 +88,7 @@ namespace ECommerce_App.Pages.Account
             [Required]
             [DataType(DataType.Password)]
             [Compare("Password")]
+            [Display(Name = "Confirm Password")]
             public string ConfirmPassword { get; set; }
 
             public bool Persistent { get; set; }

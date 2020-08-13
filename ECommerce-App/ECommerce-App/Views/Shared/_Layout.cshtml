@@ -6,32 +6,81 @@
 <html>
 
 <head>
+    <link rel="stylesheet" type="text/css" href="~/Styles/reset.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="~/Styles/StyleSheet.css" />
+    @RenderSection("Styles", false)
 </head>
 
 <body>
-    <header>
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <div> Hello @User.Claims.First(x => x.Type == "FullName").Value</div>
-            <form asp-page="/Account/Logout" method="post"> <button class="btn btn-dark" type="submit">Logout</button></form>
-            if (User.IsInRole("Admin"))
-            {
-                <a href="#" class="btn btn-dark" role="button">Dashboard</a>
-                <a asp-page="/ImageUpload/ImageUpload" class="btn btn-dark" role="button">Upload an Image</a>
-            }
-        }
-        else
-        {
-            <a asp-page="/Account/Login" class="btn btn-dark nav-btn" role="button">Login</a>
-            <a asp-page="/Account/Register" class="btn btn-dark nav-btn" role="button">Register</a>
-        }
-    </header>
+    <div class="all-container">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                    <ul class="navbar-nav mr-auto">
+                        @*<li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a asp-controller="Products" class="nav-link">Products</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mx-auto order-0">
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand mx-auto">
+                        <img src="~/assets/puddingicon.png" class="flum-icon" />
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Claims.First(x => x.Type == "FullName").Value
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <div class="dropdown-divider"></div>
+                                        <form asp-page="/ImageUpload/ImageUpload" method="get" > <button class="btn btn-link" type="submit">Uploads</button></form>
 
-    <div>
-        @RenderBody()
+                                    }
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-page="/Account/Login" class="nav-link" role="button">Login</a>
+                            </li>
+
+                            <li>
+                                <a asp-page="/Account/Register" class="nav-link" role="button">Register</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </nav>
+
+        </header>
+
+
+        <div class="body-container">
+            @RenderBody()
+        </div>
+
+        <footer>
+            <div>Copyright FlummeryInc.</div>
+            <div>Brought to you by Paul Rest and Nicco Ryan</div>
+        </footer>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>

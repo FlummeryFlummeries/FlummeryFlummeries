@@ -35,14 +35,21 @@ namespace ECommerce_App.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.Persistent, false);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
-            }
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.Persistent, false);
 
-            ModelState.AddModelError("", "Invalid Email or Password");
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Invalid Email or Password");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid attempt.");
+
+            }
             return Page();
         }
 
@@ -51,6 +58,7 @@ namespace ECommerce_App.Pages.Account
             [Required]
             //[Display("Email Address")]
             [EmailAddress]
+            [Display(Name = "Email Address")]
             public string Email { get; set; }
 
             // These are like server side versions of adding required and type="password" to the inputs on the front end
