@@ -54,7 +54,7 @@ namespace ECommerce_App
 
             services.AddTransient<IProduct, ProductsRepository>();
             services.AddTransient<IFlummeryInventory, FlummeryInventoryManagement>();
-
+            services.AddTransient<IImage, UploadImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
