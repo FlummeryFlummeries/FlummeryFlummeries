@@ -51,6 +51,16 @@ namespace ECommerce_App.Models.Services
             return null;
         }
 
+        public async Task<Flummery> GetFlummeryByWithoutVM(int id)
+        {
+            var flummeryForId = await _context.Flummery.FindAsync(id);
+            if (flummeryForId != null)
+            {
+                return flummeryForId;
+            }
+            return null;
+        }
+
         public async Task<List<FlummeryVM>> GetFlummeriesForSearch(string term)
         {
             //var allFlummeries = await GetAllFlummeries();
@@ -139,6 +149,13 @@ namespace ECommerce_App.Models.Services
             return ConvertFlummeryEntityToVM(flummeryEntity);
         }
 
+        public async Task<Flummery> UpdateFlummeryWithoutVM(Flummery flummeryEntity)
+        {
+            _context.Entry(flummeryEntity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return flummeryEntity;
+        }
+
         public async Task DeleteFlummery(int id)
         {
             var flummeryEntity = await _context.Flummery.FindAsync(id);
@@ -166,6 +183,7 @@ namespace ECommerce_App.Models.Services
                 Name = flummeryVM.Name,
                 Manufacturer = flummeryVM.Manufacturer,
                 Price = flummeryVM.Price,
+                ImageUrl = flummeryVM.ImageUrl,
                 Calories = flummeryVM.Calories,
                 Weight = flummeryVM.Weight,
                 Compliment = flummeryVM.Compliment
@@ -189,6 +207,7 @@ namespace ECommerce_App.Models.Services
                 Name = flummery.Name,
                 Manufacturer = flummery.Manufacturer,
                 Price = flummery.Price,
+                ImageUrl = flummery.ImageUrl,
                 Calories = flummery.Calories,
                 Weight = flummery.Weight,
                 Compliment = flummery.Compliment

@@ -27,6 +27,8 @@ namespace ECommerce_App.Models.Interface
         /// </returns>
         Task<FlummeryVM> GetFlummeryBy(int id);
 
+        Task<Flummery> GetFlummeryByWithoutVM(int id);
+
         /// <summary>
         /// Gets a list of all FlummeryVM objects that match the search term.
         /// </summary>
@@ -70,6 +72,8 @@ namespace ECommerce_App.Models.Interface
         /// Task<FlummeryVM>: the FlummeryVM object reflecting what was saved to the database, wrapped in a Task
         /// </returns>
         Task<FlummeryVM> UpdateFlummery(FlummeryVM flummeryVM);
+
+        Task<Flummery> UpdateFlummeryWithoutVM(Flummery flummeryEntity);
 
         /// <summary>
         /// Deletes a FlummeryVM from the database.

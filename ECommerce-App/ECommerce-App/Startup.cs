@@ -52,7 +52,7 @@ namespace ECommerce_App
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
             });
 
-            services.AddTransient<IProduct, ProductsRepository>();
+            //services.AddTransient<IProduct, ProductsRepository>();
             services.AddTransient<IFlummeryInventory, FlummeryInventoryManagement>();
             services.AddTransient<IImage, UploadImageService>();
         }

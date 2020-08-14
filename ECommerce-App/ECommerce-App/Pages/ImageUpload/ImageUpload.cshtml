@@ -11,6 +11,14 @@
 <h1>Image Upload Page</h1>
 
 <form method="post" enctype="multipart/form-data">
-    <input type="file" name="image-upload" />
+    <label asp-for="@Model.ProductId"></label>
+    <input asp-for="@Model.ProductId" />
+
+    <label asp-for="@Model.Name"></label>
+    <input asp-for="@Model.Name" />
+
+    <label asp-for="@Model.ImageFile"></label>
+    <input type="file" asp-for="@Model.ImageFile" />
+
     <button type="submit">Upload Image</button>
 </form>
