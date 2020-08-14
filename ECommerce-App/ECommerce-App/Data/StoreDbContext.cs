@@ -33,20 +33,20 @@ namespace ECommerce_App.Data
                 {
                     Id = 2,
                     Name = "Tied for First",
-                    Manufacturer = "Acme Baking",
-                    Price = 9.99m,
-                    Calories = 1300,
-                    Weight = 0.5m,
+                    Manufacturer = "Flum & Co",
+                    Price = 72.99m,
+                    Calories = 1150,
+                    Weight = 0.6m,
                     Compliment = "That tie looks great on you! Is it new?"
                 },
                 new Flummery
                 {
                     Id = 3,
                     Name = "Tryion",
-                    Manufacturer = "Acme Baking",
-                    Price = 9.99m,
-                    Calories = 900,
-                    Weight = 0.5m,
+                    Manufacturer = "Flippery Flumstons",
+                    Price = 46.33m,
+                    Calories = 873,
+                    Weight = 0.7m,
                     Compliment = "Oh wow, you really tried your hardest on that!"
                 },
                 new Flummery
@@ -63,7 +63,7 @@ namespace ECommerce_App.Data
                 {
                     Id = 5,
                     Name = "Polka",
-                    Manufacturer = "Acme Baking",
+                    Manufacturer = "Flippery Flumstons",
                     Price = 9.99m,
                     Calories = 2100,
                     Weight = 0.5m,
@@ -73,7 +73,7 @@ namespace ECommerce_App.Data
                 {
                     Id = 6,
                     Name = "Lark on the Wing",
-                    Manufacturer = "Acme Baking",
+                    Manufacturer = "Full On Flummery",
                     Price = 9.99m,
                     Calories = 1792,
                     Weight = 0.5m,
@@ -92,32 +92,32 @@ namespace ECommerce_App.Data
                 new Flummery
                 {
                     Id = 8,
-                    Name = "Job Jelly",
-                    Manufacturer = "Acme Baking",
-                    Price = 9.99m,
-                    Calories = 1280,
-                    Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Name = "Flum Jr.",
+                    Manufacturer = "Flum For Kids",
+                    Price = 4.99m,
+                    Calories = 465,
+                    Weight = 0.2m,
+                    Compliment = "What a nice painting! It's going right on the fridge."
                 },
                 new Flummery
                 {
                     Id = 9,
-                    Name = "Job Jelly",
-                    Manufacturer = "Acme Baking",
-                    Price = 9.99m,
-                    Calories = 615,
-                    Weight = 0.5m,
-                    Compliment = "I can't believe you managed to pull that off. Good job."
+                    Name = "Political HumFlummery",
+                    Manufacturer = "Local Government",
+                    Price = 52.99m,
+                    Calories = 1325,
+                    Weight = 0.1m,
+                    Compliment = "You all are the hardworking, salt of the earth type."
                 },
                 new Flummery
                 {
                     Id = 10,
-                    Name = "Lark on the Wing",
-                    Manufacturer = "Acme Baking",
+                    Name = "Flawmery",
+                    Manufacturer = "Flumm Board for Ethical Flumming",
                     Price = 9.99m,
                     Calories = 1792,
                     Weight = 0.5m,
-                    Compliment = "What a nice sorting algorithm."
+                    Compliment = "You're so good at arguing, you should be a lawyer."
                 }
             );
         }

@@ -34,7 +34,7 @@ namespace ECommerce_App.Controllers
                 else
                 {
                     usedNums.Add(newNum);
-                    selected.Add(all[rand.Next(all.Count()-1)]); 
+                    selected.Add(all[newNum]); 
                 }
             }
 
