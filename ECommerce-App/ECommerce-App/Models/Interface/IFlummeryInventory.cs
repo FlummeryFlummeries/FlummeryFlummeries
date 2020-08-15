@@ -1,5 +1,4 @@
-﻿using ECommerce_App.Models.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace ECommerce_App.Models.Interface
         /// <returns>
         /// Task<List<FlummeryVM>>: a List of FlummeryVMs in a Task object
         /// </returns>
-        Task<List<FlummeryVM>> GetAllFlummeries();
+        Task<List<Flummery>> GetAllFlummeries();
 
         /// <summary>
         /// Gets a FlummeryVM by its id.
@@ -25,7 +24,7 @@ namespace ECommerce_App.Models.Interface
         /// <returns>
         /// Task<FlummeryVM>: a FlummeryVM in a Task object if the id exists, null if not
         /// </returns>
-        Task<FlummeryVM> GetFlummeryBy(int id);
+        Task<Flummery> GetFlummeryBy(int id);
 
         /// <summary>
         /// Gets a list of all FlummeryVM objects that match the search term.
@@ -36,7 +35,7 @@ namespace ECommerce_App.Models.Interface
         /// <returns>
         /// Task<List<FlummeryVM>>: a List of FlummeryVMs in a Task object
         /// </returns>
-        Task<List<FlummeryVM>> GetFlummeriesForSearch(string term);
+        Task<List<Flummery>> GetFlummeriesForSearch(string term);
 
         /// <summary>
         /// Gets a list of all FlummeryVM objects ordered by ordering.
@@ -47,7 +46,7 @@ namespace ECommerce_App.Models.Interface
         /// <returns>
         /// Task<List<FlummeryVM>>: a List of FlummeryVMs in a Task object
         /// </returns>
-        Task<List<FlummeryVM>> GetFlummeriesOrderedBy(string ordering);
+        Task<List<Flummery>> GetFlummeriesOrderedBy(string ordering);
 
         /// <summary>
         /// Creates a new FlummeryVM object in the database.
@@ -58,7 +57,7 @@ namespace ECommerce_App.Models.Interface
         /// <returns>
         /// Task<FlummeryVM>: the FlummeryVM object reflecting what was saved to the database, wrapped in a Task
         /// </returns>
-        Task<FlummeryVM> CreateFlummery(FlummeryVM flummeryVM);
+        Task<Flummery> CreateFlummery(Flummery flummery);
 
         /// <summary>
         /// Updates a FlummeryVM object in the database.
@@ -69,7 +68,7 @@ namespace ECommerce_App.Models.Interface
         /// <returns>
         /// Task<FlummeryVM>: the FlummeryVM object reflecting what was saved to the database, wrapped in a Task
         /// </returns>
-        Task<FlummeryVM> UpdateFlummery(FlummeryVM flummeryVM);
+        Task<Flummery> UpdateFlummery(Flummery flummery);
 
         /// <summary>
         /// Deletes a FlummeryVM from the database.
