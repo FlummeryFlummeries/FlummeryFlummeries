@@ -1,6 +1,5 @@
 ﻿using ECommerce_App.Data;
 using ECommerce_App.Models.Interface;
-using ECommerce_App.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,34 +23,14 @@ namespace ECommerce_App.Models.Services
             _context = context;
         }
 
-        public async Task<List<FlummeryVM>> GetAllFlummeries()
+        public async Task<List<Flummery>> GetAllFlummeries()
         {
-            var allFlummeryVMs = await _context.Flummery
-                .Select(x => new FlummeryVM
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Manufacturer = x.Manufacturer,
-                    Price = x.Price,
-                    Calories = x.Calories,
-                    Weight = x.Weight,
-                    Compliment = x.Compliment
-                })
+            var allFlummeries = await _context.Flummery
                 .ToListAsync();
-            return allFlummeryVMs;
+            return allFlummeries;
         }
 
-        public async Task<FlummeryVM> GetFlummeryBy(int id)
-        {
-            var flummeryForId = await _context.Flummery.FindAsync(id);
-            if (flummeryForId != null)
-            {
-                return ConvertFlummeryEntityToVM(flummeryForId);
-            }
-            return null;
-        }
-
-        public async Task<Flummery> GetFlummeryByWithoutVM(int id)
+        public async Task<Flummery> GetFlummeryBy(int id)
         {
             var flummeryForId = await _context.Flummery.FindAsync(id);
             if (flummeryForId != null)
@@ -61,99 +40,48 @@ namespace ECommerce_App.Models.Services
             return null;
         }
 
-        public async Task<List<FlummeryVM>> GetFlummeriesForSearch(string term)
+        public async Task<List<Flummery>> GetFlummeriesForSearch(string term)
         {
-            //var allFlummeries = await GetAllFlummeries();
-
-            var searchedFlummeryVMs = await _context.Flummery
+            var searchedFlummeries = await _context.Flummery
                 .Where(x => EF.Functions.Like(x.Name, "%" + term + "%"))
-                .Select(x => new FlummeryVM
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Manufacturer = x.Manufacturer,
-                    Price = x.Price,
-                    Calories = x.Calories,
-                    Weight = x.Weight,
-                    Compliment = x.Compliment
-                })
                 .ToListAsync();
-            return searchedFlummeryVMs;
+            return searchedFlummeries;
         }
 
-        public async Task<List<FlummeryVM>> GetFlummeriesOrderedBy(string ordering)
+        public async Task<List<Flummery>> GetFlummeriesOrderedBy(string ordering)
         {
-            List<FlummeryVM> orderedFummeryVMs;
+            List<Flummery> orderedFummeries;
             switch (ordering)
             {
                 case "alphabetical":
-                    orderedFummeryVMs = await _context.Flummery
+                    orderedFummeries = await _context.Flummery
                         .OrderBy(x => x.Name)
-                        .Select(x => new FlummeryVM
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            Manufacturer = x.Manufacturer,
-                            Price = x.Price,
-                            Calories = x.Calories,
-                            Weight = x.Weight,
-                            Compliment = x.Compliment
-                        })
                         .ToListAsync();
-                    return orderedFummeryVMs;
+                    return orderedFummeries;
                 case "alphabeticalRev":
-                    orderedFummeryVMs = await _context.Flummery
+                    orderedFummeries = await _context.Flummery
                         .OrderByDescending(x => x.Name)
-                        .Select(x => new FlummeryVM
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            Manufacturer = x.Manufacturer,
-                            Price = x.Price,
-                            Calories = x.Calories,
-                            Weight = x.Weight,
-                            Compliment = x.Compliment
-                        })
                         .ToListAsync();
-                    return orderedFummeryVMs;
+                    return orderedFummeries;
                 default:
-                    orderedFummeryVMs = await _context.Flummery
-                        .Select(x => new FlummeryVM
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            Manufacturer = x.Manufacturer,
-                            Price = x.Price,
-                            Calories = x.Calories,
-                            Weight = x.Weight,
-                            Compliment = x.Compliment
-                        })
+                    orderedFummeries = await _context.Flummery
                         .ToListAsync();
-                    return orderedFummeryVMs;
+                    return orderedFummeries;
             }
         }
 
-        public async Task<FlummeryVM> CreateFlummery(FlummeryVM flummeryVM)
+        public async Task<Flummery> CreateFlummery(Flummery flummery)
         {
-            var flummeryEntity = ConvertFlummeryVMToEntity(flummeryVM);
-            _context.Entry(flummeryEntity).State = EntityState.Added;
+            _context.Entry(flummery).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return ConvertFlummeryEntityToVM(flummeryEntity);
+            return flummery;
         }
 
-        public async Task<FlummeryVM> UpdateFlummery(FlummeryVM flummeryVM)
+        public async Task<Flummery> UpdateFlummery(Flummery flummery)
         {
-            var flummeryEntity = ConvertFlummeryVMToEntity(flummeryVM);
-            _context.Entry(flummeryEntity).State = EntityState.Modified;
+            _context.Entry(flummery).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return ConvertFlummeryEntityToVM(flummeryEntity);
-        }
-
-        public async Task<Flummery> UpdateFlummeryWithoutVM(Flummery flummeryEntity)
-        {
-            _context.Entry(flummeryEntity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return flummeryEntity;
+            return flummery;
         }
 
         public async Task DeleteFlummery(int id)
@@ -164,54 +92,6 @@ namespace ECommerce_App.Models.Services
                 _context.Entry(flummeryEntity).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
             }
-        }
-
-        /// <summary>
-        /// Private helper method. Converts a FlummeryVM to a Flmmery entity object.
-        /// </summary>
-        /// <param name="flummeryVM">
-        /// FlummeryVM: a FlummeryVM object to be converted
-        /// </param>
-        /// <returns>
-        /// Flummery: a Flummery entity object, converted
-        /// </returns>
-        private Flummery ConvertFlummeryVMToEntity(FlummeryVM flummeryVM)
-        {
-            return new Flummery
-            {
-                Id = flummeryVM.Id,
-                Name = flummeryVM.Name,
-                Manufacturer = flummeryVM.Manufacturer,
-                Price = flummeryVM.Price,
-                ImageUrl = flummeryVM.ImageUrl,
-                Calories = flummeryVM.Calories,
-                Weight = flummeryVM.Weight,
-                Compliment = flummeryVM.Compliment
-            };
-        }
-
-        /// <summary>
-        /// Private helper method. Converts a Flummery entity to a FlmmeryVM entity object.
-        /// </summary>
-        /// <param name="flummeryVM">
-        /// Flummery: a Flummery entity object to be converted
-        /// </param>
-        /// <returns>
-        /// FlummeryVM: a FlummeryVM object, converted
-        /// </returns>
-        private FlummeryVM ConvertFlummeryEntityToVM(Flummery flummery)
-        {
-            return new FlummeryVM
-            {
-                Id = flummery.Id,
-                Name = flummery.Name,
-                Manufacturer = flummery.Manufacturer,
-                Price = flummery.Price,
-                ImageUrl = flummery.ImageUrl,
-                Calories = flummery.Calories,
-                Weight = flummery.Weight,
-                Compliment = flummery.Compliment
-            };
         }
     }
 }

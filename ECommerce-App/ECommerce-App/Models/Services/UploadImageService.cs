@@ -12,7 +12,6 @@ using System.IO;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Auth;
-using ECommerce_App.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce_App.Models.Services
@@ -21,19 +20,16 @@ namespace ECommerce_App.Models.Services
     {
         private IConfiguration _config { get; }
 
-        //private IFlummeryInventory _flummeryInventory;
-
-        //private StoreDbContext _dbContext;
+        private IFlummeryInventory _flummeryInventory;
 
         public CloudStorageAccount CloudStorageAccount { get; set; }
 
         public CloudBlobClient CloudBlobClient { get; set; }
 
-        public UploadImageService(IConfiguration configuration)
+        public UploadImageService(IConfiguration configuration, IFlummeryInventory flummeryInventory)
         {
             _config = configuration;
-            //_flummeryInventory = flummeryInventory;
-            //_dbContext = dbContext;
+            _flummeryInventory = flummeryInventory;
             StorageCredentials storageCreds = new StorageCredentials(_config["AzureBlobAccountName"], _config["AzureBlobKey"]);
             CloudStorageAccount = new CloudStorageAccount(storageCreds, true);
             CloudBlobClient = CloudStorageAccount.CreateCloudBlobClient();
@@ -66,16 +62,11 @@ namespace ECommerce_App.Models.Services
             return blobRef.Uri.AbsoluteUri;
         }
 
-        //public async Task UpdateStoreDbFor(int flummeryId, string imageURI)
-        //{
-        //    Flummery flummery = await _dbContext.Flummery.FindAsync(flummeryId);
-        //    flummery.ImageUrl = imageURI;
-        //    _dbContext.Entry(flummery).State = EntityState.Modified;
-        //    await _dbContext.SaveChangesAsync();
-
-        //    //FlummeryVM flummeryVM = await _flummeryInventory.GetFlummeryBy(flummeryId);
-        //    //flummeryVM.ImageUrl = imageURI;
-        //    //FlummeryVM updatedFlummeryVM = await _flummeryInventory.UpdateFlummery(flummeryVM);
-        //}
+        public async Task<Flummery> UpdateStoreDbFor(int flummeryId, string imageURI)
+        {
+            Flummery flummery = await _flummeryInventory.GetFlummeryBy(flummeryId);
+            flummery.ImageUrl = imageURI;
+            return await _flummeryInventory.UpdateFlummery(flummery);
+        }
     }
 }

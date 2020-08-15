@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
 using ECommerce_App.Models.Interface;
-using ECommerce_App.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce_App.Controllers
@@ -20,8 +19,8 @@ namespace ECommerce_App.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<FlummeryVM> all = await _inventory.GetAllFlummeries();
-            List<FlummeryVM> selected = new List<FlummeryVM>();
+            List<Flummery> all = await _inventory.GetAllFlummeries();
+            List<Flummery> selected = new List<Flummery>();
             Random rand = new Random();
             for (int i = 0; i < 4; i++)
             {

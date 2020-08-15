@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Storage.Blob;
-using ECommerce_App.Models.ViewModels;
 
 namespace ECommerce_App.Models.Interface
 {
@@ -16,6 +15,6 @@ namespace ECommerce_App.Models.Interface
 
         Task<string> UploadImage(string containerName, string imageFileName, byte[] imageData, string contentType, int flummeryId);
 
-        //Task UpdateStoreDbFor(int flummeryId, string imageURI);
+        Task<Flummery> UpdateStoreDbFor(int flummeryId, string imageURI);
     }
 }

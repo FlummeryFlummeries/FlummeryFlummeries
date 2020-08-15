@@ -2,8 +2,8 @@ using System;
 using Xunit;
 using ECommerce_App.Models.Interface;
 using ECommerce_App.Models.Services;
-using ECommerce_App.Models.ViewModels;
 using Microsoft.CodeAnalysis.Operations;
+using ECommerce_App.Models;
 
 namespace ECommerce_App_Testing
 {
@@ -18,7 +18,7 @@ namespace ECommerce_App_Testing
         public async void CanGetAllFlummeries()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
@@ -27,7 +27,7 @@ namespace ECommerce_App_Testing
                 Weight = 0.25m,
                 Compliment = "Damned with faint praise"
             };
-            var flummery02 = new FlummeryVM
+            var flummery02 = new Flummery
             {
                 Name = "flummery02",
                 Manufacturer = "acme02",
@@ -36,7 +36,7 @@ namespace ECommerce_App_Testing
                 Weight = 0.25m,
                 Compliment = "Damned with faint praise"
             };
-            var flummery03 = new FlummeryVM
+            var flummery03 = new Flummery
             {
                 Name = "flummery03",
                 Manufacturer = "acme03",
@@ -64,7 +64,7 @@ namespace ECommerce_App_Testing
         public async void CanGetAFlummeryBySearch()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
@@ -73,7 +73,7 @@ namespace ECommerce_App_Testing
                 Weight = 0.25m,
                 Compliment = "Damned with faint praise"
             };
-            var flummery02 = new FlummeryVM
+            var flummery02 = new Flummery
             {
                 Name = "flummery02",
                 Manufacturer = "acme02",
@@ -82,7 +82,7 @@ namespace ECommerce_App_Testing
                 Weight = 0.25m,
                 Compliment = "Damned with faint praise"
             };
-            var flummery03 = new FlummeryVM
+            var flummery03 = new Flummery
             {
                 Name = "flummery03",
                 Manufacturer = "acme03",
@@ -119,7 +119,7 @@ namespace ECommerce_App_Testing
         public async void CanGetAllFlummeriesReordered()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
@@ -128,7 +128,7 @@ namespace ECommerce_App_Testing
                 Weight = 0.25m,
                 Compliment = "Damned with faint praise"
             };
-            var flummery02 = new FlummeryVM
+            var flummery02 = new Flummery
             {
                 Name = "flummery02",
                 Manufacturer = "acme02",
@@ -137,7 +137,7 @@ namespace ECommerce_App_Testing
                 Weight = 0.25m,
                 Compliment = "Damned with faint praise"
             };
-            var flummery03 = new FlummeryVM
+            var flummery03 = new Flummery
             {
                 Name = "flummery03",
                 Manufacturer = "acme03",
@@ -161,9 +161,9 @@ namespace ECommerce_App_Testing
             Assert.True(revAlphaFlummeries.Count >= 3);
 
             bool inOrder = true;
-            FlummeryVM foundFlummery03 = null;
-            FlummeryVM foundFlummery02 = null;
-            FlummeryVM foundFlummery01 = null;
+            Flummery foundFlummery03 = null;
+            Flummery foundFlummery02 = null;
+            Flummery foundFlummery01 = null;
             foreach (var flummery in revAlphaFlummeries)
             {
                 if (flummery.Name == "flummery03" && flummery.Manufacturer == "acme03")
@@ -204,7 +204,7 @@ namespace ECommerce_App_Testing
         public async void CanCreateAndSaveAFlummery()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
@@ -231,7 +231,7 @@ namespace ECommerce_App_Testing
         public async void CanUpdateAFlummery()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
@@ -244,7 +244,7 @@ namespace ECommerce_App_Testing
             var testService = BuildFlummeryService();
 
             var savedFlummery = testService.CreateFlummery(flummery01);
-            var updatedFlummery01 = new FlummeryVM
+            var updatedFlummery01 = new Flummery
             {
                 Id = savedFlummery.Id,
                 Name = "update-flummery01",
@@ -265,7 +265,7 @@ namespace ECommerce_App_Testing
         public async void CanDeleteAFlummery()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
