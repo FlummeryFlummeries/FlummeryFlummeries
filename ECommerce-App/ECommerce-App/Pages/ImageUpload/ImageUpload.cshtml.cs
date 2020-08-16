@@ -12,9 +12,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Azure.Storage.Blob;
 using ECommerce_App.Models;
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce_App.Pages.ImageUpload
 {
+    [Authorize(Policy = "AdminOnly")]
     public class ImageUploadModel : PageModel
     {
         private IConfiguration _config;

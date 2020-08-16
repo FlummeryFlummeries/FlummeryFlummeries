@@ -2,9 +2,9 @@
 using Xunit;
 using ECommerce_App.Models.Interface;
 using ECommerce_App.Models.Services;
-using ECommerce_App.Models.ViewModels;
 using Microsoft.CodeAnalysis.Operations;
 using System.Collections.Generic;
+using ECommerce_App.Models;
 
 namespace ECommerce_App_Testing
 {
@@ -81,7 +81,7 @@ namespace ECommerce_App_Testing
         public async void CanCreateAndSaveAFlummery()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
@@ -108,7 +108,7 @@ namespace ECommerce_App_Testing
         public async void CanUpdateAFlummery()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
@@ -121,7 +121,7 @@ namespace ECommerce_App_Testing
             var testService = BuildFlummeryService();
 
             var savedFlummery = testService.CreateFlummery(flummery01);
-            var updatedFlummery01 = new FlummeryVM
+            var updatedFlummery01 = new Flummery
             {
                 Id = savedFlummery.Id,
                 Name = "update-flummery01",
@@ -142,7 +142,7 @@ namespace ECommerce_App_Testing
         public async void CanDeleteAFlummery()
         {
             //Arrange
-            var flummery01 = new FlummeryVM
+            var flummery01 = new Flummery
             {
                 Name = "flummery01",
                 Manufacturer = "acme01",
