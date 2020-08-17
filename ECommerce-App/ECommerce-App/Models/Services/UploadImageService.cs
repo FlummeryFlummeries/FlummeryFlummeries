@@ -53,8 +53,9 @@ namespace ECommerce_App.Models.Services
             return cloudBlob;
         }
 
-        public async Task<string> UploadImage(string containerName, string imageFileName, byte[] imageData, string contentType, int flummeryId)
+        public async Task<string> UploadImage(string imageFileName, byte[] imageData, string contentType, int flummeryId)
         {
+            string containerName = _config["AppContainerName"];
             CloudBlobContainer container = await GetContainerWith(containerName);
             CloudBlockBlob blobRef = container.GetBlockBlobReference(imageFileName);
             blobRef.Properties.ContentType = contentType;

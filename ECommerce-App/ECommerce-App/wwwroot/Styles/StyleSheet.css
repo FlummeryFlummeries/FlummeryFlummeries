@@ -138,6 +138,11 @@ footer {
     width: 80%;
 }
 
+form > div > img {
+    width: 40%;
+    margin-bottom: 20px;
+}
+
 .upload-card {
     margin: auto;
     padding: 20px;
@@ -150,4 +155,8 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.form-group > .form-control-plaintext {
+    color: white;
 }

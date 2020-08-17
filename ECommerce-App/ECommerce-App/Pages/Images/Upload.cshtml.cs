@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,33 +14,40 @@ using ECommerce_App.Models;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ECommerce_App.Pages.ImageUpload
+
+namespace ECommerce_App.Pages.Images
 {
     [Authorize(Policy = "AdminOnly")]
-    public class ImageUploadModel : PageModel
-    {        
+    public class UploadModel : PageModel
+    {
         private IImage _imageService;
 
-        [BindProperty]
-        public int ProductId { get; set; }
-
-        [BindProperty]
-        public string Name { get; set; }
+        private IFlummeryInventory _inventory;
 
         [BindProperty]
         public IFormFile ImageFile { get; set; }
 
-        public ImageUploadModel(IImage imageService)
+        public string Name { get; set; }
+
+        public string CurrentImgUrl { get; set; }
+
+        public UploadModel(IImage imageService, IFlummeryInventory inventory)
         {
             _imageService = imageService;
+            _inventory = inventory;
         }
 
-        public void OnGet()
+        public async Task OnGet(int id)
         {
+            var item = await _inventory.GetFlummeryBy(id);
+            Name = item.Name;
+            CurrentImgUrl = item.ImageUrl;
         }
 
-        public async Task OnPost()
+        public async Task OnPost(int id)
         {
+            var item = await _inventory.GetFlummeryBy(id);
+            Name = item.Name;
             string fileExt = Path.GetExtension(ImageFile.FileName);
             if (ImageFile != null)
             {
@@ -48,8 +55,9 @@ namespace ECommerce_App.Pages.ImageUpload
                 {
                     await ImageFile.CopyToAsync(memStream);
                     Byte[] imageData = memStream.ToArray();
-                    string imageURI = await _imageService.UploadImage($"{Name}{fileExt}", imageData, ImageFile.ContentType, ProductId);
-                    await _imageService.UpdateStoreDbFor(ProductId, imageURI);
+                    string imageURI = await _imageService.UploadImage($"{Name}{fileExt}", imageData, ImageFile.ContentType, id);
+                    CurrentImgUrl = imageURI;
+                    await _imageService.UpdateStoreDbFor(id, imageURI);
                 }
             }
         }
