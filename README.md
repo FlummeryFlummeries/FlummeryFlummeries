@@ -24,7 +24,7 @@ Clone this repository to your local machine.
 In a command line environment with Git installed:
 
 ```
-git clone GIT REPO URL HERE
+git clone https://ECommerce-App@dev.azure.com/ECommerce-App/ECommerce-App/_git/ECommerce-App
 ```
 
 ### To Run the Program from Visual Studio (2019):
