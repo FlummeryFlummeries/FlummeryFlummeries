@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
+using ECommerce_App.Models.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,11 +16,13 @@ namespace ECommerce_App.Pages.Account
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private IEmail _email;
 
-        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmail email)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _email = email;
         }
 
         [BindProperty]
@@ -50,6 +53,12 @@ namespace ECommerce_App.Pages.Account
                     await _userManager.AddClaimAsync(user, claim);
 
                     await _signInManager.SignInAsync(user, Input.Persistent);
+
+                    string emailSubject = "Thanks for registering at Flummery Flummeries!";
+
+                    string emailMessage = $"<p>Thank you {Input.FirstName} {Input.LastName} for registering with Flummery Flummeries!</p>";
+
+                    await _email.SendEmail(Input.Email, emailSubject, emailMessage);
 
                     return RedirectToAction("Index", "Home");
                 }
