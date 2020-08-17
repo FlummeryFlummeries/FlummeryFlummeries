@@ -4,41 +4,38 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
+using ECommerce_App.Models.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce_App.Controllers
 {
     public class ProductsController : Controller
     {
-        public IProduct _product { get; set; }
+        public IFlummeryInventory _flummery { get; set; }
 
-        public ProductsController(IProduct product)
+        public ProductsController(IFlummeryInventory flummery)
         {
-            _product = product;
+            _flummery = flummery;
         }
 
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            List<Product> list = _product.GetProducts();
-            return View(ConvertProductListToCereal(list));
+            List<Flummery> list = await _flummery.GetAllFlummeries();
+            return View(list);
         }
 
         [HttpPost]
-        public IActionResult Index(string type)
+        public async Task<IActionResult> Index(string type)
         {
-            List<Product> list = _product.SortProducts(type);
-            return View(ConvertProductListToCereal(list));
+            List<Flummery> list = await _flummery.GetFlummeriesOrderedBy(type);
+            return View(list);
         }
 
-        public IActionResult Details(string search)
+        public async Task<IActionResult> Details(string search)
         {
-            List<Product> list = _product.GetProduct(search);
-            return View(ConvertProductListToCereal(list));
-        }
-
-        private List<Cereal> ConvertProductListToCereal(List<Product> productsCastableToCereal)
-        {
-            return productsCastableToCereal.Cast<Cereal>().ToList();
+            List<Flummery> list = await _flummery.GetFlummeriesForSearch(search);
+            return View(list);
         }
     }
 }
