@@ -54,10 +54,10 @@ main {
     padding-bottom: 15px;
 }
 
-.home-header > a {
-    width: fit-content;
-   margin: 0 auto;
-}
+    .home-header > a {
+        width: fit-content;
+        margin: 0 auto;
+    }
 
 /*header {
     border-radius: 5px;
@@ -126,10 +126,28 @@ footer {
     padding-bottom: 150px;
 }
 
-.flum-icon{
+.flum-icon {
     height: 50px;
 }
 
 .card {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card-body > img {
+    width: 80%;
+}
+
+.upload-card {
+    margin: auto;
+    padding: 20px;
+    width: fit-content;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

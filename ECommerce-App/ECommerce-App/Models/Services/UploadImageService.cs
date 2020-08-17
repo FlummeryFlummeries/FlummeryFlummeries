@@ -36,7 +36,7 @@ namespace ECommerce_App.Models.Services
         }
 
         public async Task<CloudBlobContainer> GetContainerWith(string containerName)
-        { 
+        {
             CloudBlobContainer cloudBlobCtn = CloudBlobClient.GetContainerReference(containerName.ToLower());
             await cloudBlobCtn.CreateIfNotExistsAsync();
             await cloudBlobCtn.SetPermissionsAsync(new BlobContainerPermissions
