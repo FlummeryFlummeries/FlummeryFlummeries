@@ -52,9 +52,9 @@ namespace ECommerce_App
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
             });
 
-            services.AddTransient<IProduct, ProductsRepository>();
-            services.AddTransient<IInventory, InventoryManagement>();
-
+            //services.AddTransient<IProduct, ProductsRepository>();
+            services.AddTransient<IFlummeryInventory, FlummeryInventoryManagement>();
+            services.AddTransient<IImage, UploadImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

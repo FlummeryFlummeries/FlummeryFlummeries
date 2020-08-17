@@ -1,14 +1,20 @@
-﻿body {
-    background-color: #212121;
-    color: red;
-    margin: auto;
-    max-width: 90%;
+﻿html, body {
+    /*    background-color: #212121;*/
+    color: tan;
     text-align: center;
+    height: 100%;
+}
+
+body {
+    background: url(../assets/pudding-background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 h1 {
     font-size: 3.5em;
-    color: tan;
     padding-bottom: 0.25em;
 }
 
@@ -22,25 +28,108 @@ main {
     text-align: center;
 }
 
-.forms{
+.forms {
     display: flex;
     flex-direction: column;
     margin: auto;
     width: fit-content;
 }
 
-form {
-    padding-top: 0.25em;
-    padding-bottom: 0.5em;
-    margin: 10px auto;
-}
-
-.page-links > a{
+.page-links > a {
     display: block;
     width: 160px;
     margin: 15px auto 0px;
 }
 
-header {
+/*header {
     margin-top: 30px;
+}*/
+
+.home-header {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    border: dotted 2px;
+    width: 60%;
+    margin: 20px auto 20px;
+    padding-bottom: 15px;
+}
+
+.home-header > a {
+    width: fit-content;
+   margin: 0 auto;
+}
+
+/*header {
+    border-radius: 5px;
+    padding: 6px 10px;
+    float: right;
+    background: rgba(160, 219, 108, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}*/
+
+nav {
+    padding: .6rem 4.5rem !important;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    margin-bottom: 30px;
+}
+
+    nav > div > button {
+        margin-left: 30px !important;
+    }
+
+
+
+.nav-btn {
+    width: 100px;
+    padding: 8px 4px;
+    margin: 0 auto 10px;
+}
+
+    .nav-btn:last-child {
+        margin-bottom: 0px;
+    }
+
+
+/* bootstrap navbar drop-down over ride stuffs */
+.navbar-nav > li > .dropdown-menu {
+    background-color: #343A40;
+}
+
+.btn-link {
+    color: white;
+}
+
+    .btn-link:hover {
+        color: rgb(74, 74, 74)
+    }
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.all-container {
+    width: 100% !important;
+    min-height: 100%;
+    position: relative;
+}
+
+.body-container {
+    padding-bottom: 150px;
+}
+
+.flum-icon{
+    height: 50px;
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.5);
 }

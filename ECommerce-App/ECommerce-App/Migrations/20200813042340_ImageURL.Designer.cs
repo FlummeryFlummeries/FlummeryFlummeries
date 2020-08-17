@@ -3,14 +3,16 @@ using ECommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerce_App.Migrations
+namespace ECommerce_App.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200813042340_ImageURL")]
+    partial class ImageURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,22 +66,22 @@ namespace ECommerce_App.Migrations
                         new
                         {
                             Id = 2,
-                            Calories = 1150,
+                            Calories = 1300,
                             Compliment = "That tie looks great on you! Is it new?",
-                            Manufacturer = "Flum & Co",
+                            Manufacturer = "Acme Baking",
                             Name = "Tied for First",
-                            Price = 72.99m,
-                            Weight = 0.6m
+                            Price = 9.99m,
+                            Weight = 0.5m
                         },
                         new
                         {
                             Id = 3,
-                            Calories = 873,
+                            Calories = 900,
                             Compliment = "Oh wow, you really tried your hardest on that!",
-                            Manufacturer = "Flippery Flumstons",
+                            Manufacturer = "Acme Baking",
                             Name = "Tryion",
-                            Price = 46.33m,
-                            Weight = 0.7m
+                            Price = 9.99m,
+                            Weight = 0.5m
                         },
                         new
                         {
@@ -96,7 +98,7 @@ namespace ECommerce_App.Migrations
                             Id = 5,
                             Calories = 2100,
                             Compliment = "Stylish if your grandparents dressed you.",
-                            Manufacturer = "Flippery Flumstons",
+                            Manufacturer = "Acme Baking",
                             Name = "Polka",
                             Price = 9.99m,
                             Weight = 0.5m
@@ -106,7 +108,7 @@ namespace ECommerce_App.Migrations
                             Id = 6,
                             Calories = 1792,
                             Compliment = "What a nice sorting algorithm.",
-                            Manufacturer = "Full On Flummery",
+                            Manufacturer = "Acme Baking",
                             Name = "Lark on the Wing",
                             Price = 9.99m,
                             Weight = 0.5m
@@ -124,30 +126,30 @@ namespace ECommerce_App.Migrations
                         new
                         {
                             Id = 8,
-                            Calories = 465,
-                            Compliment = "What a nice painting! It's going right on the fridge.",
-                            Manufacturer = "Flum For Kids",
-                            Name = "Flum Jr.",
-                            Price = 4.99m,
-                            Weight = 0.2m
+                            Calories = 1280,
+                            Compliment = "I can't believe you managed to pull that off. Good job.",
+                            Manufacturer = "Acme Baking",
+                            Name = "Job Jelly",
+                            Price = 9.99m,
+                            Weight = 0.5m
                         },
                         new
                         {
                             Id = 9,
-                            Calories = 1325,
-                            Compliment = "You all are the hardworking, salt of the earth type.",
-                            Manufacturer = "Local Government",
-                            Name = "Political HumFlummery",
-                            Price = 52.99m,
-                            Weight = 0.1m
+                            Calories = 615,
+                            Compliment = "I can't believe you managed to pull that off. Good job.",
+                            Manufacturer = "Acme Baking",
+                            Name = "Job Jelly",
+                            Price = 9.99m,
+                            Weight = 0.5m
                         },
                         new
                         {
                             Id = 10,
-                            Calories = 1792,
-                            Compliment = "You're so good at arguing, you should be a lawyer.",
-                            Manufacturer = "Flumm Board for Ethical Flumming",
-                            Name = "Flawmery",
+                            Calories = 1952,
+                            Compliment = "I can't believe you managed to pull that off. Good job.",
+                            Manufacturer = "Acme Baking",
+                            Name = "Job Jelly",
                             Price = 9.99m,
                             Weight = 0.5m
                         });

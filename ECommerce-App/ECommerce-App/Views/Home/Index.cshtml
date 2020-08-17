@@ -1,16 +1,16 @@
-﻿@model List<ECommerce_App.Models.ViewModels.FlummeryVM>
+﻿@model List<ECommerce_App.Models.Flummery>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
 
-<h1>Welcome to the Flummery Flummeries!</h1>
-<h2>Click below to view our products.</h2>
-
-<div class="page-links">
-    <a asp-controller="Products" class="btn btn-dark" role="button">View Our Products (Non-Flums)</a>
+<div class="home-header card">
+    <h1>Welcome to the Flummery Flummeries!</h1>
+    <h2>Click below to view our products.</h2>
+    <a asp-controller="Products" class="btn btn-dark" role="button">View All Products</a>
 </div>
+
 
 
 <h2>Or try a few of our suggested Flummeries</h2>

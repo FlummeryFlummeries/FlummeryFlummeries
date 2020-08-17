@@ -1,0 +1,51 @@
+﻿/* The CSS for this login card was inspired by Multiullah Samim's at https://bootsnipp.com/snippets/vl4R7 */
+.container {
+    align-content: center;
+    height: 100%;
+}
+
+.card {
+    margin: 10px auto 20px;
+    width:fit-content;
+    background-color: rgba(61, 47, 54, 0.65) !important;
+}
+
+.input-group-prepend span {
+    width: 40px;
+    background-color: azure;
+    color: black;
+    border: 0 !important;
+}
+
+/* Emphasize the focused input by removing the boxshadow and outline making it stand out */
+input:focus{
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+    color: white;
+}
+
+.remember input {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    margin: 0 5px 0 0;
+    vertical-align: bottom;
+    position: relative;
+    top: -5px;
+}
+
+.remember label {
+    margin: 20px auto;
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+
+form {
+    padding-top: 0.25em;
+    padding-bottom: 0.5em;
+    margin: 10px 12px;
+}
