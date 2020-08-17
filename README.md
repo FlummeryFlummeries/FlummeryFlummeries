@@ -45,7 +45,7 @@ Create the database migrations by entering into the Package Manager Console: ```
 
 Update/create the databases by entering into the Package Manager Console: ```update-database -context StoreDbContext``` and ```update-database -context UserDbContext```.
 
-Confirm that the databases have bene created and are seeded with data.
+Confirm that the databases have been created and are seeded with data.
 
 #### Run
 
@@ -67,14 +67,16 @@ v1.5
 - Converted app's services to using entity objects rather than View Models after encountering complexities with VMs
 
 #### 2020-08-13
-- Completed Image Upload Service
+- Completed Image Upload Service.
+- Added Administrator role and authorized routes to appropriate policies.
 
 #### 2020-08-12
 - Started image upload service.
+- Overhauled UI for a better experience.
 
 #### 2020-08-11
 - Added InventoryManagement service.
-- Added user registration and login.
+- Added user handling including registration, login and logout.
 
 #### 2020-08-10
 - Initial version using CSV for products.
