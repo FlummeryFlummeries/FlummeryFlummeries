@@ -1,0 +1,30 @@
+﻿@page
+@model List<ECommerce_App.Models.Flummery>
+@{
+    ViewData["Title"] = "View";
+    Layout = "_Layout";
+}
+
+<h1>Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ECommerce_App.Models.Flummery flum in Model)
+        {
+            <tr>
+                <th scope="row">@flum.Name</th>
+                <td>@flum.Price</td>
+                <td> <a asp-page="/Cart/Update" asp-route-id="@flum.Id"></a></td>
+                <td><a asp-page="/Cart/Delete" asp-route-quantity="" asp-route-id="@flum.Id"><i class="fas fa-trash-alt fa-xs"></i></a></td>
+            </tr>
+        }
+    </tbody>
+</table>

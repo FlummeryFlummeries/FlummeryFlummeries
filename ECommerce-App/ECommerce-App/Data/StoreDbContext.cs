@@ -13,7 +13,7 @@ namespace ECommerce_App.Data
 
         public DbSet<Cart> Cart { get; set; }
 
-        public DbSet<CartItems> CartItems { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
@@ -141,29 +141,29 @@ namespace ECommerce_App.Data
                 }
             );
 
-            builder.Entity<CartItems>().HasData(
-                new CartItems
+            builder.Entity<CartItem>().HasData(
+                new CartItem
                 {
                     Id = 1,
                     CartId = 1,
                     ProductId = 3,
                     Qty = 2
                 },
-                new CartItems
+                new CartItem
                 {
                     Id = 2,
                     CartId = 1,
                     ProductId = 7,
                     Qty = 4
                 },
-                new CartItems
+                new CartItem
                 {
                     Id = 3,
                     CartId = 2,
                     ProductId = 1,
                     Qty = 5
                 },
-                new CartItems
+                new CartItem
                 {
                     Id = 4,
                     CartId = 2,
@@ -172,7 +172,7 @@ namespace ECommerce_App.Data
                 }
             );
 
-            builder.Entity<CartItems>().HasKey(x => new { x.CartId, x.ProductId });
+            builder.Entity<CartItem>().HasKey(x => new { x.CartId, x.ProductId });
         }
     }
 }
