@@ -9,7 +9,14 @@ namespace ECommerce_App.Data
 {
     public class StoreDbContext : DbContext
     {
-        public StoreDbContext(DbContextOptions<StoreDbContext> options): base(options)
+        public DbSet<Flummery> Flummery { get; set; }
+
+        public DbSet<Cart> Cart { get; set; }
+
+        public DbSet<CartItems> CartItems { get; set; }
+
+
+        public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
 
         }
@@ -120,8 +127,52 @@ namespace ECommerce_App.Data
                     Compliment = "You're so good at arguing, you should be a lawyer."
                 }
             );
-        }
 
-        public DbSet<Flummery> Flummery { get; set; }
+            builder.Entity<Cart>().HasData(
+                new Cart
+                {
+                    Id = 1,
+                    UserId = "63866547-918c-4c25-8d19-16c845d2fa2e"
+                },
+                new Cart
+                {
+                    Id = 2,
+                    UserId = "cf1833eb-dbd6-42b1-ab9c-cf24382b9d07"
+                }
+            );
+
+            builder.Entity<CartItems>().HasData(
+                new CartItems
+                {
+                    Id = 1,
+                    CartId = 1,
+                    ProductId = 3,
+                    Qty = 2
+                },
+                new CartItems
+                {
+                    Id = 2,
+                    CartId = 1,
+                    ProductId = 7,
+                    Qty = 4
+                },
+                new CartItems
+                {
+                    Id = 3,
+                    CartId = 2,
+                    ProductId = 1,
+                    Qty = 5
+                },
+                new CartItems
+                {
+                    Id = 4,
+                    CartId = 2,
+                    ProductId = 5,
+                    Qty = 1
+                }
+            );
+
+            builder.Entity<CartItems>().HasKey(x => new { x.CartId, x.ProductId });
+        }
     }
 }
