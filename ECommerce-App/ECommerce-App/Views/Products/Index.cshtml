@@ -41,12 +41,9 @@
                     <div class="card-body">
                         <h5 class="card-title">@item.Name</h5>
                         <img src="@item.ImageUrl" alt="Image of @item.Name" />
+                        <p class="card-text">Price (USD) : $@item.Price</p>
                         <p class="card-text">Compliment : @item.Compliment</p>
-                        <p class="card-text">Manufacturer : @item.Manufacturer</p>
-                        <p class="card-text">Price : @item.Price</p>
-                        <p class="card-text">Calories : @item.Calories</p>
-                        <p class="card-text">Fat : @item.Weight</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="/ProductDetails/ProductDetails/@item.Id" class="btn btn-primary">Product Details</a>
                     </div>
                 </div>
             </div>
