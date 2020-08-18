@@ -1,4 +1,7 @@
-﻿@page "{id}"
+﻿@page "/Products/{id}/Details"
+@using Microsoft.AspNetCore.Identity;
+@using ECommerce_App.Models;
+@inject SignInManager<ApplicationUser> SignInManager
 @model ECommerce_App.Pages.ProductDetails.ProductDetailsModel
 @{
 }
@@ -19,5 +22,9 @@
         <p class="card-text">Price (USD) : $@Model.Flummery.Price</p>
         <p class="card-text">Calories : @Model.Flummery.Calories</p>
         <p class="card-text">Weight (kg) : @Model.Flummery.Weight</p>
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-primary" >Upload Image</a>
+        }
     </div>
 </div>

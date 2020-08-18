@@ -1,4 +1,7 @@
-﻿@model List<ECommerce_App.Models.Flummery>
+﻿@using Microsoft.AspNetCore.Identity;
+@using ECommerce_App.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@model List<ECommerce_App.Models.Flummery>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,7 +28,7 @@
                         <img src="@item.ImageUrl" alt="Image of @item.Name" />
                         <p class="card-text">Price (USD) : $@item.Price</p>
                         <p class="card-text">Compliment : @item.Compliment</p>
-                        <a href="/ProductDetails/ProductDetails/@item.Id" class="btn btn-primary">Product Details</a>
+                        <a asp-page="/ProductDetails/ProductDetails" asp-route-id="@item.Id" class="btn btn-primary">Product Details</a>
                     </div>
                 </div>
             </div>

@@ -160,3 +160,7 @@ form > div > img {
 .form-group > .form-control-plaintext {
     color: white;
 }
+
+.card-body > a:first-of-type {
+    margin-bottom: 10px;
+}
