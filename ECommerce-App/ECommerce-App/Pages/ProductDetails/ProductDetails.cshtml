@@ -1,0 +1,30 @@
+﻿@page "/Products/{id}/Details"
+@using Microsoft.AspNetCore.Identity;
+@using ECommerce_App.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@model ECommerce_App.Pages.ProductDetails.ProductDetailsModel
+@{
+}
+
+@{
+    ViewData["Title"] = "ProductDetails";
+    Layout = "_Layout";
+}
+
+<h2>Flummery Flummery Details</h2>
+
+<div class="card" style="width: 54rem; margin:auto;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Flummery.Name</h5>
+        <img src="@Model.Flummery.ImageUrl" alt="Image of @Model.Flummery.Name" />
+        <p class="card-text">Compliment : @Model.Flummery.Compliment</p>
+        <p class="card-text">Manufacturer : @Model.Flummery.Manufacturer</p>
+        <p class="card-text">Price (USD) : $@Model.Flummery.Price</p>
+        <p class="card-text">Calories : @Model.Flummery.Calories</p>
+        <p class="card-text">Weight (kg) : @Model.Flummery.Weight</p>
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-primary" >Upload Image</a>
+        }
+    </div>
+</div>

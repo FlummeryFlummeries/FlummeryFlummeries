@@ -8,9 +8,9 @@
 
 ### Description
 
-A ASP.Net MVC wep app for showing a selection of Flummery Flummeries for sale.
+A ASP.Net MVC wep app for showing a selection of Flummery Flummeries, i.e. flummery dessert with a flummery compliment, for sale.
 
-Employs ASP.Net Core Identity and Authentication to allow users to create users, log in, and for certain functionalities to be locked down for admins.
+Employs ASP.Net Core Identity and Authentication to allow users to create users, log in, and for certain functionalities to be locked down for admins. Captures a user's supplied Full Name as a claim on registration to display to them in the navbar.
 
 Front-end is dynamically rendered using Razor Pages and Bootstrap with an MVVM-type relationship.
 
@@ -24,7 +24,7 @@ Clone this repository to your local machine.
 In a command line environment with Git installed:
 
 ```
-git clone GIT REPO URL HERE
+git clone https://ECommerce-App@dev.azure.com/ECommerce-App/ECommerce-App/_git/ECommerce-App
 ```
 
 ### To Run the Program from Visual Studio (2019):
@@ -83,5 +83,3 @@ v1.5
 #### 2020-08-10
 - Initial version using CSV for products.
 
-------------------------------
-For more information on Markdown: https://www.markdownguide.org/cheat-sheet

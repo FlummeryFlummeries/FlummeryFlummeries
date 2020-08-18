@@ -13,7 +13,7 @@ namespace ECommerce_App.Models.Interface
 
         Task<CloudBlob> GetBlobWith(string imageName, string containerName);
 
-        Task<string> UploadImage(string containerName, string imageFileName, byte[] imageData, string contentType, int flummeryId);
+        Task<string> UploadImage(string imageFileName, byte[] imageData, string contentType, int flummeryId);
 
         Task<Flummery> UpdateStoreDbFor(int flummeryId, string imageURI);
     }
