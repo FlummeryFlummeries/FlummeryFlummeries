@@ -23,12 +23,22 @@ namespace ECommerce_App.Models.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Creates a new cart items in the database
+        /// </summary>
+        /// <param name="cartItem">CartItem information for creation</param>
+        /// <returns>Successful result of cartItem creation</returns>
         public async Task Create(CartItem cartItem)
         {
             _context.Entry(cartItem).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Delete an item from a user's cart
+        /// </summary>
+        /// <param name="id">Id of cartItem to be deleted</param>
+        /// <returns>Task of completion for cartItem delete</returns>
         public async Task Delete(int cartId, int productId)
         {
             
@@ -40,12 +50,22 @@ namespace ECommerce_App.Models.Services
             }
         }
 
+        /// <summary>
+        /// Get a list of all the items in a user's card
+        /// </summary>       
+        /// <param name="cartId">Unique id of card to find items from</param>
+        /// <returns>Successful result with list of cartItems</returns>
         public async Task<List<CartItem>> GetUserCartItems(int cartId)
         {
             List<CartItem> items = await _context.CartItems.Where(x => x.CartId == cartId).ToListAsync();
             return items;
         }
 
+        /// <summary>
+        /// Update a given user's cart item quantity
+        /// </summary>
+        /// <param name="cartItem">CartItem information for update</param>
+        /// <returns>Successful result of specified updated cartItem</returns>
         public async Task Update(CartItem cartItem)
         {
             _context.Entry(cartItem).State = EntityState.Modified;
