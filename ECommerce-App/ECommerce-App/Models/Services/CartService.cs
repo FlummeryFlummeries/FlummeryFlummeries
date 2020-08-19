@@ -60,8 +60,11 @@ namespace ECommerce_App.Models.Services
         /// <returns>Successful result of specified cartItem</returns>
         public async Task<Cart> GetUserCart(string userId)
         {
-            var cart = await _context.Cart.Where(x => x.UserId == userId).FirstAsync();
-            var items = await _cartItem.GetUserCartItems(cart.Id);
+            var cart = await _context.Cart.Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            if(cart != null)
+            {
+                cart.CartItems = await _cartItem.GetUserCartItems(cart.Id);
+            }
             return cart;
         }
     }

@@ -25,30 +25,34 @@
                 <th scope="col">Item Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Total Price</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var flum in Model.FlummeriesInCart)
             {
-                <tr>
-                    <th scope="row">@flum.Product.Name</th>
-                    <td>@flum.Product.Price</td>
-                    <td>
-                        <form method="post">
-                            <input asp-for="@Model.NewQuantity" value="@flum.Qty" min="1" max="99" />
-                            <input type="hidden" asp-for="@Model.ItemId" value="@flum.Product.Id" />
-                            <input type="hidden" asp-for="@Model.CartId" value="@Model.CartId" />
-                            <button class="btn btn-link" type="submit">Update</button>
-                        </form>
-                    </td>
+            <tr>
+                <th scope="row">@flum.Product.Name</th>
+                <td>$@flum.Product.Price</td>
+                <td>
+                    <form method="post">
+                        <input asp-for="@Model.NewQuantity" value="@flum.Qty" min="1" max="99" />
+                        <input type="hidden" asp-for="@Model.ItemId" value="@flum.Product.Id" />
+                        <input type="hidden" asp-for="@Model.CartId" value="@Model.CartId" />
+                        <button class="btn btn-link" type="submit">Update</button>
+                    </form>
+                </td>
+                <td>$@(flum.Product.Price * flum.Qty)</td>
 
-                    <td>
-                        <form asp-page="/Cart/Delete" asp-route-productId="@flum.Product.Id" method="post">
-                            <button class="btn btn-link" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
+                <td title="Remove from cart">
+                    <form asp-page="/Cart/Delete" asp-route-productId="@flum.Product.Id" method="post">
+                        <button class="btn btn-link" type="submit">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

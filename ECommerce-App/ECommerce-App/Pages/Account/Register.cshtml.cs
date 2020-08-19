@@ -30,7 +30,6 @@ namespace ECommerce_App.Pages.Account
 
         public void OnGet()
         {
-            // Do I need anything on page load besides the normal CSHTML?
         }
 
         public async Task<IActionResult> OnPost()
