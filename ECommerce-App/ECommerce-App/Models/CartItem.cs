@@ -13,6 +13,8 @@ namespace ECommerce_App.Models
 
         public int ProductId { get; set; }
 
+        public Flummery Product { get; set; }
+
         public int Qty { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace ECommerce_App.Models.Services
     public class CartItemService : ICartItem
     {
         private StoreDbContext _context;
+        private IFlummeryInventory _flummery;
 
         /// <summary>
         /// Instantiates a CartService object.
@@ -18,9 +19,10 @@ namespace ECommerce_App.Models.Services
         /// <param name="context">
         /// StoreDBContext: an object that inherits from DbContext
         /// </param>
-        public CartItemService(StoreDbContext context)
+        public CartItemService(StoreDbContext context, IFlummeryInventory flummery)
         {
             _context = context;
+            _flummery = flummery;
         }
 
         /// <summary>
@@ -58,6 +60,10 @@ namespace ECommerce_App.Models.Services
         public async Task<List<CartItem>> GetUserCartItems(int cartId)
         {
             List<CartItem> items = await _context.CartItems.Where(x => x.CartId == cartId).ToListAsync();
+            foreach (var item in items)
+            {
+                item.Product = await _flummery.GetFlummeryBy(item.ProductId);
+            }
             return items;
         }
 
