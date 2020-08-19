@@ -15,7 +15,7 @@ namespace ECommerce_App.Pages.Cart
         private ICart _cart;
         private ICartItem _cartItem;
         private SignInManager<ApplicationUser> _signInManager;
-        public Dictionary<Flummery, int> FlummeriesInCart { get; set; }
+        public List<CartItem> FlummeriesInCart { get; set; }
         [BindProperty]
         public int NewQuantity { get; set; }     
         [BindProperty]
@@ -30,7 +30,7 @@ namespace ECommerce_App.Pages.Cart
             _cart = cart;
             _cartItem = cartItem;
             _signInManager = signIn;
-            FlummeriesInCart = new Dictionary<Flummery, int>();
+            FlummeriesInCart = new List<CartItem>();
         }
 
 
@@ -45,7 +45,7 @@ namespace ECommerce_App.Pages.Cart
             }
             foreach (CartItem item in cart.CartItems)
             {
-                FlummeriesInCart.Add(item.Product, item.Qty);
+                FlummeriesInCart.Add(item);
             }
             return Page();
         }

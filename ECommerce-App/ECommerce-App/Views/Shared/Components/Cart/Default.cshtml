@@ -1,0 +1,27 @@
+﻿@model List<ECommerce_App.Models.CartItem>
+
+<div class="card cart-mini hide" style="width: 18rem;">
+    <div class="card-header">
+        Cart
+    </div>
+    <table class="card-table table">
+        <thead>
+            <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var flum in Model)
+            {
+                <tr>
+                    <th scope="row">@flum.Product.Name</th>
+                    <td>@flum.Product.Price</td>
+                    <td>@flum.Qty</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-page="/Cart/View" class="btn btn-dark" role="button">View Full Cart</a>
+</div>
