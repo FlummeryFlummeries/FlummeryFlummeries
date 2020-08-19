@@ -11,6 +11,10 @@
     Layout = "_Layout";
 }
 
+@{
+    var currentUser = await SignInManager.UserManager.GetUserAsync(User);
+}
+
 <h2>Flummery Flummery Details</h2>
 
 <div class="card" style="width: 54rem; margin:auto;">
@@ -22,10 +26,10 @@
         <p class="card-text">Price (USD) : $@Model.Flummery.Price</p>
         <p class="card-text">Calories : @Model.Flummery.Calories</p>
         <p class="card-text">Weight (kg) : @Model.Flummery.Weight</p>
-        <button asp-controller="Cart" asp-action="AddToCart">Add Item to Cart</button>
+        <a asp-page="/Cart/Update" asp-route-userId="@currentUser.Id" asp-route-itemId="@Model.Flummery.Id" class="btn btn-primary">Add Item to Cart</a>
         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
         {
-            <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-primary" >Upload Image</a>
+            <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-primary">Upload Image</a>
         }
     </div>
 </div>
