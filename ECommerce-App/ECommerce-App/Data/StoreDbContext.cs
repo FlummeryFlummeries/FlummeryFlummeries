@@ -18,7 +18,6 @@ namespace ECommerce_App.Data
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
