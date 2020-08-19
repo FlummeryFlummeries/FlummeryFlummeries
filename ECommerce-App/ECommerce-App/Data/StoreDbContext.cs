@@ -143,28 +143,24 @@ namespace ECommerce_App.Data
             builder.Entity<CartItem>().HasData(
                 new CartItem
                 {
-                    Id = 1,
                     CartId = 1,
                     ProductId = 3,
                     Qty = 2
                 },
                 new CartItem
                 {
-                    Id = 2,
                     CartId = 1,
                     ProductId = 7,
                     Qty = 4
                 },
                 new CartItem
                 {
-                    Id = 3,
                     CartId = 2,
                     ProductId = 1,
                     Qty = 5
                 },
                 new CartItem
                 {
-                    Id = 4,
                     CartId = 2,
                     ProductId = 5,
                     Qty = 1

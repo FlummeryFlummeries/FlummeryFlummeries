@@ -30,10 +30,11 @@ namespace ECommerce_App.Models.Services
         /// </summary>
         /// <param name="cartItem">CartItem information for creation</param>
         /// <returns>Successful result of CartItem creation</returns>
-        public async Task Create(Cart cart)
+        public async Task<Cart> Create(Cart cart)
         {
             _context.Entry(cart).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            return cart;
         }
 
         /// <summary>
