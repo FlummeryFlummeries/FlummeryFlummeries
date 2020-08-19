@@ -12,7 +12,7 @@ namespace ECommerce_App.Models.Interface
         /// </summary>
         /// <param name="cartItem">CartItem information for creation</param>
         /// <returns>Successful result of CartItem creation</returns>
-        Task Create(Cart cart);
+        Task<Cart> Create(Cart cart);
 
         /// <summary>
         /// Get a user's cart from the database
