@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 namespace ECommerce_App.ViewComponents
 {
     [ViewComponent]
-    public class CartViewComponent : ViewComponent
+    public class CartIconViewComponent : ViewComponent
     {
         private ICart _cart;
 
-        public CartViewComponent(ICart cart)
+        public CartIconViewComponent(ICart cart)
         {
             _cart = cart;
         }
@@ -24,11 +24,11 @@ namespace ECommerce_App.ViewComponents
         {
             var cart = await _cart.GetUserCart(userId);
 
-            if(cart != null)
+            if (cart != null && cart.CartItems != null)
             {
-                return View(cart.CartItems);
+                return View(cart.CartItems.Count);
             }
-            return View(new List<CartItem>());
+            return View(0);
         }
     }
 }

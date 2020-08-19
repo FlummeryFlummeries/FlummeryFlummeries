@@ -1,0 +1,9 @@
+﻿@model int
+
+<a class="nav-link">
+    <i class="fas fa-shopping-cart fa-flip-horizontal fa-lg"></i>
+    @if(Model > 0)
+    {
+        <span class="badge badge-info cart-count">@Model</span>
+    }
+</a>
