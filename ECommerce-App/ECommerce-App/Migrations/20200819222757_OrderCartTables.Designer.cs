@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerce_App.Migrations.StoreDb
+namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200819004651_CartItemIdRemoval")]
-    partial class CartItemIdRemoval
+    [Migration("20200819222757_OrderCartTables")]
+    partial class OrderCartTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,12 +37,12 @@ namespace ECommerce_App.Migrations.StoreDb
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 2,
                             UserId = "63866547-918c-4c25-8d19-16c845d2fa2e"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
                             UserId = "cf1833eb-dbd6-42b1-ab9c-cf24382b9d07"
                         });
                 });
@@ -62,30 +62,30 @@ namespace ECommerce_App.Migrations.StoreDb
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItem");
 
                     b.HasData(
                         new
                         {
-                            CartId = 1,
+                            CartId = 2,
                             ProductId = 3,
                             Qty = 2
                         },
                         new
                         {
-                            CartId = 1,
+                            CartId = 2,
                             ProductId = 7,
                             Qty = 4
                         },
                         new
                         {
-                            CartId = 2,
+                            CartId = 3,
                             ProductId = 1,
                             Qty = 5
                         },
                         new
                         {
-                            CartId = 2,
+                            CartId = 3,
                             ProductId = 5,
                             Qty = 1
                         });
@@ -114,10 +114,10 @@ namespace ECommerce_App.Migrations.StoreDb
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(7,2)");
 
                     b.Property<decimal>("Weight")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(7,2)");
 
                     b.HasKey("Id");
 
@@ -226,11 +226,126 @@ namespace ECommerce_App.Migrations.StoreDb
                         });
                 });
 
+            modelBuilder.Entity("ECommerce_App.Models.OrderCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BillingAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BillingCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BillingState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BillingZip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingZip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderCart");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BillingAddress = "1808 Forgotten Way",
+                            BillingCity = "Wilmington",
+                            BillingState = "DE",
+                            BillingZip = "00001",
+                            FirstName = "John",
+                            LastName = "Dickinson",
+                            ShippingAddress = "1808 Forgotten Way",
+                            ShippingCity = "Wilmington",
+                            ShippingState = "DE",
+                            ShippingZip = "00001",
+                            UserId = "63866547-918c-4c25-8d19-16c845d2fa2e"
+                        });
+                });
+
+            modelBuilder.Entity("ECommerce_App.Models.OrderCartItem", b =>
+                {
+                    b.Property<int>("OrderCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderCartId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderCardItem");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderCartId = 1,
+                            ProductId = 3,
+                            Qty = 2
+                        },
+                        new
+                        {
+                            OrderCartId = 1,
+                            ProductId = 8,
+                            Qty = 5
+                        },
+                        new
+                        {
+                            OrderCartId = 1,
+                            ProductId = 1,
+                            Qty = 3
+                        });
+                });
+
             modelBuilder.Entity("ECommerce_App.Models.CartItem", b =>
                 {
                     b.HasOne("ECommerce_App.Models.Cart", null)
                         .WithMany("CartItems")
                         .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce_App.Models.Flummery", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ECommerce_App.Models.OrderCartItem", b =>
+                {
+                    b.HasOne("ECommerce_App.Models.OrderCart", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("OrderCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
