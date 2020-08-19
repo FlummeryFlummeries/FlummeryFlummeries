@@ -36,7 +36,7 @@
                     <td>@flum.Key.Price</td>
                     <td>
                         <form method="post">
-                            <input asp-for="@Model.NewQuantity" type="number" max="99" min="1" name="name" value="@flum.Value" />
+                            <input asp-for="@Model.NewQuantity" value="@flum.Value" />
                             <input type="hidden" asp-for="@Model.ItemId" value="@flum.Key.Id" />
                             <input type="hidden" asp-for="@Model.CartId" value="@Model.CartId" />
                             <button class="btn btn-link" type="submit">Update</button>
@@ -44,7 +44,7 @@
                     </td>
 
                     <td>
-                        <form asp-page="/Cart/Delete" method="post">
+                        <form asp-page="/Cart/Delete" asp-route-productId="@flum.Key.Id" method="post">
                             <button class="btn btn-link" type="submit">Delete</button>
                         </form>
                     </td>

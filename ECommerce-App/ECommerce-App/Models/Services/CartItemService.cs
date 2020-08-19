@@ -47,7 +47,7 @@ namespace ECommerce_App.Models.Services
             CartItem item = await _context.CartItems.FindAsync(cartId, productId);
             if(item != null)
             {
-                _context.Entry(item).State = EntityState.Added;
+                _context.Entry(item).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
             }
         }

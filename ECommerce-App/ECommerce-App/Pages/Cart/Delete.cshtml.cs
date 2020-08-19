@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ECommerce_App.Models;
 using ECommerce_App.Models.Interface;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -13,20 +15,26 @@ namespace ECommerce_App.Pages.Cart
     {
         private ICartItem _cartItem;
         private ICart _cart;
-        public DeleteModel(ICartItem cartItem, ICart cart)
+        private SignInManager<ApplicationUser> _signInManager;
+
+        public DeleteModel(ICartItem cartItem, ICart cart, SignInManager<ApplicationUser> signIn)
         {
             _cartItem = cartItem;
             _cart = cart;
+            _signInManager = signIn;
+
         }
+
         public void OnGet()
         {
         }
 
-        public async Task<IActionResult> OnPost(string userId, int productId)
+        public async Task<IActionResult> OnPost(int productId)
         {
-            var cart = await _cart.GetUserCart(userId);
+            var currentUser = await _signInManager.UserManager.GetUserAsync(User);
+            var cart = await _cart.GetUserCart(currentUser.Id);
             await _cartItem.Delete(cart.Id, productId);
-            return RedirectToPage("/Cart/View", new { id = userId });
+            return RedirectToPage("/Cart/View");
         }
     }
 }
