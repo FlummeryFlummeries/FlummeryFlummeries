@@ -80,9 +80,9 @@
         @if (SignInManager.IsSignedIn(User))
         {
             var currentUser = await SignInManager.UserManager.GetUserAsync(User);
-        <div>
-            @await Component.InvokeAsync("Cart", currentUser.Id)
-        </div>
+            <div>
+                @await Component.InvokeAsync("Cart", currentUser.Id)
+            </div>
         }
         <div class="body-container">
             @RenderBody()
