@@ -11,6 +11,7 @@ namespace ECommerce_App.Models.Services
     public class CartService : ICart
     {
         private StoreDbContext _context;
+        private ICartItem _cartItem;
 
         /// <summary>
         /// Instantiates a CartService object.
@@ -18,9 +19,10 @@ namespace ECommerce_App.Models.Services
         /// <param name="context">
         /// StoreDBContext: an object that inherits from DbContext
         /// </param>
-        public CartService(StoreDbContext context)
+        public CartService(StoreDbContext context, ICartItem cartItem)
         {
             _context = context;
+            _cartItem = cartItem;
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace ECommerce_App.Models.Services
         /// </summary>
         /// <param name="id">Id of cartItem to be deleted</param>
         /// <returns>Task of completion for cartItem delete</returns>
-        public async Task Delete(int userId)
+        public async Task Delete(string userId)
         {
             Cart cart = await _context.Cart.FindAsync(userId);
 
@@ -55,9 +57,10 @@ namespace ECommerce_App.Models.Services
         /// </summary>
         /// <param name="id">Id of cartItem to search for</param>
         /// <returns>Successful result of specified cartItem</returns>
-        public async Task<Cart> GetUserCart(int userId)
+        public async Task<Cart> GetUserCart(string userId)
         {
-            var cart = await _context.Cart.FindAsync(userId);
+            var cart = await _context.Cart.Where(x => x.UserId == userId).FirstAsync();
+            var items = await _cartItem.GetUserCartItems(cart.Id);
             return cart;
         }
     }
