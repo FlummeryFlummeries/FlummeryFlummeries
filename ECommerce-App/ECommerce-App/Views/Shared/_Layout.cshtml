@@ -43,32 +43,35 @@
                     <ul class="navbar-nav ml-auto">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="cart-icon">
-                                <i class="fas fa-shopping-cart fa-flip-horizontal"></i>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @User.Claims.First(x => x.Type == "FullName").Value
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
-                                    @if (User.IsInRole("Admin"))
+                        var currentUser = await SignInManager.UserManager.GetUserAsync(User);
+                        <li class="cart-icon">
+                            <div>
+                                @await Component.InvokeAsync("CartIcon", currentUser.Id)
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @User.Claims.First(x => x.Type == "FullName").Value
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
+                                @if (User.IsInRole("Admin"))
                                     {
-                                        <div class="dropdown-divider"></div>
-                                        <form asp-page="/ImageUpload/ImageUpload" method="get"> <button class="btn btn-link" type="submit">Uploads</button></form>
+                                <div class="dropdown-divider"></div>
+                                <form asp-page="/ImageUpload/ImageUpload" method="get"> <button class="btn btn-link" type="submit">Uploads</button></form>
                                     }
-                                </div>
-                            </li>
+                            </div>
+                        </li>
                         }
                         else
                         {
-                            <li>
-                                <a asp-page="/Account/Login" class="nav-link" role="button">Login</a>
-                            </li>
+                        <li>
+                            <a asp-page="/Account/Login" class="nav-link" role="button">Login</a>
+                        </li>
 
-                            <li>
-                                <a asp-page="/Account/Register" class="nav-link" role="button">Register</a>
-                            </li>
+                        <li>
+                            <a asp-page="/Account/Register" class="nav-link" role="button">Register</a>
+                        </li>
                         }
                     </ul>
                 </div>
@@ -77,9 +80,9 @@
         @if (SignInManager.IsSignedIn(User))
         {
             var currentUser = await SignInManager.UserManager.GetUserAsync(User);
-            <div>
-                @await Component.InvokeAsync("Cart", currentUser.Id);
-            </div>
+        <div>
+            @await Component.InvokeAsync("Cart", currentUser.Id)
+        </div>
         }
         <div class="body-container">
             @RenderBody()
@@ -101,6 +104,7 @@
             $(".cart-icon").click(function () {
                 $(".cart-mini").toggleClass('hide');
             });
+
         });
     </script>
 </body>

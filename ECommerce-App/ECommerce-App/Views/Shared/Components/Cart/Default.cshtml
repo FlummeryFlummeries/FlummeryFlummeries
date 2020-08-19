@@ -4,24 +4,40 @@
     <div class="card-header">
         Cart
     </div>
-    <table class="card-table table">
-        <thead>
-            <tr>
-                <th scope="col">Item Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var flum in Model)
-            {
+    @if (Model != null && Model.Any())
+    {
+        <table class="card-table table">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var flum in Model)
+                {
                 <tr>
                     <th scope="row">@flum.Product.Name</th>
                     <td>@flum.Product.Price</td>
                     <td>@flum.Qty</td>
+                    <td class="delete-icon" title="Remove from cart">
+                        <form asp-page="/Cart/Delete" asp-route-productId="@flum.Product.Id" method="post">
+                            <button class="btn btn-link" type="submit">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <a asp-page="/Cart/View" class="btn btn-dark" role="button">View Full Cart</a>
+                }
+            </tbody>
+        </table>
+        <hr />
+        <a asp-page="/Cart/View" class="btn btn-dark" role="button">View Full Cart</a>
+    }
+    else
+    {
+        <p>Your cart is empty!</p>
+    }
 </div>

@@ -134,8 +134,18 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.card-body > img {
+/*.img-container{
+    height: 300px;
+}
+*/
+.product-card > img {
     width: 80%;
+    height: 200px;
+}
+
+.compliment-container{
+    height: 75px;
+    margin-bottom:20px;
 }
 
 form > div > img {
@@ -172,8 +182,21 @@ form > div > img {
     position: absolute;
     right: 25px;
     top: 100px;
-    z-index: 100;
-    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1;
+    background-color: rgba(128, 128, 128, 0.95);
+}
+
+.cart-mini > p {
+    margin-top: 15px;
+}
+
+.cart-mini > a {
+    margin-bottom: 15px;
+}
+
+hr{
+    background-color: white;
+    height: 1px;
 }
 
 .cart-mini > table {
@@ -183,4 +206,37 @@ form > div > img {
 .hide
 {
     display: none;
+}
+
+.cart-count {
+    font-size: 12px;
+    padding: 0 3px;
+    vertical-align: top;
+    margin-left: -10px;
+}
+
+.badge{
+    padding: 0 5px;
+}
+
+.delete-icon{
+    width: 16px;
+    height: 16px;
+}
+
+.outer-x, .inner-x{
+    height: 16px;
+    width: 3px;
+    background-color: red;
+}
+
+.outer-x{
+    z-index: 2;
+    margin-left: 8px;
+    transform: rotate(45deg);
+}
+
+.inner-x{
+    z-index: 3;
+    transform: rotate(90deg);
 }
