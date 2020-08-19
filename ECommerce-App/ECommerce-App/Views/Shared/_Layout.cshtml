@@ -43,9 +43,8 @@
                     <ul class="navbar-nav ml-auto">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            var currentUser = await SignInManager.UserManager.GetUserAsync(User);
                             <li>
-                                <a asp-page="/Cart/View" asp-route-userId="@currentUser.Id" class="nav-link" role="button"><i class="fas fa-shopping-cart fa-flip-horizontal"></i></a>
+                                <a asp-page="/Cart/View" class="nav-link" role="button"><i class="fas fa-shopping-cart fa-flip-horizontal"></i></a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
