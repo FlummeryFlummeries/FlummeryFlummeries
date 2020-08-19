@@ -224,3 +224,12 @@ hr{
     z-index: 3;
     transform: rotate(90deg);
 }
+
+.details-card > div > img{
+    width: 85%;
+}
+
+.details-card {
+    width: 40%;
+    margin: auto;
+}
