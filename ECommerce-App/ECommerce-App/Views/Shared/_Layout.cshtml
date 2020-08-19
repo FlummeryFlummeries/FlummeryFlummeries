@@ -4,13 +4,12 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
     <title>Flummery Flummeries</title>
-    <link rel="shortcut icon" href="~/favicons/favicon.ico">
-    <link rel="apple-touch-icon" href="~/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="~/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="~/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" href="~/favicon/favicon.ico">
+    <link rel="apple-touch-icon" href="~/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="~/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="~/favicon/favicon-32x32.png" sizes="32x32">
     <link rel="stylesheet" type="text/css" href="~/Styles/reset.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
@@ -44,6 +43,9 @@
                     <ul class="navbar-nav ml-auto">
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            <li>
+                                <a asp-page="/Cart/View" class="nav-link" role="button"><i class="fas fa-shopping-cart fa-flip-horizontal"></i></a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     @User.Claims.First(x => x.Type == "FullName").Value
@@ -53,8 +55,7 @@
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <div class="dropdown-divider"></div>
-                                        <form asp-page="/ImageUpload/ImageUpload" method="get" > <button class="btn btn-link" type="submit">Uploads</button></form>
-
+                                        <form asp-page="/ImageUpload/ImageUpload" method="get"> <button class="btn btn-link" type="submit">Uploads</button></form>
                                     }
                                 </div>
                             </li>

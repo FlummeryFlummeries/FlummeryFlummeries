@@ -3,14 +3,16 @@ using ECommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerce_App.Migrations
+namespace ECommerce_App.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200818211258_AddedCart")]
+    partial class AddedCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace ECommerce_App.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ECommerce_App.Models.CartItem", b =>
+            modelBuilder.Entity("ECommerce_App.Models.CartItems", b =>
                 {
                     b.Property<int>("CartId")
                         .HasColumnType("int");
@@ -53,12 +55,13 @@ namespace ECommerce_App.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.Property<int>("Qty")
                         .HasColumnType("int");
 
                     b.HasKey("CartId", "ProductId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
 
@@ -67,24 +70,28 @@ namespace ECommerce_App.Migrations
                         {
                             CartId = 1,
                             ProductId = 3,
+                            Id = 1,
                             Qty = 2
                         },
                         new
                         {
                             CartId = 1,
                             ProductId = 7,
+                            Id = 2,
                             Qty = 4
                         },
                         new
                         {
                             CartId = 2,
                             ProductId = 1,
+                            Id = 3,
                             Qty = 5
                         },
                         new
                         {
                             CartId = 2,
                             ProductId = 5,
+                            Id = 4,
                             Qty = 1
                         });
                 });
@@ -224,17 +231,11 @@ namespace ECommerce_App.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ECommerce_App.Models.CartItem", b =>
+            modelBuilder.Entity("ECommerce_App.Models.CartItems", b =>
                 {
                     b.HasOne("ECommerce_App.Models.Cart", null)
                         .WithMany("CartItems")
                         .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ECommerce_App.Models.Flummery", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

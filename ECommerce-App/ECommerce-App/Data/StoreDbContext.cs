@@ -9,9 +9,15 @@ namespace ECommerce_App.Data
 {
     public class StoreDbContext : DbContext
     {
-        public StoreDbContext(DbContextOptions<StoreDbContext> options): base(options)
-        {
+        public DbSet<Flummery> Flummery { get; set; }
 
+        public DbSet<Cart> Cart { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+
+
+        public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -120,8 +126,48 @@ namespace ECommerce_App.Data
                     Compliment = "You're so good at arguing, you should be a lawyer."
                 }
             );
-        }
 
-        public DbSet<Flummery> Flummery { get; set; }
+            builder.Entity<Cart>().HasData(
+                new Cart
+                {
+                    Id = 1,
+                    UserId = "63866547-918c-4c25-8d19-16c845d2fa2e"
+                },
+                new Cart
+                {
+                    Id = 2,
+                    UserId = "cf1833eb-dbd6-42b1-ab9c-cf24382b9d07"
+                }
+            );
+
+            builder.Entity<CartItem>().HasData(
+                new CartItem
+                {
+                    CartId = 1,
+                    ProductId = 3,
+                    Qty = 2
+                },
+                new CartItem
+                {
+                    CartId = 1,
+                    ProductId = 7,
+                    Qty = 4
+                },
+                new CartItem
+                {
+                    CartId = 2,
+                    ProductId = 1,
+                    Qty = 5
+                },
+                new CartItem
+                {
+                    CartId = 2,
+                    ProductId = 5,
+                    Qty = 1
+                }
+            );
+
+            builder.Entity<CartItem>().HasKey(x => new { x.CartId, x.ProductId });
+        }
     }
 }
