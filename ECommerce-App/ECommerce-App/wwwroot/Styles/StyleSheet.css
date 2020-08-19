@@ -164,3 +164,23 @@ form > div > img {
 .card-body > a:first-of-type {
     margin-bottom: 10px;
 }
+
+.cart-mini {
+    display: block;
+    color: white;
+    width: 400px;
+    position: absolute;
+    right: 25px;
+    top: 100px;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.cart-mini > table {
+    color: white;
+}
+
+.hide
+{
+    display: none;
+}

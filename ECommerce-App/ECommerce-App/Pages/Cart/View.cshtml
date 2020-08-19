@@ -32,19 +32,19 @@
             @foreach (var flum in Model.FlummeriesInCart)
             {
                 <tr>
-                    <th scope="row">@flum.Key.Name</th>
-                    <td>@flum.Key.Price</td>
+                    <th scope="row">@flum.Product.Name</th>
+                    <td>@flum.Product.Price</td>
                     <td>
                         <form method="post">
-                            <input asp-for="@Model.NewQuantity" value="@flum.Value" min="1" max="" />
-                            <input type="hidden" asp-for="@Model.ItemId" value="@flum.Key.Id" />
+                            <input asp-for="@Model.NewQuantity" value="@flum.Qty" min="1" max="99" />
+                            <input type="hidden" asp-for="@Model.ItemId" value="@flum.Product.Id" />
                             <input type="hidden" asp-for="@Model.CartId" value="@Model.CartId" />
                             <button class="btn btn-link" type="submit">Update</button>
                         </form>
                     </td>
 
                     <td>
-                        <form asp-page="/Cart/Delete" asp-route-productId="@flum.Key.Id" method="post">
+                        <form asp-page="/Cart/Delete" asp-route-productId="@flum.Product.Id" method="post">
                             <button class="btn btn-link" type="submit">Delete</button>
                         </form>
                     </td>
