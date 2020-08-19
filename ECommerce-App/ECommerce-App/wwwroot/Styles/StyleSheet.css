@@ -1,5 +1,4 @@
 ﻿html, body {
-    /*    background-color: #212121;*/
     color: tan;
     text-align: center;
     height: 100%;
@@ -41,10 +40,6 @@ main {
     margin: 15px auto 0px;
 }
 
-/*header {
-    margin-top: 30px;
-}*/
-
 .home-header {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
@@ -58,17 +53,6 @@ main {
         width: fit-content;
         margin: 0 auto;
     }
-
-/*header {
-    border-radius: 5px;
-    padding: 6px 10px;
-    float: right;
-    background: rgba(160, 219, 108, 0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
-}*/
 
 nav {
     padding: .6rem 4.5rem !important;
