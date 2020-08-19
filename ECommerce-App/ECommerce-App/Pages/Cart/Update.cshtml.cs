@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models.Interface;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -23,7 +24,7 @@ namespace ECommerce_App.Pages.Cart
             _flummeryInventory = flummeryInventory;
         }
 
-        public async Task OnGet(int itemId, string userId)
+        public async Task<IActionResult> OnGet(int itemId, string userId)
         {
             var currCart = await _cart.GetUserCart(userId);
             if (currCart == null)
@@ -35,6 +36,7 @@ namespace ECommerce_App.Pages.Cart
                 currCart = await _cart.Create(newCart);
             }
             await UpdateCartItems(currCart, itemId, 1);
+            return RedirectToPage("/Cart/View");
         }
 
         private async Task UpdateCartItems(Models.Cart cart, int itemId, int qty)
