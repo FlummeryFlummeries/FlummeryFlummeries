@@ -33,6 +33,10 @@ namespace ECommerce_App.Pages.Cart
         {
             var currentUser = await _signInManager.UserManager.GetUserAsync(User);
             var cart = await _cart.GetUserCart(currentUser.Id);
+            if(cart.CartItems.Count <= 1)
+            {
+                await _cart.Delete(currentUser.Id);
+            }
             await _cartItem.Delete(cart.Id, productId);
             return RedirectToPage("/Cart/View");
         }
