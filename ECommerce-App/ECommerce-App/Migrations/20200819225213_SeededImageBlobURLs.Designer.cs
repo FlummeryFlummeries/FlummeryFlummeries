@@ -3,14 +3,16 @@ using ECommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819225213_SeededImageBlobURLs")]
+    partial class SeededImageBlobURLs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,7 +129,7 @@ namespace ECommerce_App.Migrations
                             Id = 1,
                             Calories = 1525,
                             Compliment = "I can't believe you managed to pull that off. Good job.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Job%20Jelly.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Job%Jelly.jpg",
                             Manufacturer = "Acme Baking",
                             Name = "Job Jelly",
                             Price = 9.99m,
@@ -138,7 +140,7 @@ namespace ECommerce_App.Migrations
                             Id = 2,
                             Calories = 1150,
                             Compliment = "That tie looks great on you! Is it new?",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Tied%20for%20First.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Tied%for%First.jpg",
                             Manufacturer = "Flum & Co",
                             Name = "Tied for First",
                             Price = 72.99m,
@@ -160,7 +162,7 @@ namespace ECommerce_App.Migrations
                             Id = 4,
                             Calories = 912,
                             Compliment = "That chili would be pretty spicy to an infant.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Baby%20Cowboy.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Baby%Cowboy.jpg",
                             Manufacturer = "Acme Baking",
                             Name = "Baby Cowboy",
                             Price = 9.99m,
@@ -182,7 +184,7 @@ namespace ECommerce_App.Migrations
                             Id = 6,
                             Calories = 1792,
                             Compliment = "What a nice sorting algorithm.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Lark%20on%20the%20Wing.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Lark%on%the%Wing.jpg",
                             Manufacturer = "Full On Flummery",
                             Name = "Lark on the Wing",
                             Price = 9.99m,
@@ -193,7 +195,7 @@ namespace ECommerce_App.Migrations
                             Id = 7,
                             Calories = 1135,
                             Compliment = "Yeah, that's a nice loaf of quarantine sourdough.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Scarce%20Flour.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Scarce%Flour.jpg",
                             Manufacturer = "Acme Baking",
                             Name = "Scarce Flour",
                             Price = 9.99m,
@@ -204,7 +206,7 @@ namespace ECommerce_App.Migrations
                             Id = 8,
                             Calories = 465,
                             Compliment = "What a nice painting! It's going right on the fridge.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Flum%20Jr..jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Flum%Jr..jpg",
                             Manufacturer = "Flum For Kids",
                             Name = "Flum Jr.",
                             Price = 4.99m,
@@ -215,7 +217,7 @@ namespace ECommerce_App.Migrations
                             Id = 9,
                             Calories = 1325,
                             Compliment = "You all are the hardworking, salt of the earth type.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Political%20HumFlummery.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Political%HumFlummery.jpg",
                             Manufacturer = "Local Government",
                             Name = "Political HumFlummery",
                             Price = 52.99m,

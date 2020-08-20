@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using ECommerce_App.Models;
 using ECommerce_App.Models.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static ECommerce_App.Models.Services.PaymentHandlingService;
 
@@ -16,17 +18,23 @@ namespace ECommerce_App.Pages.Cart
     public class CheckoutModel : PageModel
     {
         private IPaymentHandler _payment;
+
         private ICart _cart;
+
         private SignInManager<ApplicationUser> _signInManager;
+
         [BindProperty]
         public CheckoutViewModel Input { get; set; }
+
         public decimal Total { get; set; }
+
         public CheckoutModel(IPaymentHandler payment, ICart cart, SignInManager<ApplicationUser> signIn)
         {
             _payment = payment;
             _cart = cart;
             _signInManager = signIn;
         }
+
         public async Task<IActionResult> OnGet()
         {
             var currentUser = await _signInManager.UserManager.GetUserAsync(User);
@@ -47,7 +55,7 @@ namespace ECommerce_App.Pages.Cart
             {
                 var currentUser = await _signInManager.UserManager.GetUserAsync(User);
                 var cart = await _cart.GetUserCart(currentUser.Id);
-                if(cart != null && cart.CartItems != null)
+                if (cart != null && cart.CartItems != null)
                 {
                     creditCardType card = new creditCardType()
                     {
@@ -79,38 +87,42 @@ namespace ECommerce_App.Pages.Cart
             return Page();
         }
 
-        public class CheckoutViewModel 
+        public class CheckoutViewModel
         {
             [Required]
-            public string CardNumber;
+            public string CardNumber { get; set; }
 
             [Required]
             [Display(Name = "First Name")]
-            public string FirstName;
+            public string FirstName { get; set; }
 
             [Required]
             [Display(Name = "Last name")]
-            public string LastName;
+            public string LastName { get; set; }
+
+            [Display(Name = "Billing Address")]
+            public customerAddressType Billing { get; set; }
 
             [Required]
-            [Display(Name = "Billing Address")]
-            public customerAddressType Billing;  
-            
-            [Required]
             [Display(Name = "Billing Address Line 2")]
-            public string BillingOptionalAddition;
+            public string BillingOptionalAddition { get; set; }
 
             [Required]
             [Display(Name = "Same shipping address")]
-            public bool SameBillingAndShipping;
+            public bool SameBillingAndShipping { get; set; }
 
-            [Required]
             [Display(Name = "Shipping Address")]
-            public customerAddressType Shipping;
+            public customerAddressType Shipping { get; set; }
 
             [Required]
             [Display(Name = "Shipping Address Line 2")]
-            public string ShippingOptionalAddition;
+            public string ShippingOptionalAddition { get; set; }
+
+            public CheckoutViewModel()
+            {
+                Billing = new customerAddressType();
+                Shipping = new customerAddressType();
+            }
         }
     }
 }
