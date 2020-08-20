@@ -1,0 +1,16 @@
+﻿@page
+@model ECommerce_App.Pages.Checkout.SuccessModel
+@{
+    ViewData["Title"] = "Success";
+    Layout = "_Layout";
+}
+
+<h1>Success!</h1>
+
+<div class="card">
+    <div class="card-body">
+        <h3>Your order has been processed:</h3>
+        <p>@Model.Message</p>
+    </div>
+</div>
+

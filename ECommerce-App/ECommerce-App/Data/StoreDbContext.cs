@@ -13,7 +13,7 @@ namespace ECommerce_App.Data
 
         public DbSet<Cart> Cart { get; set; }
 
-        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
 
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)

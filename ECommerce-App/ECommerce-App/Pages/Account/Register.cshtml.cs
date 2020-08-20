@@ -85,8 +85,8 @@ namespace ECommerce_App.Pages.Account
             public string FirstName { get; set; }
 
             [Required]
-            public string LastName { get; set; }
             [Display(Name = "Last Name")]
+            public string LastName { get; set; }
 
             // These are like server side versions of adding required and type="password" to the inputs on the front end
             [Required]

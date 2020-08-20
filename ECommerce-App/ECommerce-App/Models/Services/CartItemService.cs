@@ -44,7 +44,7 @@ namespace ECommerce_App.Models.Services
         public async Task Delete(int cartId, int productId)
         {
             
-            CartItem item = await _context.CartItems.FindAsync(cartId, productId);
+            CartItem item = await _context.CartItem.FindAsync(cartId, productId);
             if(item != null)
             {
                 _context.Entry(item).State = EntityState.Deleted;
@@ -59,7 +59,7 @@ namespace ECommerce_App.Models.Services
         /// <returns>Successful result with list of cartItems</returns>
         public async Task<List<CartItem>> GetUserCartItems(int cartId)
         {
-            List<CartItem> items = await _context.CartItems.Where(x => x.CartId == cartId).ToListAsync();
+            List<CartItem> items = await _context.CartItem.Where(x => x.CartId == cartId).ToListAsync();
             foreach (var item in items)
             {
                 item.Product = await _flummery.GetFlummeryBy(item.ProductId);
