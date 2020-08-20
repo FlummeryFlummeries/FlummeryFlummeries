@@ -59,6 +59,7 @@ namespace ECommerce_App.Pages.Cart
                     TransactionResponse result = _payment.Run(card, Input.Billing, cart.CartItems, Total);
                     if (result.Successful)
                     {
+                        // Delete cart and add order history
                         return RedirectToPage("/Checkout/Success", new { response = result.Response });
                     }
                     else
