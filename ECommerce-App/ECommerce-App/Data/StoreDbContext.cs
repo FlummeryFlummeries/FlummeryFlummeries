@@ -13,8 +13,11 @@ namespace ECommerce_App.Data
 
         public DbSet<Cart> Cart { get; set; }
 
-        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
 
+        public DbSet<OrderCart> OrderCart { get; set; }
+
+        public DbSet<OrderCartItem> OrderCardItem { get; set; }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
@@ -130,44 +133,85 @@ namespace ECommerce_App.Data
             builder.Entity<Cart>().HasData(
                 new Cart
                 {
-                    Id = 1,
+                    Id = 2,
                     UserId = "63866547-918c-4c25-8d19-16c845d2fa2e"
                 },
                 new Cart
                 {
-                    Id = 2,
+                    Id = 3,
                     UserId = "cf1833eb-dbd6-42b1-ab9c-cf24382b9d07"
                 }
             );
 
+            builder.Entity<CartItem>().HasKey(x => new { x.CartId, x.ProductId });
+
             builder.Entity<CartItem>().HasData(
                 new CartItem
                 {
-                    CartId = 1,
+                    CartId = 2,
                     ProductId = 3,
                     Qty = 2
                 },
                 new CartItem
                 {
-                    CartId = 1,
+                    CartId = 2,
                     ProductId = 7,
                     Qty = 4
                 },
                 new CartItem
                 {
-                    CartId = 2,
+                    CartId = 3,
                     ProductId = 1,
                     Qty = 5
                 },
                 new CartItem
                 {
-                    CartId = 2,
+                    CartId = 3,
                     ProductId = 5,
                     Qty = 1
                 }
             );
 
-            builder.Entity<CartItem>().HasKey(x => new { x.CartId, x.ProductId });
+            builder.Entity<OrderCart>().HasData(
+                new OrderCart
+                { 
+                    Id = 1,
+                    UserId = "63866547-918c-4c25-8d19-16c845d2fa2e",
+                    FirstName = "John",
+                    LastName = "Dickinson",
+                    BillingAddress = "1808 Forgotten Way",
+                    BillingCity = "Wilmington",
+                    BillingState = "DE",
+                    BillingZip = "00001",
+                    ShippingAddress = "1808 Forgotten Way",
+                    ShippingCity = "Wilmington",
+                    ShippingState = "DE",
+                    ShippingZip = "00001"
+                }
+            );
+
+            builder.Entity<OrderCartItem>().HasKey(x => new { x.OrderCartId, x.ProductId });
+
+            builder.Entity<OrderCartItem>().HasData(
+                new OrderCartItem
+                {
+                    OrderCartId = 1,
+                    ProductId = 3,
+                    Qty = 2
+                },
+                new OrderCartItem
+                {
+                    OrderCartId = 1,
+                    ProductId = 8,
+                    Qty = 5
+                },
+                new OrderCartItem
+                {
+                    OrderCartId = 1,
+                    ProductId = 1,
+                    Qty = 3
+                }
+            );
         }
     }
 }
