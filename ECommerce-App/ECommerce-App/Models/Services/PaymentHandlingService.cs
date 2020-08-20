@@ -21,7 +21,7 @@ namespace ECommerce_App.Models.Services
         }
 
 
-        public TransactionResponse Run(creditCardType card, customerAddressType billingAddress, List<CartItem> cartItems, decimal total)
+        public TransactionResponse Run(creditCardType card, customerAddressType billingAddress, List<CartItem> cartItems)
         {
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
 
@@ -32,12 +32,14 @@ namespace ECommerce_App.Models.Services
                 Item = _config["AuthorizeNet:TransactionKey"]
             };
 
+            decimal total = 0;
             paymentType paymentType = new paymentType { Item = card };
             lineItemType[] lineItems = new lineItemType[cartItems.Count];
             for (int i = 0; i < cartItems.Count; i++)
             {
                 CartItem item = cartItems[i];
                 lineItems[i] = new lineItemType { itemId = item.ProductId.ToString(), name = item.Product.Name, quantity = item.Qty, unitPrice = item.Product.Price };
+                total += item.Qty * item.Product.Price;
             }
 
             transactionRequestType transactionRequest = new transactionRequestType

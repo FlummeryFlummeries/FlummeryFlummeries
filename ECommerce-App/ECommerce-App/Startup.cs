@@ -58,6 +58,8 @@ namespace ECommerce_App
             services.AddTransient<ICart, CartService>();
             services.AddTransient<ICartItem, CartItemService>();
             services.AddTransient<IPaymentHandler, PaymentHandlingService>();
+            services.AddTransient<IOrder, OrderService>();
+            services.AddTransient<IOrderItem, OrderItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -44,8 +44,7 @@ namespace ECommerce_App.Models.Services
         /// <returns>Task of completion for cartItem delete</returns>
         public async Task Delete(string userId)
         {
-            Cart cart = await _context.Cart.FindAsync(userId);
-
+            Cart cart = await _context.Cart.Where(x => x.UserId == userId).FirstOrDefaultAsync();
             if(cart != null)
             {
                 _context.Entry(cart).State = EntityState.Deleted;

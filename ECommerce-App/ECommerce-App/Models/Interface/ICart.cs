@@ -10,22 +10,22 @@ namespace ECommerce_App.Models.Interface
         /// <summary>
         /// Creates a new cart for a user, called if a cart doesn't already exist for the user in question
         /// </summary>
-        /// <param name="cartItem">CartItem information for creation</param>
-        /// <returns>Successful result of CartItem creation</returns>
+        /// <param name="cartItem">Cart information for creation</param>
+        /// <returns>Successful result of Cart creation</returns>
         Task<Cart> Create(Cart cart);
 
         /// <summary>
         /// Get a user's cart from the database
         /// </summary>
-        /// <param name="id">Id of cartItem to search for</param>
-        /// <returns>Successful result of specified cartItem</returns>
+        /// <param name="id">Id of user to search for a cart for</param>
+        /// <returns>Successful result of specified cart</returns>
         Task<Cart> GetUserCart(string userId);
 
         /// <summary>
-        /// Delete a cart from the database, used when the last item in a 
+        /// Delete a cart from the database, used when the last item in a cart is removed or a checkout is successful
         /// </summary>
-        /// <param name="id">Id of cartItem to be deleted</param>
-        /// <returns>Task of completion for cartItem delete</returns>
+        /// <param name="id">Id of cart to be deleted</param>
+        /// <returns>Task of completion for cart deletion</returns>
         Task Delete(string userId);
 
     }

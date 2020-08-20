@@ -17,7 +17,7 @@ namespace ECommerce_App.Data
 
         public DbSet<OrderCart> OrderCart { get; set; }
 
-        public DbSet<OrderCartItem> OrderCardItem { get; set; }
+        public DbSet<OrderCartItem> OrderCartItem { get; set; }
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
@@ -187,6 +187,7 @@ namespace ECommerce_App.Data
                 { 
                     Id = 1,
                     UserId = "63866547-918c-4c25-8d19-16c845d2fa2e",
+                    CartId = 100,
                     FirstName = "John",
                     LastName = "Dickinson",
                     BillingAddress = "1808 Forgotten Way",
