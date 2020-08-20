@@ -11,6 +11,8 @@ namespace ECommerce_App.Models
 
         public string UserId { get; set; }
 
+        public int CartId { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
