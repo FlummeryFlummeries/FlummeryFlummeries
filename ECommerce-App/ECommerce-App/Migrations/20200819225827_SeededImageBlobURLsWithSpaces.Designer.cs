@@ -3,14 +3,16 @@ using ECommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819225827_SeededImageBlobURLsWithSpaces")]
+    partial class SeededImageBlobURLsWithSpaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,7 +184,7 @@ namespace ECommerce_App.Migrations
                             Id = 6,
                             Calories = 1792,
                             Compliment = "What a nice sorting algorithm.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Lark%20on%20the%20Wing.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Lark%20on%the%20Wing.jpg",
                             Manufacturer = "Full On Flummery",
                             Name = "Lark on the Wing",
                             Price = 9.99m,
