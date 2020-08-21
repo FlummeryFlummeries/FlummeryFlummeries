@@ -8,13 +8,15 @@
     Layout = "_Layout";
 }
 
+@{
+    var currentUser = await SignInManager.UserManager.GetUserAsync(User);
+}
+
 <div class="home-header card">
     <h1>Welcome to the Flummery Flummeries!</h1>
     <h2>Click below to view our products.</h2>
     <a asp-controller="Products" class="btn btn-dark" role="button">View All Products</a>
 </div>
-
-
 
 <h2>Or try a few of our suggested Flummeries</h2>
 <div class="container-fluid mt-4">
@@ -31,6 +33,10 @@
                             <p class="card-text">Compliment : @item.Compliment</p>
                         </div>
                         <a asp-page="/ProductDetails/ProductDetails" asp-route-id="@item.Id" class="btn btn-primary">Product Details</a>
+                        @if (currentUser != null)
+                        {
+                            <a asp-page="/Cart/Update" asp-route-userId="@currentUser.Id" asp-route-itemId="@item.Id" class="btn btn-primary">Add Item to Cart</a>
+                        }
                     </div>
                 </div>
             </div>
