@@ -125,6 +125,7 @@ namespace ECommerce_App.Pages.Cart
                         };
                         await _order.Create(order);
                         order.CartItems = new List<OrderCartItem>();
+                        List<OrderCartItem> orderCartItems = new List<OrderCartItem>();
                         foreach (var item in cartItems)
                         {
                             OrderCartItem orderItem = new OrderCartItem()
@@ -134,13 +135,14 @@ namespace ECommerce_App.Pages.Cart
                                 Qty = item.Qty
                             };
                             order.CartItems.Add(orderItem);
+                            orderCartItems.Add(orderItem);
                             await _orderItem.Create(orderItem);
                             await _cartItem.Delete(item.CartId, item.ProductId);
                         }                       
 
                         await _cart.Delete(currentUser.Id);
 
-                        return RedirectToPage("/Checkout/Success", new { response = result.Response, order });
+                        return RedirectToPage("/Checkout/Success", new { response = result.Response, cartId = order.CartId });
                     }
                     else
                     {

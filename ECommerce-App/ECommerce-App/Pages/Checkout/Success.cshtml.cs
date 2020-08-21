@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
+using ECommerce_App.Models.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,14 +11,22 @@ namespace ECommerce_App.Pages.Checkout
 {
     public class SuccessModel : PageModel
     {
-        public string Message;
+        private readonly IOrder _order;
 
-        public OrderCart Order;
+        public string Message { get; set; }
 
-        public void OnGet(string response, OrderCart order)
+        public OrderCart Order { get; set; }
+
+
+        public SuccessModel(IOrder order)
+        {
+            _order = order;
+        }
+
+        public async Task OnGet(string response, int cartId)
         {
             Message = response;
-            Order = order;
+            Order = await _order.GetUserOrderFor(cartId);
         }
     }
 }
