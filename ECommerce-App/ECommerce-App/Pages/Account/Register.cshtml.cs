@@ -81,7 +81,7 @@ namespace ECommerce_App.Pages.Account
             Random rand = new Random();
             for (int i = 0; i < 2; i++)
             {
-                int temp = rand.Next(10);
+                int temp = rand.Next(1, 10);
                 while (usedNums.Contains(temp))
                 {
                     temp = rand.Next(10);

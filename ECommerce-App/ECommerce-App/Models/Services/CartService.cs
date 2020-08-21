@@ -60,6 +60,7 @@ namespace ECommerce_App.Models.Services
         public async Task<Cart> GetUserCart(string userId)
         {
             var cart = await _context.Cart.Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            
             if(cart != null)
             {
                 cart.CartItems = await _cartItem.GetUserCartItems(cart.Id);
