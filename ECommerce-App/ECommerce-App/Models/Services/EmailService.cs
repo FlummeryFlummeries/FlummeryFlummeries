@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models.Interface;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
@@ -25,17 +26,18 @@ namespace ECommerce_App.Models.Services
         /// <param name="subject">Subject of the email</param>
         /// <param name="htmlMessage">HTML Content of the email</param>
         /// <returns>Task of completion for email sending</returns>
-        public async Task SendEmail(string emailAddress, string subject, string message)
+        public async Task SendEmail(string templateId, List<Personalization> personalizations, string subject = null, string message = null)
         {
             SendGridClient client = new SendGridClient(_config["SENDGRID_API_KEY"]);
 
-            SendGridMessage email = new SendGridMessage();
+            SendGridMessage email = new SendGridMessage()
+            {
+                From = new EmailAddress("Flummery@Flummeries.com", "Flummery Flummeries"),
+                TemplateId = templateId,
+                Personalizations = personalizations
+            };
+            Response result = await client.SendEmailAsync(email);
 
-            email.SetFrom("Flummery@Flummeries.com", "Flummery Flummeries");
-            email.AddTo(emailAddress);
-            email.SetSubject(subject);
-            email.AddContent(MimeType.Html, message);
-            await client.SendEmailAsync(email);
         }
     }
 }

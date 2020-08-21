@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using AuthorizeNet.Api.Contracts.V1;
 using ECommerce_App.Models;
 using ECommerce_App.Models.Interface;
+using ECommerce_App.Models.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SendGrid.Helpers.Mail;
 using SQLitePCL;
 using static ECommerce_App.Models.Services.PaymentHandlingService;
+using static ECommerce_App.Models.Services.Emails.ReceiptTemplateData;
+using ECommerce_App.Models.Services.Emails;
+using ECommerce_App.Models.ViewModels;
+using ECommerce_App.Models.Emails;
 
 namespace ECommerce_App.Pages.Cart
 {
@@ -28,6 +36,8 @@ namespace ECommerce_App.Pages.Cart
 
         private IOrderItem _orderItem;
 
+        private IEmail _email;
+
         private SignInManager<ApplicationUser> _signInManager;
 
         [BindProperty]
@@ -35,7 +45,7 @@ namespace ECommerce_App.Pages.Cart
 
         public decimal Total { get; set; }
 
-        public CheckoutModel(IPaymentHandler payment, ICart cart, SignInManager<ApplicationUser> signIn, IOrder order, IOrderItem orderItem, ICartItem cartItem)
+        public CheckoutModel(IPaymentHandler payment, ICart cart, SignInManager<ApplicationUser> signIn, IOrder order, IOrderItem orderItem, ICartItem cartItem, IEmail email)
         {
             _payment = payment;
             _cart = cart;
@@ -43,6 +53,7 @@ namespace ECommerce_App.Pages.Cart
             _signInManager = signIn;
             _order = order;
             _orderItem = orderItem;
+            _email = email;
 
         }
 
@@ -102,12 +113,14 @@ namespace ECommerce_App.Pages.Cart
                     TransactionResponse result = _payment.Run(card, billingAddress, cart.CartItems);
                     if (result.Successful)
                     {
+                        decimal total = 0;
                         List<CartItem> cartItems = new List<CartItem>();
                         foreach (var item in cart.CartItems)
                         {
                             cartItems.Add(item);
+                            total += item.Qty * item.Product.Price;
                         }
-                        // Delete cart and add order history
+
                         OrderCart order = new OrderCart()
                         {
                             CartId = cart.Id,
@@ -136,9 +149,11 @@ namespace ECommerce_App.Pages.Cart
                             order.CartItems.Add(orderItem);
                             await _orderItem.Create(orderItem);
                             await _cartItem.Delete(item.CartId, item.ProductId);
-                        }                       
+                        }
 
                         await _cart.Delete(currentUser.Id);
+
+                        await BuildCheckoutEmail(currentUser.Email, $"{order.FirstName} {order.LastName}", cartItems, $"{shippingAddress.address} {shippingAddress.city}, {shippingAddress.state} {shippingAddress.zip}", total);
 
                         return RedirectToPage("/Checkout/Success", new { response = result.Response, order });
                     }
@@ -159,57 +174,39 @@ namespace ECommerce_App.Pages.Cart
             return Page();
         }
 
-        public class CheckoutViewModel
+        public async Task BuildCheckoutEmail(string emailAddress, string name, List<CartItem> items, string address, decimal total)
         {
-            [Required]
-            public string CardNumber { get; set; }
+            List<EmailItem> newItems = new List<EmailItem>();
+            string templateId = "d-baa668b986ef47f79ef56df8a2674db8";
+            foreach (var item in items)
+            {
+                newItems.Add(new EmailItem
+                {
+                    ImgSrc = item.Product.ImageUrl,
+                    Qty = item.Qty,
+                    ItemName = item.Product.Name,
+                    ItemTotal = item.Qty * item.Product.Price
+                });
+            }
 
-            [Required]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [Display(Name = "Last name")]
-            public string LastName { get; set; }
-
-            [Required]
-            [Display(Name = "Billing Address")]
-            public string BillingAddress { get; set; }
-
-            [Required]
-            [Display(Name = "Billing Address City")]
-            public string BillingCity { get; set; }
-
-            [Required]
-            [Display(Name = "Billing Address State")]
-            public string BillingState { get; set; }
-
-            [Required]
-            [Display(Name = "Billing Address Zip Code")]
-            public string BillingZip { get; set; }
-
-            [Display(Name = "Billing Address Line 2")]
-            public string BillingOptionalAddition { get; set; }
-
-            [Required]
-            [Display(Name = "Same shipping address")]
-            public bool SameBillingAndShipping { get; set; }
-
-            [Display(Name = "Shipping Address")]
-            public string ShippingAddress { get; set; }
-
-            [Display(Name = "Shipping Address City")]
-            public string ShippingCity { get; set; }
-
-            [Display(Name = "Shipping Address State")]
-            public string ShippingState { get; set; }
-
-            [Display(Name = "Shipping Address Zip Code")]
-            public string ShippingZip { get; set; }
-
-            [Display(Name = "Shipping Address Line 2")]
-            public string ShippingOptionalAddition { get; set; }
-
+            List<Personalization> personalizations = new List<Personalization>();
+            personalizations.Add(new Personalization()
+            {
+                Tos = new List<EmailAddress>
+                {
+                    new EmailAddress(emailAddress)
+                },
+                Subject = "Thanks for your purchase!",
+                TemplateData = new ReceiptTemplateData()
+                {
+                    FullName = name,
+                    Date = DateTime.Now.ToString(),
+                    Address = address,
+                    Total = total,
+                    CartItems = newItems
+                }
+            });
+            await _email.SendEmail(templateId, personalizations);
         }
     }
 }

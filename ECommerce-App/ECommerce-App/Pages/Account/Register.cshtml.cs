@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
+using ECommerce_App.Models.Emails;
 using ECommerce_App.Models.Interface;
+using ECommerce_App.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SendGrid.Helpers.Mail;
 
 namespace ECommerce_App.Pages.Account
 {
@@ -17,12 +21,14 @@ namespace ECommerce_App.Pages.Account
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private IEmail _email;
+        private IFlummeryInventory _flummery;
 
-        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmail email)
+        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmail email, IFlummeryInventory flummery)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _email = email;
+            _flummery = flummery;
         }
 
         [BindProperty]
@@ -53,11 +59,7 @@ namespace ECommerce_App.Pages.Account
 
                     await _signInManager.SignInAsync(user, Input.Persistent);
 
-                    string emailSubject = "Thanks for registering at Flummery Flummeries!";
-
-                    string emailMessage = $"<p>Thank you {Input.FirstName} {Input.LastName} for registering with Flummery Flummeries!</p>";
-
-                    await _email.SendEmail(Input.Email, emailSubject, emailMessage);
+                    await BuildRegistrationEmail(Input.Email, $"{Input.FirstName} {Input.LastName}");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -70,36 +72,45 @@ namespace ECommerce_App.Pages.Account
             return Page();
         }
 
-
-
-        public class RegisterViewModel
+        public async Task BuildRegistrationEmail(string emailAddress, string name)
         {
-            [Required]
-            [Display(Name = "Email Address")]
-            [EmailAddress]
-            public string Email { get; set; }
+            string templateId = "d-d26e9bcbfef6438ab53fd65fca39da27";
 
+            List<EmailItem> featuredFlums = new List<EmailItem>();
+            List<int> usedNums = new List<int>();
+            Random rand = new Random();
+            for (int i = 0; i < 2; i++)
+            {
+                int temp = rand.Next(10);
+                while (usedNums.Contains(temp))
+                {
+                    temp = rand.Next(10);
+                }
+                Flummery flum = await _flummery.GetFlummeryBy(temp);
+                featuredFlums.Add(new EmailItem{
+                    Id = flum.Id,
+                    ImgSrc = flum.ImageUrl,
+                    ItemName = flum.Name,
+                    ItemPrice = flum.Price
+                });
+            }
 
-            [Required]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
-
-            // These are like server side versions of adding required and type="password" to the inputs on the front end
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-
-            [Required]
-            [DataType(DataType.Password)]
-            [Compare("Password")]
-            [Display(Name = "Confirm Password")]
-            public string ConfirmPassword { get; set; }
-
-            public bool Persistent { get; set; }
+            List<Personalization> personalizations = new List<Personalization>();
+            personalizations.Add(new Personalization()
+            {
+                Tos = new List<EmailAddress>
+                {
+                    new EmailAddress(emailAddress)
+                },
+                Subject = "Thanks for your purchase!",
+                TemplateData = new RegistrationTemplateData()
+                {
+                    FullName = name,
+                    Date = DateTime.Now.ToString(),
+                    DisplayItems = featuredFlums
+                }
+            });
+            await _email.SendEmail(templateId, personalizations);
         }
     }
 }
