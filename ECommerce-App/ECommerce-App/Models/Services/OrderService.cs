@@ -73,9 +73,9 @@ namespace ECommerce_App.Models.Services
         /// </summary>
         /// <param name="id">Id of orderItem to search for</param>
         /// <returns>Successful result of specified orderItem</returns>
-        public async Task<OrderCart> GetUserOrder(int orderId)
+        public async Task<OrderCart> GetUserOrderFor(int cardId)
         {
-            var order = await _context.OrderCart.Where(x => x.Id == orderId).FirstOrDefaultAsync();
+            var order = await _context.OrderCart.Where(x => x.CartId == cardId).FirstOrDefaultAsync();
             if (order != null)
             {
                 order.CartItems = await _orderItem.GetUserOrderItems(order.Id);

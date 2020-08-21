@@ -19,15 +19,15 @@ namespace ECommerce_App.Models.Interface
         /// </summary>
         /// <param name="id">Id of order item to search for</param>
         /// <returns>Successful result of specified orderItem</returns>
-        Task<OrderCart> GetUserOrders(string userId);   
-        
+        Task<OrderCart> GetUserOrders(string userId);
+
         /// <summary>
         /// Get a specific user's order from the database
         /// </summary>
         /// <param name="userId">Id of order item to search for</param>
         /// <param name="orderId">Id of order item to search for</param>
         /// <returns>Successful result of specified orderItem</returns>
-        Task<OrderCart> GetUserOrder(int orderId);
+        Task<OrderCart> GetUserOrderFor(int cardId);
 
         /// <summary>
         /// Delete a order from the database, used when the last item in a 
