@@ -155,8 +155,12 @@ form > div > img {
     color: white;
 }
 
-.card-body > a:first-of-type {
+.card-body > a {
     margin-bottom: 10px;
+}
+
+.card-body > a:last-of-type {
+    margin-bottom: 0;
 }
 
 .cart-mini {
@@ -231,5 +235,11 @@ hr{
 
 .details-card {
     width: 40%;
+    margin: auto;
+}
+
+.checkout-form{
+    padding: 20px 30px;
+    max-width: 600px;
     margin: auto;
 }
