@@ -87,9 +87,28 @@ Select ```Debug``` -> ```Start Without Debugging```
 
 ### Version
 
-v1.5
+v1.8
 
 ### Change Log
+
+#### 2020-08-23
+- Overhaul of Image uploads and Flummery creation, Admin now can upload Flummeries via the upload item in the top-right dropdown, and upload/update individual images via the link on the item in the products page.
+
+#### 2020-08-20
+- Completion of Checkout process (using pseudo-cards and AuthorizeNet sandbox).
+- Created nice templates on SendGrid for both registration and receipt emails.
+- Completed confirmation page for order processing showing users information about the order and the success message.
+
+#### 2020-08-19
+- Started creation of checkout process using AuthorizeNet and added OrderCarts and OrderCartItems tables to the database.
+
+#### 2020-08-18
+- Added user carts along with the ability to add items, update and remove items in them. 
+- Cart view page for showing all cart items and View Component for showing mini cart on other pages created, toggleable by pressing cart icon in top right.
+
+#### 2020-08-17
+- Integrated SendGrid to send user's an email upon registration.
+- Created Product Details pages for viewing a specific product
 
 #### 2020-08-15
 - Converted app's services to using entity objects rather than View Models after encountering complexities with VMs
