@@ -23,6 +23,12 @@ namespace ECommerce_App.Models.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Gets a list of all Flummery objects saved to the database.
+        /// </summary>
+        /// <returns>
+        /// Task<List<Flummery>>: a List of Flummerys in a Task object
+        /// </returns>
         public async Task<List<Flummery>> GetAllFlummeries()
         {
             var allFlummeries = await _context.Flummery
