@@ -12,9 +12,15 @@ A ASP.Net MVC wep app for showing a selection of Flummery Flummeries, i.e. flumm
 
 Employs ASP.Net Core Identity and Authentication to allow users to create users, log in, and for certain functionalities to be locked down for admins. Captures a user's supplied Full Name as a claim on registration to display to them in the navbar.
 
+Anonymous users are able to view the products available on the site but only logged in user's have a cart that can be added to and checked out. The admin has the ability to do full CRUD operations on all products. This is achieved with an Admin role-based policy used on pages that update product info, and allow anonymous being added to the home and product pages.
+
 Front-end is dynamically rendered using Razor Pages and Bootstrap with an MVVM-type relationship.
 
 Dependency injection is used to define the relationship between Razor Page's View Models and their services.
+
+*Admin Username* : Admin@admin.com
+
+*Admin Password* : @Test123! 
 
 ---
 

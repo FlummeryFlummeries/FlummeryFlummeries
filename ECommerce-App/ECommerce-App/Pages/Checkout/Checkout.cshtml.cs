@@ -155,7 +155,7 @@ namespace ECommerce_App.Pages.Cart
 
                         await BuildCheckoutEmail(currentUser.Email, $"{order.FirstName} {order.LastName}", cartItems, $"{shippingAddress.address} {shippingAddress.city}, {shippingAddress.state} {shippingAddress.zip}", total);
 
-                        return RedirectToPage("/Checkout/Success", new { response = result.Response, order });
+                        return RedirectToPage("/Checkout/Success", new { response = result.Response, cartId = cart.Id });
                     }
                     else
                     {

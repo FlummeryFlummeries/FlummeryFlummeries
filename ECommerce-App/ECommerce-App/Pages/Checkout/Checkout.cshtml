@@ -1,29 +1,14 @@
-﻿@page
+﻿@page "/Checkout"
 @model ECommerce_App.Pages.Cart.CheckoutModel
 @{
     ViewData["Title"] = "Checkout";
     Layout = "_Layout";
 }
 
-@*@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $(".same-shipping").change(function () {
-                if ($(".shipping-info").hasClass("hide")) {
-                    $(".shipping-info").children().attr("required", true);
-                } else {
-                    $(".shipping-info").children().attr("required", false);
-                }
-                $(".shipping-info").toggleClass("hide");
-            })
-        })
-    </script>
-}*@
-
 <h1>Checkout</h1>
 
 <div class="container">
-    <div class="card">
+    <div class="card checkout-form">
         <h3>Total: @Model.Total</h3>
         <form method="post">
             <div asp-validation-summary="All"></div>
@@ -60,7 +45,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label asp-for="@Model.Input.BillingZip">Zip</label>
-                    <input type="text" class="form-control" asp-for="@Model.Input.BillingZip" required>
+                    <input type="text" class="form-control" asp-for="@Model.Input.BillingZip" placeholder="98101" required>
                 </div>
             </div>
             <div class="form-group">
@@ -71,7 +56,7 @@
                     </label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 mx-auto">
                 <label asp-for="@Model.Input.CardNumber">Card Number</label>
                 <select asp-for="@Model.Input.CardNumber" class="form-control" required value="370000000000002">
                     <option selected disabled>Select a card...</option>
@@ -99,7 +84,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="@Model.Input.ShippingCity">City</label>
-                        <input asp-for="@Model.Input.ShippingCity" type="text" class="form-control" required>
+                        <input asp-for="@Model.Input.ShippingCity" type="text" class="form-control" placeholder="Seattle" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label asp-for="@Model.Input.ShippingState">State</label>
@@ -110,7 +95,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label asp-for="@Model.Input.ShippingZip">Zip</label>
-                        <input type="text" class="form-control" asp-for="@Model.Input.ShippingZip" required>
+                        <input type="text" class="form-control" asp-for="@Model.Input.ShippingZip" placeholder="98101" required>
                     </div>
                 </div>
             </div>
