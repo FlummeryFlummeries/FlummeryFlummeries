@@ -38,18 +38,19 @@
                 <label asp-for="@Model.Input.Calories"></label>
                 <input asp-for="@Model.Input.Calories" class="form-control" value="@Model.Input.Calories" />
             </div>
-            @if (!Model.Input.ImgUrl.Equals(""))
+            @if (Model.ImgUrl != null && !Model.ImgUrl.Equals(""))
             {
                 <div>
                     <p>Current Image</p>
-                    <img src="@Model.Input.ImgUrl" alt="Image of @Model.Input.Name" />
+                    <img src="@Model.ImgUrl" alt="Image of @Model.Input.Name" />
+                    <input type="hidden" asp-for="@Model.ImgUrl" value="@Model.ImgUrl" />
                 </div>
             }
             <div class="form-group">
                 <label asp-for="@Model.Input.ImageFile">Upload image</label>
                 <input type="file" class="form-control-file" asp-for="@Model.Input.ImageFile" />
             </div>
-            <button type="submit" class="btn btn-primary">Upload Image</button>
+            <button type="submit" class="btn btn-primary">Submit Edit</button>
         </form>
     </div>
 </div>

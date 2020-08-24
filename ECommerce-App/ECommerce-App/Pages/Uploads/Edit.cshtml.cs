@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using ECommerce_App.Models;
 using ECommerce_App.Models.Interface;
 using ECommerce_App.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerce_App.Pages.Uploads
 {
+    [Authorize(Policy = "AdminOnly")]
     public class EditModel : PageModel
     {
         private IImage _imageService;
@@ -18,16 +20,21 @@ namespace ECommerce_App.Pages.Uploads
 
         [BindProperty]
         public ItemUploadViewModel Input { get; set; }
+        [BindProperty]
+        public int Id { get; set; }
+        [BindProperty]
+        public string ImgUrl { get; set; }
 
         public EditModel(IImage imageService, IFlummeryInventory flummery)
         {
             _imageService = imageService;
             _flummery = flummery;
         }
-        public async void OnGet(int id)
+        public async Task<IActionResult> OnGet(int id)
         {
+            Id = id;
             Flummery flum = await _flummery.GetFlummeryBy(id);
-            if(flum != null)
+            if (flum != null)
             {
                 Input = new ItemUploadViewModel
                 {
@@ -37,16 +44,19 @@ namespace ECommerce_App.Pages.Uploads
                     Weight = flum.Weight,
                     Price = flum.Price,
                     Compliment = flum.Compliment,
-                    ImgUrl = flum.ImageUrl
                 };
+                ImgUrl = flum.ImageUrl;
+                return Page();
             }
+            return RedirectToAction("Index", "Products");
+
         }
 
-        public async Task OnPost(int id)
+        public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
-                var flum = await UpdateFlum(id);
+                var flum = await UpdateFlum(Id);
                 if (Input.ImageFile != null)
                 {
                     string fileExt = Path.GetExtension(Input.ImageFile.FileName);
@@ -58,7 +68,10 @@ namespace ECommerce_App.Pages.Uploads
                         await _imageService.UpdateStoreDbFor(flum.Id, imageURI);
                     }
                 }
+                return RedirectToPage("/ProductDetails/ProductDetails", new { Id });
             }
+            ModelState.AddModelError("", "Something went wrong!");
+            return Page();
         }
 
         public async Task<Flummery> UpdateFlum(int id)
@@ -73,6 +86,10 @@ namespace ECommerce_App.Pages.Uploads
                 Weight = Input.Weight,
                 Compliment = Input.Compliment
             };
+            if(Input.ImageFile == null)
+            {
+                flum.ImageUrl = ImgUrl;
+            }
             flum = await _flummery.UpdateFlummery(flum);
             return flum;
         }
