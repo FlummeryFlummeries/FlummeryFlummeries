@@ -24,8 +24,10 @@ namespace ECommerce_App.Pages.Cart
             _flummeryInventory = flummeryInventory;
         }
 
-        public async Task<IActionResult> OnGet(int itemId, string userId)
+        public async Task<IActionResult> OnGet(int itemId, string userId, int qty = 1)
         {
+            if (qty < 1) qty = 1;
+            else if (qty > 99) qty = 99;
             var currCart = await _cart.GetUserCart(userId);
             if (currCart == null)
             {
@@ -35,7 +37,24 @@ namespace ECommerce_App.Pages.Cart
                 };
                 currCart = await _cart.Create(newCart);
             }
-            await UpdateCartItems(currCart, itemId, 1);
+            await UpdateCartItems(currCart, itemId, qty);
+            return RedirectToPage("/Cart/View");
+        }
+
+        public async Task<IActionResult> OnPost(int itemId, string userId, int qty = 1)
+        {
+            if (qty < 1) qty = 1;
+            else if (qty > 99) qty = 99;
+            var currCart = await _cart.GetUserCart(userId);
+            if (currCart == null)
+            {
+                var newCart = new Models.Cart
+                {
+                    UserId = userId
+                };
+                currCart = await _cart.Create(newCart);
+            }
+            await UpdateCartItems(currCart, itemId, qty);
             return RedirectToPage("/Cart/View");
         }
 
