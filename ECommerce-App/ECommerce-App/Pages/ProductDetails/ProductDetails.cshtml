@@ -34,6 +34,8 @@
         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
         {
             <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-primary">Upload Image</a>
+            <a asp-page="/Uploads/Edit" asp-route-id="@Model.Flummery.Id" class="btn btn-primary">Edit Flummery</a>
+            <a asp-page="/Uploads/Delete" asp-route-id="@Model.Flummery.Id" class="btn btn-primary">Delete Flummery</a>
         }
     </div>
 </div>

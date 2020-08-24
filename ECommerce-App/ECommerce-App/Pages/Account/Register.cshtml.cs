@@ -63,7 +63,7 @@ namespace ECommerce_App.Pages.Account
 
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Invalid Registration. Email may already be in use.");
+                ModelState.AddModelError("", "Invalid Registration. Make sure your password has an uppercase, lowercase, number and special character.");
             }
             else
             {
@@ -84,8 +84,9 @@ namespace ECommerce_App.Pages.Account
                 int temp = rand.Next(1, 10);
                 while (usedNums.Contains(temp))
                 {
-                    temp = rand.Next(10);
+                    temp = rand.Next(1, 10);
                 }
+                usedNums.Add(temp);
                 Flummery flum = await _flummery.GetFlummeryBy(temp);
                 featuredFlums.Add(new EmailItem{
                     Id = flum.Id,

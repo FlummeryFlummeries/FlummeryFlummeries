@@ -22,7 +22,7 @@
                     <th scope="row">@flum.Product.Name</th>
                     <td>@flum.Product.Price</td>
                     <td>@flum.Qty</td>
-                    <td class="delete-icon" title="Remove from cart">
+                    <td class="delete-icon" data-toggle="tooltip" data-placement="top" title="Remove from cart">
                         <form asp-page="/Cart/Delete" asp-route-productId="@flum.Product.Id" method="post">
                             <button class="btn btn-link" type="submit">
                                 <i class="far fa-trash-alt"></i>

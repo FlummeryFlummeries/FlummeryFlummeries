@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerce_App.Pages.Cart
 {
+    [Authorize]
     public class UpdateModel : PageModel
     {
         private readonly ICart _cart;
