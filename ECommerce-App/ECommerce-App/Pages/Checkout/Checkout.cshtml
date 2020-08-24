@@ -1,0 +1,105 @@
+﻿@page "/Checkout"
+@model ECommerce_App.Pages.Cart.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "_Layout";
+}
+
+<h1>Checkout</h1>
+
+<div class="container">
+    <div class="card checkout-form">
+        <h3>Total: @Model.Total</h3>
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Input.FirstName"></label>
+                <input asp-for="@Model.Input.FirstName" type="text" class="form-control" placeholder="John" required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Input.LastName"></label>
+                <input type="text" class="form-control" asp-for="@Model.Input.LastName" placeholder="Smith" required>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Input.BillingAddress">Address</label>
+                <input type="text" class="form-control" asp-for="@Model.Input.BillingAddress" placeholder="1234 Main St" required>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Input.BillingOptionalAddition">Address 2</label>
+                <input asp-for="@Model.Input.BillingOptionalAddition" type="text" class="form-control" placeholder="Apartment, studio, or floor">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="@Model.Input.BillingCity">City</label>
+                    <input asp-for="@Model.Input.BillingCity" type="text" class="form-control" placeholder="Seattle" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="@Model.Input.BillingState">State</label>
+                    <select asp-for="@Model.Input.BillingState" class="form-control" required>
+                        <option selected disabled>Choose...</option>
+                        <option value="WA" >WA</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="@Model.Input.BillingZip">Zip</label>
+                    <input type="text" class="form-control" asp-for="@Model.Input.BillingZip" placeholder="98101" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input asp-for="@Model.Input.SameBillingAndShipping" class="same-shipping">
+                    <label asp-for="@Model.Input.SameBillingAndShipping">
+                        Shipping address same as billing
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-4 mx-auto">
+                <label asp-for="@Model.Input.CardNumber">Card Number</label>
+                <select asp-for="@Model.Input.CardNumber" class="form-control" required value="370000000000002">
+                    <option selected disabled>Select a card...</option>
+                    <option value="370000000000002" selected>370000000000002</option>
+                    <option value="6011000000000012">6011000000000012</option>
+                    <option value="3088000000000017">3088000000000017</option>
+                    <option value="38000000000006">38000000000006</option>
+                    <option value="4007000000027">4007000000027</option>
+                    <option value="4012888818888">4012888818888</option>
+                    <option value="4111111111111111">4111111111111111</option>
+                    <option value="5424000000000015">5424000000000015</option>
+                    <option value="2223000010309703">2223000010309703</option>
+                    <option value="2223000010309711">2223000010309711</option>
+                </select>
+            </div>
+            <div class="shipping-info">
+                <div class="form-group">
+                    <label asp-for="@Model.Input.ShippingAddress">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" asp-for="@Model.Input.ShippingAddress" placeholder="1234 Main St" required>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Input.ShippingOptionalAddition">Address 2</label>
+                    <input asp-for="@Model.Input.ShippingOptionalAddition" type="text" class="form-control shipping-optional" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="@Model.Input.ShippingCity">City</label>
+                        <input asp-for="@Model.Input.ShippingCity" type="text" class="form-control" placeholder="Seattle" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="@Model.Input.ShippingState">State</label>
+                        <select asp-for="@Model.Input.ShippingState" class="form-control" required>
+                            <option selected>Choose...</option>
+                            <option value="WA" selected>WA</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="@Model.Input.ShippingZip">Zip</label>
+                        <input type="text" class="form-control" asp-for="@Model.Input.ShippingZip" placeholder="98101" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </form>
+    </div>
+</div>

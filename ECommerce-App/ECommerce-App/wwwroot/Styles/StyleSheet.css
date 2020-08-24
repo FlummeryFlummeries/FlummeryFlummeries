@@ -1,5 +1,4 @@
 ﻿html, body {
-    /*    background-color: #212121;*/
     color: tan;
     text-align: center;
     height: 100%;
@@ -41,10 +40,6 @@ main {
     margin: 15px auto 0px;
 }
 
-/*header {
-    margin-top: 30px;
-}*/
-
 .home-header {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
@@ -58,17 +53,6 @@ main {
         width: fit-content;
         margin: 0 auto;
     }
-
-/*header {
-    border-radius: 5px;
-    padding: 6px 10px;
-    float: right;
-    background: rgba(160, 219, 108, 0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
-}*/
 
 nav {
     padding: .6rem 4.5rem !important;
@@ -134,8 +118,18 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.card-body > img {
+/*.img-container{
+    height: 300px;
+}
+*/
+.product-card > img {
     width: 80%;
+    height: 200px;
+}
+
+.compliment-container{
+    height: 75px;
+    margin-bottom:20px;
 }
 
 form > div > img {
@@ -161,6 +155,110 @@ form > div > img {
     color: white;
 }
 
-.card-body > a:first-of-type {
+.card-body > a {
     margin-bottom: 10px;
+}
+
+.card-body > a:last-of-type {
+    margin-bottom: 0;
+}
+
+.cart-mini {
+    display: block;
+    color: white;
+    width: 400px;
+    position: absolute;
+    right: 25px;
+    top: 100px;
+    z-index: 1;
+    background-color: rgba(128, 128, 128, 0.95);
+}
+
+.cart-mini > p {
+    margin-top: 15px;
+}
+
+.cart-mini > a {
+    margin-bottom: 15px;
+}
+
+hr{
+    background-color: white;
+    height: 1px;
+}
+
+.cart-mini > table {
+    color: white;
+}
+
+.hide
+{
+    display: none;
+}
+
+.cart-count {
+    font-size: 12px;
+    padding: 0 3px;
+    vertical-align: top;
+    margin-left: -10px;
+}
+
+.badge{
+    padding: 0 5px;
+}
+
+.delete-icon{
+    width: 16px;
+    height: 16px;
+}
+
+.outer-x, .inner-x{
+    height: 16px;
+    width: 3px;
+    background-color: red;
+}
+
+.outer-x{
+    z-index: 2;
+    margin-left: 8px;
+    transform: rotate(45deg);
+}
+
+.inner-x{
+    z-index: 3;
+    transform: rotate(90deg);
+}
+
+.details-card > div > img{
+    width: 85%;
+}
+
+.details-card {
+    width: 40%;
+    margin: auto;
+}
+
+.checkout-form{
+    padding: 20px 30px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.receipt-card {
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.receipt-card h3 {
+    text-decoration: underline;
+    margin-bottom: 0.5em;
+}
+
+.receipt-card p {
+    text-indent: 20px;
 }

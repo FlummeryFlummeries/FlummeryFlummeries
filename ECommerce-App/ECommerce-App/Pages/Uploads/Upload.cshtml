@@ -1,0 +1,51 @@
+﻿@page "/Flummeries/Upload"
+@model ECommerce_App.Pages.ImageUpload.ImageUploadModel
+@{
+}
+
+@{
+    ViewData["Title"] = "ImageUpload";
+    Layout = "_Layout";
+}
+
+<h2>Upload an Image</h2>
+
+<div class="container">
+    <div class="card upload-card">
+        <form method="post" class="flex" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="@Model.Input.Name"></label>
+                <input asp-for="@Model.Input.Name" class="form-control" placeholder="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Input.Price"></label>
+                <input asp-for="@Model.Input.Price" class="form-control" placeholder="Price" />
+            </div>              
+            <div class="form-group">
+                <label asp-for="@Model.Input.Compliment"></label>
+                <input asp-for="@Model.Input.Compliment" class="form-control" placeholder="Compliment" />
+            </div>              
+            <div class="form-group">
+                <label asp-for="@Model.Input.Manufacturer"></label>
+                <input asp-for="@Model.Input.Manufacturer" class="form-control" placeholder="Manufacturer" />
+            </div>                
+            <div class="form-group">
+                <label asp-for="@Model.Input.Weight"></label>
+                <input asp-for="@Model.Input.Weight" class="form-control" placeholder="Weight" />
+            </div>                
+            <div class="form-group">
+                <label asp-for="@Model.Input.Manufacturer"></label>
+                <input asp-for="@Model.Input.Manufacturer" class="form-control" placeholder="Manufacturer" />
+            </div>                 
+            <div class="form-group">
+                <label asp-for="@Model.Input.Calories"></label>
+                <input asp-for="@Model.Input.Calories" class="form-control" placeholder="Calories" />
+            </div>   
+            <div class="form-group">
+                <label asp-for="@Model.Input.ImageFile"></label>
+                <input type="file" class="form-control-file" asp-for="@Model.Input.ImageFile" />
+            </div>
+            <button type="submit" class="btn btn-primary" >Upload Image</button>
+        </form>
+    </div>
+</div>

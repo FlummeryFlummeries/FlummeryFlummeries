@@ -4,13 +4,12 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
     <title>Flummery Flummeries</title>
-    <link rel="shortcut icon" href="~/favicons/favicon.ico">
-    <link rel="apple-touch-icon" href="~/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="~/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="~/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" href="~/favicon/favicon.ico">
+    <link rel="apple-touch-icon" href="~/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="~/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="~/favicon/favicon-32x32.png" sizes="32x32">
     <link rel="stylesheet" type="text/css" href="~/Styles/reset.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
@@ -44,38 +43,47 @@
                     <ul class="navbar-nav ml-auto">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @User.Claims.First(x => x.Type == "FullName").Value
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <div class="dropdown-divider"></div>
-                                        <form asp-page="/ImageUpload/ImageUpload" method="get" > <button class="btn btn-link" type="submit">Uploads</button></form>
-
-                                    }
-                                </div>
-                            </li>
+                        var currentUser = await SignInManager.UserManager.GetUserAsync(User);
+                        <li class="cart-icon">
+                            <div>
+                                @await Component.InvokeAsync("CartIcon", currentUser.Id)
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @User.Claims.First(x => x.Type == "FullName").Value
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div class="dropdown-divider"></div>
+                                    <form asp-page="/Uploads/Upload" method="get"> <button class="btn btn-link" type="submit">Uploads</button></form>
+                                }
+                            </div>
+                        </li>
                         }
                         else
                         {
-                            <li>
-                                <a asp-page="/Account/Login" class="nav-link" role="button">Login</a>
-                            </li>
+                        <li>
+                            <a asp-page="/Account/Login" class="nav-link" role="button">Login</a>
+                        </li>
 
-                            <li>
-                                <a asp-page="/Account/Register" class="nav-link" role="button">Register</a>
-                            </li>
+                        <li>
+                            <a asp-page="/Account/Register" class="nav-link" role="button">Register</a>
+                        </li>
                         }
                     </ul>
                 </div>
             </nav>
-
         </header>
-
-
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var currentUser = await SignInManager.UserManager.GetUserAsync(User);
+            <div>
+                @await Component.InvokeAsync("Cart", currentUser.Id)
+            </div>
+        }
         <div class="body-container">
             @RenderBody()
         </div>
@@ -86,8 +94,28 @@
         </footer>
     </div>
 
+
+    @*@RenderSection("Scripts", false)*@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $(".cart-icon").click(function () {
+                $(".cart-mini").toggleClass('hide');
+            });
+            $(".same-shipping").change(function () {
+                if ($(".shipping-info").hasClass("hide")) {
+                    $(".shipping-info").find("input").attr("required", true);
+                    $(".shipping-info").find("select").attr("required", true);
+                } else {
+                    $(".shipping-info").find("input").attr("required", false);
+                    $(".shipping-info").find("select").attr("required", false);
+                }
+                $(".shipping-optional").attr("required", false)
+                $(".shipping-info").toggleClass("hide");
+            });
+        });
+    </script>
 </body>
 </html>
