@@ -35,8 +35,10 @@
                         <a asp-page="/ProductDetails/ProductDetails" asp-route-id="@item.Id" class="btn btn-primary">Product Details</a>
                         @if (currentUser != null)
                         {
-                            <a asp-page="/Cart/Update" asp-route-userId="@currentUser.Id" asp-route-itemId="@item.Id" class="btn btn-primary">Add Item to Cart</a>
-                        }
+                            <form method="get" class="add-to-cart" asp-page="/Cart/Update" asp-route-userId="@currentUser.Id" asp-route-itemId="@item.Id">
+                                <input type="number" value="1" min="1" max="99" name="qty" required />
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </form>}
                     </div>
                 </div>
             </div>

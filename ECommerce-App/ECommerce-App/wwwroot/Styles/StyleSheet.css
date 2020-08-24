@@ -64,8 +64,6 @@ nav {
         margin-left: 30px !important;
     }
 
-
-
 .nav-btn {
     width: 100px;
     padding: 8px 4px;
@@ -75,7 +73,6 @@ nav {
     .nav-btn:last-child {
         margin-bottom: 0px;
     }
-
 
 /* bootstrap navbar drop-down over ride stuffs */
 .navbar-nav > li > .dropdown-menu {
@@ -118,12 +115,8 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/*.img-container{
-    height: 300px;
-}
-*/
 .product-card > img {
-    width: 80%;
+    max-width: 80%;
     height: 200px;
 }
 
@@ -157,10 +150,6 @@ form > div > img {
 
 .card-body > a {
     margin-bottom: 10px;
-}
-
-.card-body > a:last-of-type {
-    margin-bottom: 0;
 }
 
 .cart-mini {
@@ -230,7 +219,8 @@ hr{
 }
 
 .details-card > div > img{
-    width: 85%;
+    max-width: 85%;
+    max-height: 350px;
 }
 
 .details-card {
@@ -261,4 +251,10 @@ hr{
 
 .receipt-card p {
     text-indent: 20px;
+}
+}
+
+.cart-table {
+    width: 70%;
+    margin: 20px auto;
 }

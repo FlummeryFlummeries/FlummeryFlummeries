@@ -47,9 +47,9 @@ namespace ECommerce_App.Pages.Uploads
             if (ModelState.IsValid)
             {
                 var flum = await UpdateFlum(id);
-                string fileExt = Path.GetExtension(Input.ImageFile.FileName);
                 if (Input.ImageFile != null)
                 {
+                    string fileExt = Path.GetExtension(Input.ImageFile.FileName);
                     using (MemoryStream memStream = new MemoryStream())
                     {
                         await Input.ImageFile.CopyToAsync(memStream);
