@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
 using ECommerce_App.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerce_App.Pages.Account
 {
+    [Authorize]
     public class PasswordModel : PageModel
     {
         public UserManager<ApplicationUser> _userManager { get; set; }

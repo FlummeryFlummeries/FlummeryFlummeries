@@ -21,9 +21,11 @@ using static ECommerce_App.Models.Services.Emails.ReceiptTemplateData;
 using ECommerce_App.Models.Services.Emails;
 using ECommerce_App.Models.ViewModels;
 using ECommerce_App.Models.Emails;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce_App.Pages.Cart
 {
+    [Authorize]
     public class CheckoutModel : PageModel
     {
         private IPaymentHandler _payment;
