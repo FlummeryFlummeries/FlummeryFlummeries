@@ -1,0 +1,44 @@
+﻿@page "/Account"
+@model ECommerce_App.Pages.Account.ViewModel
+@{
+    ViewData["Title"] = "View";
+    Layout = "_Layout";
+}
+
+
+<div class="container">
+    <div class="card">
+        <h1>Account</h1>
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+
+                <label asp-for="@Model.Input.Email"></label>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                </div>
+                <input asp-for="@Model.Input.Email" type="text" class="form-control" id="validationCustom02" value="@Model.Input.Email" required>
+            </div>
+
+                <label asp-for="@Model.Input.FirstName"></label>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input asp-for="@Model.Input.FirstName" type="text" class="form-control" id="validationCustom02" value="@Model.Input.FirstName" required>
+            </div>
+
+                <label asp-for="@Model.Input.LastName"></label>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input asp-for="@Model.Input.LastName" type="text" class="form-control" id="validationCustom02" value="@Model.Input.LastName" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-light">
+            </div>
+        </form>
+    </div>
+</div>
