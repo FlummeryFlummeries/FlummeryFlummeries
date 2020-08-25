@@ -18,12 +18,15 @@ namespace ECommerce_App.Pages.Account
     {
         public UserManager<ApplicationUser> _userManager { get; set; }
 
+        private SignInManager<ApplicationUser> _signInManager;
+
         [BindProperty]
         public AccountInfoViewModel Input { get; set; }
 
-        public ViewModel(UserManager<ApplicationUser> userManager)
+        public ViewModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         public async Task<IActionResult> OnGet()
         {
@@ -59,7 +62,7 @@ namespace ECommerce_App.Pages.Account
 
                 Claim newClaim = new Claim("FullName", $"{Input.FirstName} {Input.LastName}");
                 await _userManager.AddClaimAsync(currentUser, newClaim);
-
+                await _signInManager.RefreshSignInAsync(currentUser);
             }
 
             return Page();
