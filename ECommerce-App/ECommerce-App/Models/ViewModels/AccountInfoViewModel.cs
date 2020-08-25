@@ -21,5 +21,9 @@ namespace ECommerce_App.Models.ViewModels
         [Required]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
+        [BindProperty]
+        [Display(Name = "Change Password")]
+        public bool ChangePassword { get; set; }
+        
     }
 }

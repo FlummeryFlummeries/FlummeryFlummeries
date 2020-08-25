@@ -51,6 +51,8 @@ namespace ECommerce_App.Pages.Account
             currentUser.Email = Input.Email;
             currentUser.UserName = Input.Email;
 
+            //_signInManager.UserManager.ChangePasswordAsync
+
             var result = await _userManager.UpdateAsync(currentUser);
             if (result.Succeeded)
             {
@@ -63,6 +65,7 @@ namespace ECommerce_App.Pages.Account
                 Claim newClaim = new Claim("FullName", $"{Input.FirstName} {Input.LastName}");
                 await _userManager.AddClaimAsync(currentUser, newClaim);
                 await _signInManager.RefreshSignInAsync(currentUser);
+
             }
 
             return Page();
