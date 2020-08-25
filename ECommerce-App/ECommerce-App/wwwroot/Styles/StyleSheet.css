@@ -226,6 +226,7 @@ hr{
 .details-card {
     width: 40%;
     margin: auto;
+    min-width: 300px;
 }
 
 .checkout-form{
@@ -263,4 +264,14 @@ hr{
     min-width: 300px;
     margin: auto;
     padding: 10px 20px;
+}
+
+.add-to-cart{
+    margin-bottom: 10px;
+}
+
+.admin-options > a:last-of-type{
+    margin: 10px auto 0;
+    display: block;
+    width: fit-content;
 }
