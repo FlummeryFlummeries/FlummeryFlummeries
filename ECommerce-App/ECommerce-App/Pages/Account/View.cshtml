@@ -1,0 +1,51 @@
+﻿@page "/Account"
+@model ECommerce_App.Pages.Account.ViewModel
+@{
+    ViewData["Title"] = "View";
+    Layout = "_Layout";
+}
+@*@section Styles {
+    <link href="~/Styles/Login.css" rel="stylesheet" type="text/css" />
+}*@
+
+<div class="container">
+    <div class="card update-card">
+        <h1>Account</h1>
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+
+            <label asp-for="@Model.Input.Email"></label>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                </div>
+                <input asp-for="@Model.Input.Email" type="text" class="form-control" id="validationCustom02" value="@Model.Input.Email" required>
+            </div>
+
+            <label asp-for="@Model.Input.FirstName"></label>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input asp-for="@Model.Input.FirstName" type="text" class="form-control" id="validationCustom02" value="@Model.Input.FirstName" required>
+            </div>
+
+            <label asp-for="@Model.Input.LastName"></label>
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input asp-for="@Model.Input.LastName" type="text" class="form-control" id="validationCustom02" value="@Model.Input.LastName" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Update Account" class="btn btn-light">
+            </div>
+
+            <div class="form-group">
+                <a asp-page="/Account/Password" class="btn btn-light">Change Password</a>
+            </div>
+
+        </form>
+    </div>
+</div>

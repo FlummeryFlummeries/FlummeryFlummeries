@@ -257,3 +257,10 @@ hr{
     width: 70%;
     margin: 20px auto;
 }
+
+.update-card {
+    width: 60%;
+    min-width: 300px;
+    margin: auto;
+    padding: 10px 20px;
+}

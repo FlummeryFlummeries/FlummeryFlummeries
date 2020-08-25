@@ -54,12 +54,13 @@
                                 @User.Claims.First(x => x.Type == "FullName").Value
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <div class="dropdown-divider"></div>
                                     <form asp-page="/Uploads/Upload" method="get"> <button class="btn btn-link" type="submit">Uploads</button></form>
                                 }
+                                <form asp-page="/Account/View" method="get"> <button class="btn btn-link" type="submit">Account</button></form>
+                                <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
                             </div>
                         </li>
                         }
