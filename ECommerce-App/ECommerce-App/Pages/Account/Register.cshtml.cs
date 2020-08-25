@@ -31,6 +31,7 @@ namespace ECommerce_App.Pages.Account
             _flummery = flummery;
         }
 
+
         [BindProperty]
         public RegisterViewModel Input { get; set; }
 
