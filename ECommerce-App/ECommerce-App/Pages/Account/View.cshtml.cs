@@ -39,6 +39,15 @@ namespace ECommerce_App.Pages.Account
                 LastName = currentUser.LastName,
                 Email = currentUser.Email
             };
+            if(currentUser.Address != "" && currentUser.Address != null)
+            {
+                Input.Address = currentUser.Address;
+                Input.OptionalAddress = currentUser.OptionalAddress;
+                Input.City = currentUser.City;
+                Input.State = currentUser.State;
+                Input.Zip = currentUser.Zip;
+
+            }
             return Page();
         }
 
@@ -50,6 +59,15 @@ namespace ECommerce_App.Pages.Account
             currentUser.LastName = Input.LastName;
             currentUser.Email = Input.Email;
             currentUser.UserName = Input.Email;
+
+            if (Input.UpdateAddress)
+            {
+                currentUser.Address = Input.Address;
+                currentUser.OptionalAddress = Input.OptionalAddress != "" && Input.OptionalAddress != null ? Input.OptionalAddress : "";
+                currentUser.City = Input.City;
+                currentUser.State = Input.State;
+                currentUser.Zip = Input.Zip;
+            }
 
             //_signInManager.UserManager.ChangePasswordAsync
 

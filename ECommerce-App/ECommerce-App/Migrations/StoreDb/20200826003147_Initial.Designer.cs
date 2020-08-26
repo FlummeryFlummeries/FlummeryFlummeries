@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerce_App.Migrations
+namespace ECommerce_App.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200819225827_SeededImageBlobURLsWithSpaces")]
-    partial class SeededImageBlobURLsWithSpaces
+    [Migration("20200826003147_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -184,7 +184,7 @@ namespace ECommerce_App.Migrations
                             Id = 6,
                             Calories = 1792,
                             Compliment = "What a nice sorting algorithm.",
-                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Lark%20on%the%20Wing.jpg",
+                            ImageUrl = "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Lark%20on%20the%20Wing.jpg",
                             Manufacturer = "Full On Flummery",
                             Name = "Lark on the Wing",
                             Price = 9.99m,
@@ -255,6 +255,9 @@ namespace ECommerce_App.Migrations
                     b.Property<string>("BillingZip")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -288,6 +291,7 @@ namespace ECommerce_App.Migrations
                             BillingCity = "Wilmington",
                             BillingState = "DE",
                             BillingZip = "00001",
+                            CartId = 100,
                             FirstName = "John",
                             LastName = "Dickinson",
                             ShippingAddress = "1808 Forgotten Way",
@@ -313,7 +317,7 @@ namespace ECommerce_App.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderCardItem");
+                    b.ToTable("OrderCartItem");
 
                     b.HasData(
                         new

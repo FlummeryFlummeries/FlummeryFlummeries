@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ECommerce_App.Migrations
+namespace ECommerce_App.Migrations.StoreDb
 {
-    public partial class OrderCartTables : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,7 @@ namespace ECommerce_App.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: true),
+                    CartId = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     BillingAddress = table.Column<string>(nullable: true),
@@ -87,7 +88,7 @@ namespace ECommerce_App.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderCardItem",
+                name: "OrderCartItem",
                 columns: table => new
                 {
                     OrderCartId = table.Column<int>(nullable: false),
@@ -96,15 +97,15 @@ namespace ECommerce_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderCardItem", x => new { x.OrderCartId, x.ProductId });
+                    table.PrimaryKey("PK_OrderCartItem", x => new { x.OrderCartId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_OrderCardItem_OrderCart_OrderCartId",
+                        name: "FK_OrderCartItem_OrderCart_OrderCartId",
                         column: x => x.OrderCartId,
                         principalTable: "OrderCart",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderCardItem_Flummery_ProductId",
+                        name: "FK_OrderCartItem_Flummery_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Flummery",
                         principalColumn: "Id",
@@ -125,22 +126,22 @@ namespace ECommerce_App.Migrations
                 columns: new[] { "Id", "Calories", "Compliment", "ImageUrl", "Manufacturer", "Name", "Price", "Weight" },
                 values: new object[,]
                 {
-                    { 1, 1525, "I can't believe you managed to pull that off. Good job.", null, "Acme Baking", "Job Jelly", 9.99m, 0.5m },
-                    { 2, 1150, "That tie looks great on you! Is it new?", null, "Flum & Co", "Tied for First", 72.99m, 0.6m },
-                    { 3, 873, "Oh wow, you really tried your hardest on that!", null, "Flippery Flumstons", "Tryion", 46.33m, 0.7m },
-                    { 4, 912, "That chili would be pretty spicy to an infant.", null, "Acme Baking", "Baby Cowboy", 9.99m, 0.5m },
-                    { 5, 2100, "Stylish if your grandparents dressed you.", null, "Flippery Flumstons", "Polka", 9.99m, 0.5m },
-                    { 6, 1792, "What a nice sorting algorithm.", null, "Full On Flummery", "Lark on the Wing", 9.99m, 0.5m },
-                    { 7, 1135, "Yeah, that's a nice loaf of quarantine sourdough.", null, "Acme Baking", "Scarce Flour", 9.99m, 0.5m },
-                    { 8, 465, "What a nice painting! It's going right on the fridge.", null, "Flum For Kids", "Flum Jr.", 4.99m, 0.2m },
-                    { 9, 1325, "You all are the hardworking, salt of the earth type.", null, "Local Government", "Political HumFlummery", 52.99m, 0.1m },
-                    { 10, 1792, "You're so good at arguing, you should be a lawyer.", null, "Flumm Board for Ethical Flumming", "Flawmery", 9.99m, 0.5m }
+                    { 1, 1525, "I can't believe you managed to pull that off. Good job.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Job%20Jelly.jpg", "Acme Baking", "Job Jelly", 9.99m, 0.5m },
+                    { 2, 1150, "That tie looks great on you! Is it new?", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Tied%20for%20First.jpg", "Flum & Co", "Tied for First", 72.99m, 0.6m },
+                    { 3, 873, "Oh wow, you really tried your hardest on that!", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Tryion.jpg", "Flippery Flumstons", "Tryion", 46.33m, 0.7m },
+                    { 4, 912, "That chili would be pretty spicy to an infant.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Baby%20Cowboy.jpg", "Acme Baking", "Baby Cowboy", 9.99m, 0.5m },
+                    { 5, 2100, "Stylish if your grandparents dressed you.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Polka.jpg", "Flippery Flumstons", "Polka", 9.99m, 0.5m },
+                    { 6, 1792, "What a nice sorting algorithm.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Lark%20on%20the%20Wing.jpg", "Full On Flummery", "Lark on the Wing", 9.99m, 0.5m },
+                    { 7, 1135, "Yeah, that's a nice loaf of quarantine sourdough.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Scarce%20Flour.jpg", "Acme Baking", "Scarce Flour", 9.99m, 0.5m },
+                    { 8, 465, "What a nice painting! It's going right on the fridge.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Flum%20Jr..jpg", "Flum For Kids", "Flum Jr.", 4.99m, 0.2m },
+                    { 9, 1325, "You all are the hardworking, salt of the earth type.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Political%20HumFlummery.jpg", "Local Government", "Political HumFlummery", 52.99m, 0.1m },
+                    { 10, 1792, "You're so good at arguing, you should be a lawyer.", "https://ecommerceflum.blob.core.windows.net/ecommerceimages/Flawmery.jpg", "Flumm Board for Ethical Flumming", "Flawmery", 9.99m, 0.5m }
                 });
 
             migrationBuilder.InsertData(
                 table: "OrderCart",
-                columns: new[] { "Id", "BillingAddress", "BillingCity", "BillingState", "BillingZip", "FirstName", "LastName", "ShippingAddress", "ShippingCity", "ShippingState", "ShippingZip", "UserId" },
-                values: new object[] { 1, "1808 Forgotten Way", "Wilmington", "DE", "00001", "John", "Dickinson", "1808 Forgotten Way", "Wilmington", "DE", "00001", "63866547-918c-4c25-8d19-16c845d2fa2e" });
+                columns: new[] { "Id", "BillingAddress", "BillingCity", "BillingState", "BillingZip", "CartId", "FirstName", "LastName", "ShippingAddress", "ShippingCity", "ShippingState", "ShippingZip", "UserId" },
+                values: new object[] { 1, "1808 Forgotten Way", "Wilmington", "DE", "00001", 100, "John", "Dickinson", "1808 Forgotten Way", "Wilmington", "DE", "00001", "63866547-918c-4c25-8d19-16c845d2fa2e" });
 
             migrationBuilder.InsertData(
                 table: "CartItem",
@@ -154,7 +155,7 @@ namespace ECommerce_App.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "OrderCardItem",
+                table: "OrderCartItem",
                 columns: new[] { "OrderCartId", "ProductId", "Qty" },
                 values: new object[,]
                 {
@@ -169,8 +170,8 @@ namespace ECommerce_App.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderCardItem_ProductId",
-                table: "OrderCardItem",
+                name: "IX_OrderCartItem_ProductId",
+                table: "OrderCartItem",
                 column: "ProductId");
         }
 
@@ -180,7 +181,7 @@ namespace ECommerce_App.Migrations
                 name: "CartItem");
 
             migrationBuilder.DropTable(
-                name: "OrderCardItem");
+                name: "OrderCartItem");
 
             migrationBuilder.DropTable(
                 name: "Cart");

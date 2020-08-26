@@ -40,7 +40,10 @@ namespace ECommerce_App.Models.ViewModels
 
         [Required]
         [Display(Name = "Same shipping address")]
-        public bool SameBillingAndShipping { get; set; }
+        public bool SameBillingAndShipping { get; set; }    
+        
+        [Required]
+        public bool SaveBillingAddress { get; set; }
 
         [Display(Name = "Shipping Address")]
         public string ShippingAddress { get; set; }
@@ -56,5 +59,7 @@ namespace ECommerce_App.Models.ViewModels
 
         [Display(Name = "Shipping Address Line 2")]
         public string ShippingOptionalAddition { get; set; }
+
+        
     }
 }
