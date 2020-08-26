@@ -236,8 +236,6 @@ hr{
 }
 
 .receipt-card {
-    width: 80%;
-    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -246,12 +244,25 @@ hr{
 }
 
 .receipt-card h3 {
-    text-decoration: underline;
+    font-weight: 600;
     margin-bottom: 0.5em;
 }
 
 .receipt-card p {
     text-indent: 20px;
+}
+
+.order-card {
+    width: 85%;
+    width: 625px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
 }
 
 .cart-table {
