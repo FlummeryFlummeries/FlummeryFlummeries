@@ -56,16 +56,29 @@ namespace ECommerce_App.Models.Services
         /// <summary>
         /// Get a user's orders from the database
         /// </summary>
-        /// <param name="id">Id of orderItem to search for</param>
-        /// <returns>Successful result of specified orderItem</returns>
-        public async Task<OrderCart> GetUserOrders(string userId)
+        /// <param name="id">
+        /// Id of orderItem to search for
+        /// </param>
+        /// <returns>
+        /// Successful result of specified orderItem
+        /// </returns>
+        public async Task<List<OrderCart>> GetUserOrders(string userId)
         {
-            var order = await _context.OrderCart.Where(x => x.UserId == userId).FirstOrDefaultAsync();
-            if (order != null)
+            var orders = await _context.OrderCart.Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CartId)
+                .ToListAsync();
+            if (orders == null)
             {
-                order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
+                return orders;
             }
-            return order;
+            foreach (var order in orders)
+            {
+                if (order != null)
+                {
+                    order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
+                }
+            }
+            return orders;
         }      
         
         /// <summary>

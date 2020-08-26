@@ -46,19 +46,26 @@
                         var currentUser = await SignInManager.UserManager.GetUserAsync(User);
                         <li class="cart-icon">
                             <div>
-                                @await Component.InvokeAsync("CartIcon", currentUser.Id)
+                                 @await Component.InvokeAsync("CartIcon", currentUser.Id)
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @User.Claims.First(x => x.Type == "FullName").Value
                             </a>
+
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <div class="dropdown-divider"></div>
                                     <form asp-page="/Uploads/Upload" method="get"> <button class="btn btn-link" type="submit">Uploads</button></form>
                                 }
+                                <form asp-page="/Orders/Orders" method="post">
+                                    <input type="hidden" name="userId" value="@currentUser.Id" />
+                                    <button class="btn btn-link" type="submit">Orders</button>
+                                </form>
+
                                 <form asp-page="/Account/View" method="get"> <button class="btn btn-link" type="submit">Account</button></form>
                                 <form asp-page="/Account/Logout" method="post"> <button class="btn btn-link" type="submit">Logout</button></form>
                             </div>

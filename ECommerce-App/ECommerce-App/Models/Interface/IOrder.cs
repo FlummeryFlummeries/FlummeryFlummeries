@@ -19,7 +19,7 @@ namespace ECommerce_App.Models.Interface
         /// </summary>
         /// <param name="id">Id of order item to search for</param>
         /// <returns>Successful result of specified orderItem</returns>
-        Task<OrderCart> GetUserOrders(string userId);
+        Task<List<OrderCart>> GetUserOrders(string userId);
 
         /// <summary>
         /// Get a specific user's order from the database
