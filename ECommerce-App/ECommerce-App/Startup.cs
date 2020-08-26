@@ -63,7 +63,7 @@ namespace ECommerce_App
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -77,7 +77,7 @@ namespace ECommerce_App
 
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await RoleInitializer.SeedAdmin(serviceProvider, userManager, Config);
+            RoleInitializer.SeedAdmin(serviceProvider, userManager, Config);
 
             app.UseEndpoints(endpoints =>
             {

@@ -39,6 +39,58 @@
             </div>
 
             <div class="form-group">
+                <div class="form-check">
+                    <input asp-for="@Model.Input.UpdateAddress" class="address-toggle" autocomplete="off" >
+                    <label asp-for="@Model.Input.UpdateAddress">
+                        Update Stored Address
+                    </label>
+                </div>
+            </div>
+
+            <div class="address-info hide" >
+                <label asp-for="@Model.Input.Address"></label>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    <input asp-for="@Model.Input.Address" type="text" class="form-control" id="validationCustom02" value="@Model.Input.Address" >
+                </div>
+
+                <label asp-for="@Model.Input.OptionalAddress"></label>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input asp-for="@Model.Input.OptionalAddress" type="text" class="form-control address-optional" id="validationCustom02" value="@Model.Input.OptionalAddress" >
+                </div>
+
+                <label asp-for="@Model.Input.City"></label>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input asp-for="@Model.Input.City" type="text" class="form-control" id="validationCustom02" value="@Model.Input.City" >
+                </div>         
+            
+                <label asp-for="@Model.Input.State"></label>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input asp-for="@Model.Input.State" type="text" class="form-control" id="validationCustom02" placeholder="@Model.Input.State" maxlength="2" >
+                </div>   
+            
+                <label asp-for="@Model.Input.Zip"></label>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input asp-for="@Model.Input.Zip" type="text" class="form-control" id="validationCustom02" value="@Model.Input.Zip" >
+                </div>
+            </div>
+
+
+            <div class="form-group">
                 <input type="submit" value="Update Account" class="btn btn-light">
             </div>
 

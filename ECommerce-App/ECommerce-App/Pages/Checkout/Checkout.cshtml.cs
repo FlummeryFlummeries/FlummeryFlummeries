@@ -40,28 +40,27 @@ namespace ECommerce_App.Pages.Cart
 
         private IEmail _email;
 
-        private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<ApplicationUser> _userManager;
 
         [BindProperty]
         public CheckoutViewModel Input { get; set; }
 
         public decimal Total { get; set; }
 
-        public CheckoutModel(IPaymentHandler payment, ICart cart, SignInManager<ApplicationUser> signIn, IOrder order, IOrderItem orderItem, ICartItem cartItem, IEmail email)
+        public CheckoutModel(IPaymentHandler payment, ICart cart, UserManager<ApplicationUser> userManager, IOrder order, IOrderItem orderItem, ICartItem cartItem, IEmail email)
         {
             _payment = payment;
             _cart = cart;
             _cartItem = cartItem;
-            _signInManager = signIn;
+            _userManager = userManager;
             _order = order;
             _orderItem = orderItem;
             _email = email;
-
         }
 
         public async Task<IActionResult> OnGet()
         {
-            var currentUser = await _signInManager.UserManager.GetUserAsync(User);
+            var currentUser = await _userManager.GetUserAsync(User);
             var cart = await _cart.GetUserCart(currentUser.Id);
             decimal total = 0;
             foreach (var item in cart.CartItems)
@@ -75,7 +74,7 @@ namespace ECommerce_App.Pages.Cart
         public async Task<IActionResult> OnPost()
         {
             #region AddressBuilding
-            var currentUser = await _signInManager.UserManager.GetUserAsync(User);
+            var currentUser = await _userManager.GetUserAsync(User);
             customerAddressType billingAddress = new customerAddressType
             {
                 address = Input.BillingAddress,
@@ -156,6 +155,16 @@ namespace ECommerce_App.Pages.Cart
                         await _cart.Delete(currentUser.Id);
 
                         await BuildCheckoutEmail(currentUser.Email, $"{order.FirstName} {order.LastName}", cartItems, $"{shippingAddress.address} {shippingAddress.city}, {shippingAddress.state} {shippingAddress.zip}", total);
+
+                        if (Input.SaveBillingAddress)
+                        {
+                            currentUser.Address = Input.BillingAddress;
+                            currentUser.City = Input.BillingCity;
+                            currentUser.State = Input.BillingState;
+                            currentUser.Zip = Input.BillingZip;
+                            if (Input.BillingOptionalAddition != null || Input.BillingOptionalAddition != "") currentUser.OptionalAddress = Input.BillingOptionalAddition;
+                            await _userManager.UpdateAsync(currentUser);
+                        }
 
                         return RedirectToPage("/Checkout/Success", new { response = result.Response, cartId = cart.Id });
                     }

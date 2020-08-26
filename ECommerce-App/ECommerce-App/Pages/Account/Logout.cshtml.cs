@@ -16,8 +16,10 @@ namespace ECommerce_App.Pages.Account
             _signInManager = signIn;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> OnPost()

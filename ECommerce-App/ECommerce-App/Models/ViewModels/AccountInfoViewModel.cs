@@ -7,23 +7,26 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Models.ViewModels
 {
+    [BindProperties]
     public class AccountInfoViewModel
     {
-        [BindProperty]
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        [BindProperty]
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [BindProperty]
         [Required]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
-        [BindProperty]
-        [Display(Name = "Change Password")]
-        public bool ChangePassword { get; set; }
+        [Required]
+        public bool UpdateAddress { get; set; }
         
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+        public string OptionalAddress { get; set; }
+
     }
 }

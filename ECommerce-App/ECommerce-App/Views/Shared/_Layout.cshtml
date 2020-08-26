@@ -113,17 +113,18 @@
             $(".cart-icon").click(function () {
                 $(".cart-mini").toggleClass('hide');
             });
-            $(".same-shipping").change(function () {
-                if ($(".shipping-info").hasClass("hide")) {
-                    $(".shipping-info").find("input").attr("required", true);
-                    $(".shipping-info").find("select").attr("required", true);
+            $(".address-toggle").change(function () {
+                if ($(".address-info").hasClass("hide")) {
+                    $(".address-info").find("input").attr("required", true);
+                    $(".address-info").find("select").attr("required", true);
                 } else {
-                    $(".shipping-info").find("input").attr("required", false);
-                    $(".shipping-info").find("select").attr("required", false);
+                    $(".address-info").find("input").attr("required", false);
+                    $(".address-info").find("select").attr("required", false);
                 }
-                $(".shipping-optional").attr("required", false)
-                $(".shipping-info").toggleClass("hide");
+                $(".address-optional").attr("required", false)
+                $(".address-info").toggleClass("hide");
             });
+            $(':checkbox:checked').prop('checked', false);
         });
     </script>
 </body>
