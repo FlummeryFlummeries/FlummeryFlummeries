@@ -54,17 +54,18 @@ namespace ECommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Get a user's orders from the database
+        /// Get a user's orders from the database.
         /// </summary>
         /// <param name="id">
-        /// Id of orderItem to search for
+        /// string: the userId
         /// </param>
         /// <returns>
-        /// Successful result of specified orderItem
+        /// List<OrderCart>: a List of OrderCart entity objects
         /// </returns>
         public async Task<List<OrderCart>> GetUserOrders(string userId)
         {
-            var orders = await _context.OrderCart.Where(x => x.UserId == userId)
+            var orders = await _context.OrderCart
+                .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.CartId)
                 .ToListAsync();
             if (orders == null)
@@ -79,7 +80,7 @@ namespace ECommerce_App.Models.Services
                 }
             }
             return orders;
-        }      
+        }
         
         /// <summary>
         /// Get a specific user's order from the database
