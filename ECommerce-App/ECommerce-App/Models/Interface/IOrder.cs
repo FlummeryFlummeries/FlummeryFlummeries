@@ -15,10 +15,14 @@ namespace ECommerce_App.Models.Interface
         Task<OrderCart> Create(OrderCart order);
 
         /// <summary>
-        /// Get a user's order from the database
+        /// Get a user's orders from the database.
         /// </summary>
-        /// <param name="id">Id of order item to search for</param>
-        /// <returns>Successful result of specified orderItem</returns>
+        /// <param name="id">
+        /// string: the userId
+        /// </param>
+        /// <returns>
+        /// List<OrderCart>: a List of OrderCart entity objects
+        /// </returns>
         Task<List<OrderCart>> GetUserOrders(string userId);
 
         /// <summary>

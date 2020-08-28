@@ -18,44 +18,54 @@
 
 <h2>Your Order History</h2>
 
-@foreach (var order in Model.Orders)
+@foreach (var order in Model.DisplayedOrders)
 {
-<div class="order-card">
+    <div class="order-card">
 
-    @{
-        decimal grandTotal = 0.0m;
-    }
+        @{
+            decimal grandTotal = 0.0m;
+        }
 
-    <div class="card receipt-card">
-        <div class="card-body">
-            <h3>Order Number: @order.Id</h3>
-        </div>
-    </div>
-
-    @foreach (var oneItem in order.CartItems)
-    {
         <div class="card receipt-card">
             <div class="card-body">
-                <h3>Item Name: @oneItem.Product.Name</h3>
-                <p>Price: $@oneItem.Product.Price</p>
-                <p>Quantity: @oneItem.Qty</p>
-                <p>Manufacturer: @oneItem.Product.Manufacturer </p>
-                <p>Compliment: @oneItem.Product.Compliment</p>
-                @{
-                    decimal itemTotal = oneItem.Product.Price * oneItem.Qty;
-                    grandTotal += itemTotal;
-                }
-                <p>Total: $@itemTotal</p>
+                <h3>Order Number: @order.Id</h3>
             </div>
         </div>
-    }
 
-    <div class="card receipt-card">
-        <div class="card-body">
-            <h3>Grand Total: $@grandTotal</h3>
+        @foreach (var oneItem in order.CartItems)
+        {
+            <div class="card receipt-card">
+                <div class="card-body">
+                    <h3>Item Name: @oneItem.Product.Name</h3>
+                    <p>Price: $@oneItem.Product.Price</p>
+                    <p>Quantity: @oneItem.Qty</p>
+                    <p>Manufacturer: @oneItem.Product.Manufacturer </p>
+                    <p>Compliment: @oneItem.Product.Compliment</p>
+                    @{
+                        decimal itemTotal = oneItem.Product.Price * oneItem.Qty;
+                        grandTotal += itemTotal;
+                    }
+                    <p>Total: $@itemTotal</p>
+                </div>
+            </div>
+        }
+
+        <div class="card receipt-card">
+            <div class="card-body">
+                <h3>Grand Total: $@grandTotal</h3>
+            </div>
         </div>
+
     </div>
-
-</div>
-
 }
+
+<div>
+    <ul class="pagination pagination-lg justify-content-center">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrPage ? "active" : "")">
+                <a asp-route-userId="@currentUser.Id" asp-route-nextPage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>
