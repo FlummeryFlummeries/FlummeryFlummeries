@@ -64,7 +64,11 @@
         @for (int i = 1; i <= Model.TotalPages; i++)
         {
             <li class="page-item @(i == Model.CurrPage ? "active" : "")">
-                <a asp-route-userId="@currentUser.Id" asp-route-nextPage="@i" class="page-link">@i</a>
+                <form method="post">
+                    <input type="hidden" name="userID" value="@currentUser.Id" />
+                    <input type="hidden" name="page" value="@i" />
+                    <button type="submit">@i</button>
+                </form>
             </li>
         }
     </ul>

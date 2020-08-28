@@ -33,15 +33,15 @@ namespace ECommerce_App.Pages.Orders
             _order = order;
         }
 
-        public async Task<IActionResult> OnGet(string userId, int nextPage)
-        {
-            await GetOrdersForUserAndPage(userId, nextPage);
-            return Page();
-        }
+        //public async Task<IActionResult> OnGet(string userId, int nextPage)
+        //{
+        //    await GetOrdersForUserAndPage(userId, nextPage);
+        //    return Page();
+        //}
 
-        public async Task<IActionResult> OnPost(string userId)
+        public async Task<IActionResult> OnPost(string userId, int page)
         {
-            await GetOrdersForUserAndPage(userId, 1);
+            await GetOrdersForUserAndPage(userId, page);
             return Page();
         }
 
