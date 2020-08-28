@@ -17,6 +17,8 @@ namespace ECommerce_App.Models
 
         public string LastName { get; set; }
 
+        public string Date { get; set; }
+
         public string BillingAddress { get; set; }
 
         public string BillingCity { get; set; }

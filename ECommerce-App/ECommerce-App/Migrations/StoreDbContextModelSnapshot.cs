@@ -3,16 +3,14 @@ using ECommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200826005044_Reset")]
-    partial class Reset
+    partial class StoreDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,6 +255,9 @@ namespace ECommerce_App.Migrations
 
                     b.Property<int>("CartId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");

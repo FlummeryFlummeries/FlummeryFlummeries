@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ECommerce_App.Migrations.StoreDb
+namespace ECommerce_App.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,7 @@ namespace ECommerce_App.Migrations.StoreDb
                     CartId = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
+                    Date = table.Column<string>(nullable: true),
                     BillingAddress = table.Column<string>(nullable: true),
                     BillingCity = table.Column<string>(nullable: true),
                     BillingState = table.Column<string>(nullable: true),
@@ -140,8 +141,8 @@ namespace ECommerce_App.Migrations.StoreDb
 
             migrationBuilder.InsertData(
                 table: "OrderCart",
-                columns: new[] { "Id", "BillingAddress", "BillingCity", "BillingState", "BillingZip", "CartId", "FirstName", "LastName", "ShippingAddress", "ShippingCity", "ShippingState", "ShippingZip", "UserId" },
-                values: new object[] { 1, "1808 Forgotten Way", "Wilmington", "DE", "00001", 100, "John", "Dickinson", "1808 Forgotten Way", "Wilmington", "DE", "00001", "63866547-918c-4c25-8d19-16c845d2fa2e" });
+                columns: new[] { "Id", "BillingAddress", "BillingCity", "BillingState", "BillingZip", "CartId", "Date", "FirstName", "LastName", "ShippingAddress", "ShippingCity", "ShippingState", "ShippingZip", "UserId" },
+                values: new object[] { 1, "1808 Forgotten Way", "Wilmington", "DE", "00001", 100, null, "John", "Dickinson", "1808 Forgotten Way", "Wilmington", "DE", "00001", "63866547-918c-4c25-8d19-16c845d2fa2e" });
 
             migrationBuilder.InsertData(
                 table: "CartItem",

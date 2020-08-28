@@ -51,7 +51,7 @@ namespace ECommerce_App.Models
                     var result = userManager.AddClaimAsync(user, claim).Result;
 
 
-                    var roleResult = await userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    await userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                 }
             }
         }

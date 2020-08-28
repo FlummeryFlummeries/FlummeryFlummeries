@@ -35,5 +35,11 @@ namespace ECommerce_App.Models.Interface
         /// <param name="id">Id of order item to be deleted</param>
         /// <returns>Task of completion for orderItem delete</returns>
         Task Delete(string userId, int orderId);
+
+        /// <summary>
+        /// Get all orders for Admin viewing
+        /// </summary>
+        /// <returns>Successful result of list of all OrderCarts</returns>
+        Task<List<OrderCart>> GetAllOrders();
     }
 }
