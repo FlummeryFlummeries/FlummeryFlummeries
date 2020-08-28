@@ -52,6 +52,16 @@ namespace ECommerce_App
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
             });
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 2;
+            });
+
             services.AddTransient<IFlummeryInventory, FlummeryInventoryManagement>();
             services.AddTransient<IImage, UploadImageService>();
             services.AddTransient<IEmail, EmailService>();

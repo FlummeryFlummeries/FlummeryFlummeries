@@ -286,3 +286,7 @@ hr{
     display: block;
     width: fit-content;
 }
+
+.toggle-order{
+    margin: 15px 0;
+}

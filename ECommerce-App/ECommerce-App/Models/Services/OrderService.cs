@@ -95,6 +95,24 @@ namespace ECommerce_App.Models.Services
                 order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
             }
             return order;
+        }     
+        
+        
+        /// <summary>
+        /// Get all orders for Admin viewing
+        /// </summary>
+        /// <returns>Successful result of list of all OrderCarts</returns>
+        public async Task<List<OrderCart>> GetAllOrders()
+        {
+            var orders = await _context.OrderCart.ToListAsync();
+            if (orders != null)
+            {
+                foreach (OrderCart order in orders)
+                {
+                    order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
+                }
+            }
+            return orders;
         }
     }
 }

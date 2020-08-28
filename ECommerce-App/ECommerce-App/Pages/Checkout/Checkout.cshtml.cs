@@ -128,6 +128,7 @@ namespace ECommerce_App.Pages.Cart
                             UserId = currentUser.Id,
                             FirstName = billingAddress.firstName,
                             LastName = billingAddress.lastName,
+                            Date = DateTime.Now.ToString(),
                             BillingAddress = billingAddress.address,
                             BillingCity = billingAddress.city,
                             BillingState = billingAddress.state,

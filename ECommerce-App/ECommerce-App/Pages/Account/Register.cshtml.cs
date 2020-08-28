@@ -64,7 +64,13 @@ namespace ECommerce_App.Pages.Account
 
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Invalid Registration. Make sure your password has an uppercase, lowercase, number and special character.");
+                else
+                {
+                    foreach (var error in registered.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
             }
             else
             {
