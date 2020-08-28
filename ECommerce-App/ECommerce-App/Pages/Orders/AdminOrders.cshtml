@@ -6,21 +6,23 @@
 }
 
 <h1>Orders</h1>
-<div class="forms">
-    @if (Model.UserNameSearch == null)
-    {
-        <form method="post">
-            <label asp-for="@Model.UserNameSearch">Search for a spefic user's order by email</label>
-            <input type="text" asp-for="@Model.UserNameSearch" />
-            <button type="submit" class="btn btn-dark">Search</button>
-        </form>
-    }
-    else
-    {
-        <form method="get">
-            <button type="submit" class="btn btn-dark">View all orders</button>
-        </form>
-    }
+<div class="card">
+    <div class="forms">
+        @if (Model.UserNameSearch == null)
+        {
+            <form method="post">
+                <label asp-for="@Model.UserNameSearch">Search for a spefic user's order by email</label>
+                <input type="text" asp-for="@Model.UserNameSearch" />
+                <button type="submit" class="btn btn-dark">Search</button>
+            </form>
+        }
+        else
+        {
+            <form method="get">
+                <button type="submit" class="btn btn-dark">View all orders</button>
+            </form>
+        }
+    </div>
 </div>
 
 <div class="orders-container">
@@ -89,7 +91,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-light" id="@order.Order.Id">Toggle Full Order</button>
+            <button class="btn btn-light toggle-order" id="@order.Order.Id">Toggle Full Order</button>
 
         </div>
     }
