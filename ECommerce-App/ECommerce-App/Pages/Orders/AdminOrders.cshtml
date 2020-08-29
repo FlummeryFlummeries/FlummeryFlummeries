@@ -8,20 +8,11 @@
 <h1>Orders</h1>
 <div class="card">
     <div class="forms">
-        @if (Model.UserNameSearch == null)
-        {
-            <form method="post">
-                <label asp-for="@Model.UserNameSearch">Search for a spefic user's order by email</label>
-                <input type="text" asp-for="@Model.UserNameSearch" />
-                <button type="submit" class="btn btn-dark">Search</button>
-            </form>
-        }
-        else
-        {
-            <form method="get">
-                <button type="submit" class="btn btn-dark">View all orders</button>
-            </form>
-        }
+        <form method="post" asp-page="/Orders/Orders">
+            <label for="userEmail">Search for a specific user's order by email</label>
+            <input type="text" name="userEmail" />
+            <button type="submit" class="btn btn-dark">View</button>
+        </form>
     </div>
 </div>
 
@@ -95,6 +86,20 @@
 
         </div>
     }
+</div>
+
+<div>
+    <ul class="pagination pagination-lg justify-content-center">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrPage ? "active" : "")">
+                <form method="post">
+                    <input type="hidden" name="page" value="@i" />
+                    <button type="submit">@i</button>
+                </form>
+            </li>
+        }
+    </ul>
 </div>
 
 @section Scripts{

@@ -62,9 +62,7 @@
                                     <div class="dropdown-divider"></div>
                                     <form asp-page="/Uploads/Upload" method="get"> <button class="btn btn-link" type="submit">Uploads</button></form>
                                 }
-                            <form asp-page="/Orders/Orders" method="post">
-                                <input type="hidden" name="userId" value="@currentUser.Id" />
-                                <input type="hidden" name="page" value="1" />
+                            <form asp-page="/Orders/Orders" asp-route-page="1" method="post">
                                 <button class="btn btn-link" type="submit">Orders</button>
                             </form>
 

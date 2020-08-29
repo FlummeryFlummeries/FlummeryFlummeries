@@ -18,6 +18,13 @@
 
 <h2>Your Order History</h2>
 
+@if (currentUser.Email == "Admin@admin.com")
+{
+    <form method="get" asp-page="/Orders/AdminOrders">
+        <button type="submit" class="btn btn-dark">Back to all orders</button>
+    </form>
+}
+
 @foreach (var order in Model.DisplayedOrders)
 {
     <div class="order-card">
@@ -65,7 +72,6 @@
         {
             <li class="page-item @(i == Model.CurrPage ? "active" : "")">
                 <form method="post">
-                    <input type="hidden" name="userID" value="@currentUser.Id" />
                     <input type="hidden" name="page" value="@i" />
                     <button type="submit">@i</button>
                 </form>

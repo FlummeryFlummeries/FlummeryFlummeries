@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
 using ECommerce_App.Models.Interface;
@@ -18,6 +19,13 @@ namespace ECommerce_App.Pages.Orders
         private UserManager<ApplicationUser> _userManager;
 
         [BindProperty]
+        public int CurrPage { get; set; }
+
+        public int ItemsPerPage { get; set; } = 5;
+
+        public int TotalPages { get; private set; }
+
+        [BindProperty]
         public List<AdminOrdersViewModel> Orders { get; set; }
         [BindProperty]
         public string UserNameSearch { get; set; }
@@ -26,29 +34,37 @@ namespace ECommerce_App.Pages.Orders
         {
             _orders = orders;
             _userManager = userManager;
+            Orders = new List<AdminOrdersViewModel>();
         }
 
 
-        public async Task OnGet()
+        public async Task OnGet(int page)
         {
-            var orders = await _orders.GetAllOrders();
-            Orders = new List<AdminOrdersViewModel>();
-            foreach (var item in orders)
-            {
-                Orders.Add(new AdminOrdersViewModel
-                {
-                    Order = item,
-                    User = await _userManager.FindByIdAsync(item.UserId)
-                });
-            }
+            await HandlePagination(page);
         }        
         
-        public async Task OnPost()
+        public async Task OnPost(int page)
         {
             var user = await _userManager.FindByNameAsync(UserNameSearch);
-            var orders = await _orders.GetUserOrders(user.Id);
-            Orders = new List<AdminOrdersViewModel>();
-            foreach (var item in orders)
+            await HandlePagination(page, user.Id);
+        }
+
+        public async Task HandlePagination(int page, string userId = null)
+        {
+            CurrPage = page;
+            List<OrderCart> orders;
+            if(userId != null)
+            {
+                orders = await _orders.GetUserOrders(userId);
+            }
+            else
+            {
+                orders = await _orders.GetAllOrders();
+            }
+
+            var displayedOrders = orders.Skip((CurrPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
+
+            foreach (var item in displayedOrders)
             {
                 Orders.Add(new AdminOrdersViewModel
                 {
@@ -56,6 +72,7 @@ namespace ECommerce_App.Pages.Orders
                     User = await _userManager.FindByIdAsync(item.UserId)
                 });
             }
+            TotalPages = (int)Math.Ceiling(decimal.Divide(orders.Count, ItemsPerPage));
         }
     }
 
