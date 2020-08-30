@@ -66,16 +66,19 @@
     </div>
 }
 
-<div>
-    <ul class="pagination pagination-lg justify-content-center">
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.CurrPage ? "active" : "")">
-                <form method="post">
-                    <input type="hidden" name="page" value="@i" />
-                    <button type="submit">@i</button>
-                </form>
-            </li>
-        }
-    </ul>
-</div>
+@if(Model.TotalPages > 1)
+{
+    <div>
+        <ul class="pagination pagination-lg justify-content-center">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrPage ? "active" : "")">
+                    <form method="post">
+                        <input type="hidden" name="page" value="@i" />
+                        <button type="submit">@i</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    </div>
+}

@@ -30,7 +30,7 @@
             }
 
             <div class="card receipt-card">
-                <div class="card-body order-trigger" id="@order.Order.Id">
+                <div class="card-body header-trigger" id="@order.Order.Id">
                     @if (order.User != null)
                     {
                         <h3>User: @order.User.FirstName @order.User.LastName</h3>
@@ -69,13 +69,13 @@
                     <h3>Grand Total: $@grandTotal</h3>
                 </div>
             </div>
-            
+
             <div class="card shipping-info">
                 <div class="card-body" id="@order.Order.Id">
                     <h3>Shipping info:</h3>
                     <p>Shipped to: @order.Order.FirstName @order.Order.LastName</p>
                     <p>At: @order.Order.ShippingAddress @order.Order.ShippingCity, @order.Order.ShippingState @order.Order.ShippingZip</p>
-                    @if(order.Order.Date != null)
+                    @if (order.Order.Date != null)
                     {
                         <p>Date: @order.Order.Date</p>
                     }
@@ -88,24 +88,30 @@
     }
 </div>
 
-<div>
-    <ul class="pagination pagination-lg justify-content-center">
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.CurrPage ? "active" : "")">
-                <form method="post">
-                    <input type="hidden" name="page" value="@i" />
-                    <button type="submit">@i</button>
-                </form>
-            </li>
-        }
-    </ul>
-</div>
+@if (Model.TotalPages > 1)
+{
+    <div>
+        <ul class="pagination pagination-lg justify-content-center">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrPage ? "active" : "")">
+                    <form method="post">
+                        <input type="hidden" name="page" value="@i" />
+                        <button type="submit">@i</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    </div>
+}
 
 @section Scripts{
     <script>
         $(document).ready(function () {
             $(".order-trigger").click(function (e) {
+                $("#order-body-" + e.target.id).toggleClass('hide');
+            });
+            $(".header-trigger").find().click(function (e) {
                 $("#order-body-" + e.target.id).toggleClass('hide');
             });
         });

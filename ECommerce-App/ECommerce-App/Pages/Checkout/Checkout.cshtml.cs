@@ -60,6 +60,7 @@ namespace ECommerce_App.Pages.Cart
 
         public async Task<IActionResult> OnGet()
         {
+            Input = new CheckoutViewModel();
             var currentUser = await _userManager.GetUserAsync(User);
             var cart = await _cart.GetUserCart(currentUser.Id);
             decimal total = 0;
@@ -68,6 +69,17 @@ namespace ECommerce_App.Pages.Cart
                 total += item.Qty * item.Product.Price;
             }
             Total = total;
+            if(currentUser.Address != null || currentUser.Address != "")
+            {
+                Input.SameBillingAndShipping = true;
+                Input.FirstName = currentUser.FirstName;
+                Input.LastName = currentUser.LastName;
+                Input.BillingAddress = currentUser.Address;
+                Input.BillingOptionalAddition = currentUser.OptionalAddress;
+                Input.BillingCity = currentUser.City;
+                Input.BillingState = currentUser.State;
+                Input.BillingZip = currentUser.Zip;
+            }
             return Page();
         }
 
