@@ -294,3 +294,17 @@ hr{
 .page-link {
     padding: 13px 18px;
 }
+
+.admin-links{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-links > a {
+    width: 200px;
+}
+
+.admin-links > a:first-child{
+    margin-bottom: 20px;
+}
