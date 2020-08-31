@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/Orders/Admin"
 @model ECommerce_App.Pages.Orders.AdminOrdersModel
 @{
     ViewData["Title"] = "AdminOrders";
@@ -8,20 +8,11 @@
 <h1>Orders</h1>
 <div class="card">
     <div class="forms">
-        @if (Model.UserNameSearch == null)
-        {
-            <form method="post">
-                <label asp-for="@Model.UserNameSearch">Search for a spefic user's order by email</label>
-                <input type="text" asp-for="@Model.UserNameSearch" />
-                <button type="submit" class="btn btn-dark">Search</button>
-            </form>
-        }
-        else
-        {
-            <form method="get">
-                <button type="submit" class="btn btn-dark">View all orders</button>
-            </form>
-        }
+        <form method="post" asp-page="/Orders/Orders">
+            <label for="userEmail">Search for a specific user's order by email</label>
+            <input type="text" name="userEmail" />
+            <button type="submit" class="btn btn-dark">View</button>
+        </form>
     </div>
 </div>
 
@@ -39,7 +30,7 @@
             }
 
             <div class="card receipt-card">
-                <div class="card-body order-trigger" id="@order.Order.Id">
+                <div class="card-body header-trigger" id="@order.Order.Id">
                     @if (order.User != null)
                     {
                         <h3>User: @order.User.FirstName @order.User.LastName</h3>
@@ -78,13 +69,13 @@
                     <h3>Grand Total: $@grandTotal</h3>
                 </div>
             </div>
-            
+
             <div class="card shipping-info">
                 <div class="card-body" id="@order.Order.Id">
                     <h3>Shipping info:</h3>
                     <p>Shipped to: @order.Order.FirstName @order.Order.LastName</p>
                     <p>At: @order.Order.ShippingAddress @order.Order.ShippingCity, @order.Order.ShippingState @order.Order.ShippingZip</p>
-                    @if(order.Order.Date != null)
+                    @if (order.Order.Date != null)
                     {
                         <p>Date: @order.Order.Date</p>
                     }
@@ -97,12 +88,50 @@
     }
 </div>
 
-@section Scripts{
+@if (Model.TotalPages > 1)
+{
+    <div>
+        <ul class="pagination justify-content-center">
+            @*@if (Model.CurrPage > 1)
+            {
+                <li class="page-item">
+                    <form method="post">
+                        <input type="hidden" name="page" value="@(Model.CurrPage-1)" />
+                        <button type="submit" class="page-link">&lsaquo;</button>
+                    </form>
+                </li>
+            }*@
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrPage ? "active" : "")">
+                    <form method="post">
+                        <input type="hidden" name="page" value="@i" />
+                        <button type="submit" class="page-link">@i</button>
+                    </form>
+                </li>
+            }
+            @*@if (Model.CurrPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <form method="post">
+                        <input type="hidden" name="page" value="@(Model.CurrPage+1)" />
+                        <button type="submit" class="page-link">&rsaquo;</button>
+                    </form>
+                </li>
+            }*@
+        </ul>
+    </div>
+}
+
+@*@section Scripts{
     <script>
         $(document).ready(function () {
             $(".order-trigger").click(function (e) {
                 $("#order-body-" + e.target.id).toggleClass('hide');
             });
+            $(".header-trigger").find().click(function (e) {
+                $("#order-body-" + e.target.id).toggleClass('hide');
+            });
         });
     </script>
-}
+}*@

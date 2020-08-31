@@ -36,7 +36,7 @@
         }
         <a asp-controller="Products" asp-action="Index" class="btn btn-light">Return to Products</a>
 
-        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
         {
             <h5>Admin Options:</h5>
             <div class="admin-options">
@@ -44,6 +44,6 @@
                 <a asp-page="/Uploads/Edit" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Edit Flummery</a>
                 <a asp-page="/Uploads/Delete" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Delete Flummery</a>
             </div>
-        }
+        }*@
     </div>
 </div>
