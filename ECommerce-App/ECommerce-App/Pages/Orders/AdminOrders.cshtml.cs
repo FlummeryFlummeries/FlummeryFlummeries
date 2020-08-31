@@ -41,26 +41,19 @@ namespace ECommerce_App.Pages.Orders
         public async Task OnGet(int page)
         {
             await HandlePagination(page);
-        }        
-        
+        }
+
         public async Task OnPost(int page)
         {
-            var user = await _userManager.FindByNameAsync(UserNameSearch);
-            await HandlePagination(page, user.Id);
+            await HandlePagination(page);
         }
 
         public async Task HandlePagination(int page, string userId = null)
         {
             CurrPage = page;
             List<OrderCart> orders;
-            if(userId != null)
-            {
-                orders = await _orders.GetUserOrders(userId);
-            }
-            else
-            {
-                orders = await _orders.GetAllOrders();
-            }
+
+            orders = await _orders.GetAllOrders();
 
             var displayedOrders = orders.Skip((CurrPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
 
@@ -79,7 +72,7 @@ namespace ECommerce_App.Pages.Orders
     public class AdminOrdersViewModel
     {
         [BindProperty]
-        public OrderCart Order { get; set; }     
+        public OrderCart Order { get; set; }
         [BindProperty]
         public ApplicationUser User { get; set; }
     }

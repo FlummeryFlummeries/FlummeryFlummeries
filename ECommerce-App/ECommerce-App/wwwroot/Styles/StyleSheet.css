@@ -290,3 +290,7 @@ hr{
 .toggle-order{
     margin: 15px 0;
 }
+
+.page-link {
+    padding: 13px 18px;
+}

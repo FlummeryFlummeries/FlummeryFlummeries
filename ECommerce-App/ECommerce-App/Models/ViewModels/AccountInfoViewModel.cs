@@ -21,12 +21,10 @@ namespace ECommerce_App.Models.ViewModels
         public string Email { get; set; }
         [Required]
         public bool UpdateAddress { get; set; }
-        
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
         public string OptionalAddress { get; set; }
-
     }
 }

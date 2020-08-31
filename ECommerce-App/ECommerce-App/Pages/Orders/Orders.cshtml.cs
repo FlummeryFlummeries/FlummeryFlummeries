@@ -25,6 +25,9 @@ namespace ECommerce_App.Pages.Orders
         [BindProperty]
         public int CurrPage { get; set; }
 
+        [BindProperty]
+        public string UserEmail { get; set; }
+
         public int ItemsPerPage { get; set; } = 5;
 
         public int TotalPages { get; private set; }
@@ -36,12 +39,6 @@ namespace ECommerce_App.Pages.Orders
             _userManager = userManager;
         }
 
-        //public async Task<IActionResult> OnGet(string userEmail, int nextPage)
-        //{
-        //    await GetOrdersForUserAndPage(userEmail, nextPage);
-        //    return Page();
-        //}
-
         public async Task<IActionResult> OnPost(int page, string userEmail = null)
         {
             ApplicationUser user;
@@ -52,6 +49,7 @@ namespace ECommerce_App.Pages.Orders
             else
             {
                 user = await _userManager.FindByEmailAsync(userEmail);
+                UserEmail = user.Email;
                 if(user == null)
                 {
                     return RedirectToPage("/Orders/AdminOrders");

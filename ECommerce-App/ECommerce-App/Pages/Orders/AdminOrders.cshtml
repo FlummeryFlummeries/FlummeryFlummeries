@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/Orders/Admin"
 @model ECommerce_App.Pages.Orders.AdminOrdersModel
 @{
     ViewData["Title"] = "AdminOrders";
@@ -91,21 +91,39 @@
 @if (Model.TotalPages > 1)
 {
     <div>
-        <ul class="pagination pagination-lg justify-content-center">
+        <ul class="pagination justify-content-center">
+            @*@if (Model.CurrPage > 1)
+            {
+                <li class="page-item">
+                    <form method="post">
+                        <input type="hidden" name="page" value="@(Model.CurrPage-1)" />
+                        <button type="submit" class="page-link">&lsaquo;</button>
+                    </form>
+                </li>
+            }*@
             @for (int i = 1; i <= Model.TotalPages; i++)
             {
                 <li class="page-item @(i == Model.CurrPage ? "active" : "")">
                     <form method="post">
                         <input type="hidden" name="page" value="@i" />
-                        <button type="submit">@i</button>
+                        <button type="submit" class="page-link">@i</button>
                     </form>
                 </li>
             }
+            @*@if (Model.CurrPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <form method="post">
+                        <input type="hidden" name="page" value="@(Model.CurrPage+1)" />
+                        <button type="submit" class="page-link">&rsaquo;</button>
+                    </form>
+                </li>
+            }*@
         </ul>
     </div>
 }
 
-@section Scripts{
+@*@section Scripts{
     <script>
         $(document).ready(function () {
             $(".order-trigger").click(function (e) {
@@ -116,4 +134,4 @@
             });
         });
     </script>
-}
+}*@
