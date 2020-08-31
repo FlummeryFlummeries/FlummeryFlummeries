@@ -52,6 +52,16 @@ namespace ECommerce_App
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
             });
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 2;
+            });
+
             services.AddTransient<IFlummeryInventory, FlummeryInventoryManagement>();
             services.AddTransient<IImage, UploadImageService>();
             services.AddTransient<IEmail, EmailService>();
@@ -63,7 +73,7 @@ namespace ECommerce_App
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -77,7 +87,7 @@ namespace ECommerce_App
 
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await RoleInitializer.SeedAdmin(serviceProvider, userManager, Config);
+            RoleInitializer.SeedAdmin(serviceProvider, userManager, Config);
 
             app.UseEndpoints(endpoints =>
             {

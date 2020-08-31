@@ -15,11 +15,15 @@ namespace ECommerce_App.Models.Interface
         Task<OrderCart> Create(OrderCart order);
 
         /// <summary>
-        /// Get a user's order from the database
+        /// Get a user's orders from the database.
         /// </summary>
-        /// <param name="id">Id of order item to search for</param>
-        /// <returns>Successful result of specified orderItem</returns>
-        Task<OrderCart> GetUserOrders(string userId);
+        /// <param name="id">
+        /// string: the userId
+        /// </param>
+        /// <returns>
+        /// List<OrderCart>: a List of OrderCart entity objects
+        /// </returns>
+        Task<List<OrderCart>> GetUserOrders(string userId);
 
         /// <summary>
         /// Get a specific user's order from the database
@@ -35,5 +39,11 @@ namespace ECommerce_App.Models.Interface
         /// <param name="id">Id of order item to be deleted</param>
         /// <returns>Task of completion for orderItem delete</returns>
         Task Delete(string userId, int orderId);
+
+        /// <summary>
+        /// Get all orders for Admin viewing
+        /// </summary>
+        /// <returns>Successful result of list of all OrderCarts</returns>
+        Task<List<OrderCart>> GetAllOrders();
     }
 }

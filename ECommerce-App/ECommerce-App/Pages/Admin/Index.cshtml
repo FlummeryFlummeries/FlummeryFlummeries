@@ -1,0 +1,41 @@
+﻿@page
+@model ECommerce_App.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h1>Admin Dash</h1>
+
+<div class="admin-links">
+
+    <a asp-page="/Orders/AdminOrders" class="btn btn-dark">View All Orders</a>
+    <a asp-page="/Uploads/Upload" class="btn btn-dark">Make a new Flummery</a>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="row justify-content-center">
+        @foreach (var item in Model.Flums)
+        {
+            <div class="col-auto mb-3">
+                <div class="card item-card" style="width: 18rem;">
+                    <div class="card-body product-card">
+                        <h5 class="card-title">@item.Name</h5>
+                        <img src="@item.ImageUrl" alt="Image of @item.Name" />
+                        <p class="card-text">Price (USD) : $@item.Price</p>
+                        <div class="compliment-container d-flex align-items-center justify-content-center">
+                            <p class="card-text">Compliment : @item.Compliment</p>
+                        </div>
+
+                        <a asp-page="/ProductDetails/ProductDetails" asp-route-id="@item.Id" class="btn btn-light">Product Details Page</a>
+
+                        <a asp-page="/Uploads/Edit" asp-route-id="@item.Id" class="btn btn-light">Edit Flummery</a>
+                        <a asp-page="/Images/Upload" asp-route-id="@item.Id" class="btn btn-light">Upload New Image</a>
+                        <a asp-page="/Uploads/Delete" asp-route-id="@item.Id" class="btn btn-light">Delete Flummery</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

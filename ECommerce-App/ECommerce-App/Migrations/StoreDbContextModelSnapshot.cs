@@ -256,6 +256,9 @@ namespace ECommerce_App.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 

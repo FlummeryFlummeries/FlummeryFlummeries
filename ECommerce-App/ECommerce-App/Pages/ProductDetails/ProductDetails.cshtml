@@ -15,7 +15,7 @@
     var currentUser = await SignInManager.UserManager.GetUserAsync(User);
 }
 
-<h2>Flummery Flummery Details</h2>
+@*<h2>Flummery Flummery Details</h2>*@
 
 <div class="card details-card">
     <div class="card-body">
@@ -28,14 +28,22 @@
         <p class="card-text">Weight (kg) : @Model.Flummery.Weight</p>
         @if (currentUser != null)
         {
-            <a asp-page="/Cart/Update" asp-route-userId="@currentUser.Id" asp-route-itemId="@Model.Flummery.Id" class="btn btn-primary">Add Item to Cart</a>
-        }
+            <form method="get" class="add-to-cart" asp-page="/Cart/Update" asp-route-userId="@currentUser.Id" asp-route-itemId="@Model.Flummery.Id">
+                <input type="number" value="1" min="1" max="99" name="qty" required />
+                <button type="submit" class="btn btn-light">Add to Cart</button>
+            </form>
 
-        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-        {
-            <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-primary">Upload Image</a>
-            <a asp-page="/Uploads/Edit" asp-route-id="@Model.Flummery.Id" class="btn btn-primary">Edit Flummery</a>
-            <a asp-page="/Uploads/Delete" asp-route-id="@Model.Flummery.Id" class="btn btn-primary">Delete Flummery</a>
         }
+        <a asp-controller="Products" asp-action="Index" class="btn btn-light">Return to Products</a>
+
+        @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <h5>Admin Options:</h5>
+            <div class="admin-options">
+                <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Upload Image</a>
+                <a asp-page="/Uploads/Edit" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Edit Flummery</a>
+                <a asp-page="/Uploads/Delete" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Delete Flummery</a>
+            </div>
+        }*@
     </div>
 </div>

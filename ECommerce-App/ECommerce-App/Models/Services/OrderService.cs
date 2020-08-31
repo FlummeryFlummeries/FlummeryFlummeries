@@ -54,19 +54,33 @@ namespace ECommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Get a user's orders from the database
+        /// Get a user's orders from the database.
         /// </summary>
-        /// <param name="id">Id of orderItem to search for</param>
-        /// <returns>Successful result of specified orderItem</returns>
-        public async Task<OrderCart> GetUserOrders(string userId)
+        /// <param name="id">
+        /// string: the userId
+        /// </param>
+        /// <returns>
+        /// List<OrderCart>: a List of OrderCart entity objects
+        /// </returns>
+        public async Task<List<OrderCart>> GetUserOrders(string userId)
         {
-            var order = await _context.OrderCart.Where(x => x.UserId == userId).FirstOrDefaultAsync();
-            if (order != null)
+            var orders = await _context.OrderCart
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CartId)
+                .ToListAsync();
+            if (orders == null)
             {
-                order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
+                return orders;
             }
-            return order;
-        }      
+            foreach (var order in orders)
+            {
+                if (order != null)
+                {
+                    order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
+                }
+            }
+            return orders;
+        }
         
         /// <summary>
         /// Get a specific user's order from the database
@@ -81,6 +95,24 @@ namespace ECommerce_App.Models.Services
                 order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
             }
             return order;
+        }     
+        
+        
+        /// <summary>
+        /// Get all orders for Admin viewing
+        /// </summary>
+        /// <returns>Successful result of list of all OrderCarts</returns>
+        public async Task<List<OrderCart>> GetAllOrders()
+        {
+            var orders = await _context.OrderCart.ToListAsync();
+            if (orders != null)
+            {
+                foreach (OrderCart order in orders)
+                {
+                    order.CartItems = await _orderItem.GetUserOrderItems(order.Id);
+                }
+            }
+            return orders;
         }
     }
 }

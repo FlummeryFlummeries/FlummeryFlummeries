@@ -7,58 +7,63 @@
 
 <h1>Success!</h1>
 
-<div class="card receipt-card">
-    <div class="card-body">
-        <h3>Your order has been processed:</h3>
-        <p>Order Number: @Model.Order.Id</p>
-        <p>Authorization Number: @Model.Message</p>
-    </div>
-</div>
+<div class="order-card">
 
-<div class="card receipt-card">
-    <div class="card-body">
-        <h3>Billing Information:</h3>
-        <p>Address: @Model.Order.BillingAddress</p>
-        <p>City: @Model.Order.BillingCity</p>
-        <p>State: @Model.Order.BillingState</p>
-        <p>Zip: @Model.Order.BillingZip</p>
-    </div>
-</div>
-
-<div class="card receipt-card">
-    <div class="card-body">
-        <h3>Shipping Information:</h3>
-        <p>Address: @Model.Order.ShippingAddress</p>
-        <p>City: @Model.Order.ShippingCity</p>
-        <p>State: @Model.Order.ShippingState</p>
-        <p>Zip: @Model.Order.ShippingZip</p>
-    </div>
-</div>
-
-@{
-    decimal grandTotal = 0.0m;
-}
-
-@foreach (var oneItem in Model.Order.CartItems)
-{
     <div class="card receipt-card">
         <div class="card-body">
-            <h3>Item Name: @oneItem.Product.Name</h3>
-            <p>Price: $@oneItem.Product.Price</p>
-            <p>Quantity: @oneItem.Qty</p>
-            <p>Manufacturer: @oneItem.Product.Manufacturer </p>
-            <p>Compliment: @oneItem.Product.Compliment</p>
-            @{
-                decimal itemTotal = oneItem.Product.Price * oneItem.Qty;
-                grandTotal += itemTotal;
-            }
-            <p>Total: $@itemTotal</p>
+            <h3>Your order has been processed:</h3>
+            <p>Order Number: @Model.Order.Id</p>
+            <p>Authorization Number: @Model.Message</p>
         </div>
     </div>
-}
 
-<div class="card receipt-card">
-    <div class="card-body">
-        <h3>Grand Total: $@grandTotal</h3>
+    <div class="card receipt-card">
+        <div class="card-body">
+            <h3>Billing Information:</h3>
+            <p>Address: @Model.Order.BillingAddress</p>
+            <p>City: @Model.Order.BillingCity</p>
+            <p>State: @Model.Order.BillingState</p>
+            <p>Zip: @Model.Order.BillingZip</p>
+        </div>
     </div>
+
+    <div class="card receipt-card">
+        <div class="card-body">
+            <h3>Shipping Information:</h3>
+            <p>Address: @Model.Order.ShippingAddress</p>
+            <p>City: @Model.Order.ShippingCity</p>
+            <p>State: @Model.Order.ShippingState</p>
+            <p>Zip: @Model.Order.ShippingZip</p>
+        </div>
+    </div>
+
+    @{
+        decimal grandTotal = 0.0m;
+    }
+
+    @foreach (var oneItem in Model.Order.CartItems)
+    {
+        <div class="card receipt-card">
+            <div class="card-body">
+                <h3>Item Name: @oneItem.Product.Name</h3>
+                <p>Price: $@oneItem.Product.Price</p>
+                <p>Quantity: @oneItem.Qty</p>
+                <p>Manufacturer: @oneItem.Product.Manufacturer </p>
+                <p>Compliment: @oneItem.Product.Compliment</p>
+                @{
+                    decimal itemTotal = oneItem.Product.Price * oneItem.Qty;
+                    grandTotal += itemTotal;
+                }
+                <p>Total: $@itemTotal</p>
+            </div>
+        </div>
+    }
+
+    <div class="card receipt-card">
+        <div class="card-body">
+            <h3>Grand Total: $@grandTotal</h3>
+        </div>
+    </div>
+
 </div>
+

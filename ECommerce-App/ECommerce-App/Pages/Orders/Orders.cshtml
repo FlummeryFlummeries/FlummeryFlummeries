@@ -1,0 +1,105 @@
+﻿@page "/Orders"
+@model ECommerce_App.Pages.Orders.OrdersModel
+
+@using Microsoft.AspNetCore.Identity;
+@using ECommerce_App.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "_Layout";
+}
+
+@{
+    var currentUser = await SignInManager.UserManager.GetUserAsync(User);
+}
+
+@*<h1>Welcome @currentUser.FirstName</h1>*@
+
+<h1>Order History</h1>
+
+@if (currentUser.Email == "Admin@admin.com")
+{
+    <form method="get" asp-page="/Orders/AdminOrders">
+        <button type="submit" class="btn btn-dark">Back to all orders</button>
+    </form>
+}
+
+@foreach (var order in Model.DisplayedOrders)
+{
+<div class="order-card  order-trigger" id="@order.Id">
+
+    @{
+        decimal grandTotal = 0.0m;
+    }
+
+    <div class="card receipt-card">
+        <div class="card-body">
+            <h3>Order Number: @order.Id</h3>
+        </div>
+    </div>
+
+    <div class="order-body hide order-trigger" id="order-body-@order.Id">
+        @foreach (var oneItem in order.CartItems)
+        {
+            <div class="card receipt-card">
+                <div class="card-body">
+                    <h3>Item Name: @oneItem.Product.Name</h3>
+                    <p>Price: $@oneItem.Product.Price</p>
+                    <p>Quantity: @oneItem.Qty</p>
+                    <p>Manufacturer: @oneItem.Product.Manufacturer </p>
+                    <p>Compliment: @oneItem.Product.Compliment</p>
+                    @{
+                        decimal itemTotal = oneItem.Product.Price * oneItem.Qty;
+                        grandTotal += itemTotal;
+                    }
+                    <p>Total: $@itemTotal</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="card receipt-card">
+        <div class="card-body">
+            <h3>Grand Total: $@grandTotal</h3>
+        </div>
+    </div>
+
+
+    <div class="card shipping-info">
+        <div class="card-body" id="@order.Id">
+            <h3>Shipping info:</h3>
+            <p>Shipped to: @order.FirstName @order.LastName</p>
+            <p>At: @order.ShippingAddress @order.ShippingCity, @order.ShippingState @order.ShippingZip</p>
+            @if (order.Date != null)
+            {
+                <p>Date: @order.Date</p>
+            }
+        </div>
+    </div>
+
+
+    <button class="btn btn-light toggle-order" id="@order.Id">Toggle Full Order</button>
+
+</div>
+}
+
+@if(Model.TotalPages > 1)
+{
+    <div>
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrPage ? "active" : "")">
+                    <form method="post">
+                        @if (Model.UserEmail != null)
+                        {
+                            <input type="hidden" name="userEmail" value="@Model.UserEmail" />
+                        }
+                        <input type="hidden" name="page" value="@i" />
+                        <button type="submit" class="page-link">@i</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    </div>
+}

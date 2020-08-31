@@ -40,17 +40,18 @@ namespace ECommerce_App.Models
                     LastName = "Adminton",
                     Email = config["AdminUserName"]
                 };
+
                 IdentityResult created = userManager.CreateAsync(user, config["AdminPassword"]).Result;
 
                 if (created.Succeeded)
                 {
-                    var roleResult = userManager.AddToRoleAsync(user, ApplicationRoles.Admin).Result;
-
                     Claim claim = new Claim("FullName", "Administrator");
 
-                    await userManager.AddClaimAsync(user, claim);
+
+                    var result = userManager.AddClaimAsync(user, claim).Result;
 
 
+                    await userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                 }
             }
         }
