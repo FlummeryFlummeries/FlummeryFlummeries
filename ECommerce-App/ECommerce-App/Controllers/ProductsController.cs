@@ -14,18 +14,20 @@ namespace ECommerce_App.Controllers
         public IFlummeryInventory _flummery { get; set; }
 
         /// <summary>
-        /// Constructor for ProductsController
+        /// Instantiates a new ProductsController object.
         /// </summary>
-        /// <param name="flummery">Interface for flummeries</param>
+        /// <param name="flummery"></param>
         public ProductsController(IFlummeryInventory flummery)
         {
             _flummery = flummery;
         }
 
         /// <summary>
-        /// Get all of the flummeries and display them to the page
+        /// Displays all the flummeries in a View.
         /// </summary>
-        /// <returns>View with a model consisting of all flummeries in DB</returns>
+        /// <returns>
+        /// Task<IActionResult>: a list of all flummeries
+        /// </returns>
         public async Task<IActionResult> Index()
         {
             List<Flummery> list = await _flummery.GetAllFlummeries();
@@ -33,10 +35,14 @@ namespace ECommerce_App.Controllers
         }
 
         /// <summary>
-        /// Order flummeries when the user selects a sort method
+        /// Displays all the flummeries sorted by the parameter string
         /// </summary>
-        /// <param name="type">How the flummeries should be sorted</param>
-        /// <returns>View with a model consisting of all flummeries sorted in a given way.</returns>
+        /// <param name="type">
+        /// string: how to sort the flummeries
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: a list of all flummeries, sorted
+        /// </returns>
         [HttpPost]
         public async Task<IActionResult> Index(string type)
         {
@@ -45,10 +51,14 @@ namespace ECommerce_App.Controllers
         }
 
         /// <summary>
-        /// Search for a specific individual flummeries or group of flummeries by a search term
+        /// Gets a subset of the flummeries from the parameter string
         /// </summary>
-        /// <param name="search">Search term</param>
-        /// <returns>View with a model consisting of all flummeries with given search term in name</returns>
+        /// <param name="search">
+        /// string: the serach string used to match flummeries against
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: a subset of flummeries that match the search string
+        /// </returns>
         public async Task<IActionResult> Details(string search)
         {
             List<Flummery> list = await _flummery.GetFlummeriesForSearch(search);

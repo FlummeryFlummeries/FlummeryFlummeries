@@ -16,21 +16,39 @@ namespace ECommerce_App.Pages.Cart
     public class DeleteModel : PageModel
     {
         private ICartItem _cartItem;
+
         private ICart _cart;
+
         private SignInManager<ApplicationUser> _signInManager;
 
+        /// <summary>
+        /// Instantiates a new DeleteModel object
+        /// </summary>
+        /// <param name="cartItem">
+        /// ICartItem: an object that implements the ICartItem interface
+        /// </param>
+        /// <param name="cart">
+        /// ICart: an object that implements the ICart interface
+        /// </param>
+        /// <param name="signIn">
+        /// SignInManager<ApplicationUser>: a SignInManager object
+        /// </param>
         public DeleteModel(ICartItem cartItem, ICart cart, SignInManager<ApplicationUser> signIn)
         {
             _cartItem = cartItem;
             _cart = cart;
             _signInManager = signIn;
-
         }
 
-        public void OnGet()
-        {
-        }
-
+        /// <summary>
+        /// Deletes a flummery from the cart
+        /// </summary>
+        /// <param name="productId">
+        /// int: the product ID of the item to be deleted from the cart
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: a View directing back to the cart
+        /// </returns>
         public async Task<IActionResult> OnPost(int productId)
         {
             var currentUser = await _signInManager.UserManager.GetUserAsync(User);
