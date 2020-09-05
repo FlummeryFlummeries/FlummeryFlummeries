@@ -13,18 +13,36 @@ namespace ECommerce_App.Controllers
     {
         public IFlummeryInventory _flummery { get; set; }
 
+        /// <summary>
+        /// Instantiates a new ProductsController object.
+        /// </summary>
+        /// <param name="flummery"></param>
         public ProductsController(IFlummeryInventory flummery)
         {
             _flummery = flummery;
         }
 
-
+        /// <summary>
+        /// Displays all the flummeries in a View.
+        /// </summary>
+        /// <returns>
+        /// Task<IActionResult>: a list of all flummeries
+        /// </returns>
         public async Task<IActionResult> Index()
         {
             List<Flummery> list = await _flummery.GetAllFlummeries();
             return View(list);
         }
 
+        /// <summary>
+        /// Displays all the flummeries sorted by the parameter string
+        /// </summary>
+        /// <param name="type">
+        /// string: how to sort the flummeries
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: a list of all flummeries, sorted
+        /// </returns>
         [HttpPost]
         public async Task<IActionResult> Index(string type)
         {
@@ -32,6 +50,15 @@ namespace ECommerce_App.Controllers
             return View(list);
         }
 
+        /// <summary>
+        /// Gets a subset of the flummeries from the parameter string
+        /// </summary>
+        /// <param name="search">
+        /// string: the serach string used to match flummeries against
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: a subset of flummeries that match the search string
+        /// </returns>
         public async Task<IActionResult> Details(string search)
         {
             List<Flummery> list = await _flummery.GetFlummeriesForSearch(search);

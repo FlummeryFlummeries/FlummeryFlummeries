@@ -15,11 +15,26 @@ namespace ECommerce_App.ViewComponents
     {
         private ICart _cart;
 
+        /// <summary>
+        /// Instantiates a new CartViewComponent object.
+        /// </summary>
+        /// <param name="cart">
+        /// ICart: an object that implements the ICart interface
+        /// </param>
         public CartViewComponent(ICart cart)
         {
             _cart = cart;
         }
 
+        /// <summary>
+        /// Gets the current user's cart items.
+        /// </summary>
+        /// <param name="userId">
+        /// string: the current user's ID
+        /// </param>
+        /// <returns>
+        /// Task<IViewComponentResult>: a View containing the current user's cart items
+        /// </returns>
         public async Task<IViewComponentResult> InvokeAsync(string userId)
         {
             var cart = await _cart.GetUserCart(userId);
