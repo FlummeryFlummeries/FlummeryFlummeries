@@ -48,7 +48,7 @@ namespace ECommerce_App.Pages.Orders
         public async Task<IActionResult> OnPost(int page, string userEmail = null)
         {
             ApplicationUser user;
-            if(User.IsInRole("Admin") && userEmail == null || userEmail == "")
+            if(!User.IsInRole("Admin") && userEmail == null || userEmail == "")
             {
                 user = await _userManager.GetUserAsync(User);
             }
