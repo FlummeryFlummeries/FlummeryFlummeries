@@ -27,6 +27,12 @@ namespace ECommerce_App.Pages.ProductDetails
             _flummeryInventory = flummeryInventory;
         }
 
+        /// <summary>
+        /// Sets the bound Flummery property for the Razor Page.
+        /// </summary>
+        /// <param name="id">
+        /// int: a flummery item ID
+        /// </param>
         public async Task OnGet(int id)
         {
             Flummery = await _flummeryInventory.GetFlummeryBy(id);

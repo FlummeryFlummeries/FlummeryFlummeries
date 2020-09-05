@@ -19,6 +19,18 @@ namespace ECommerce_App.Pages.Cart
 
         private readonly IFlummeryInventory _flummeryInventory;
 
+        /// <summary>
+        /// Instantiates a new UpdateModel object
+        /// </summary>
+        /// <param name="cartItem">
+        /// ICartItem: an object that implements the ICartItem interface
+        /// </param>
+        /// <param name="cart">
+        /// ICart: an object that implements the ICart interface
+        /// </param>
+        /// <param name="flummeryInventory">
+        /// IFlummeryInventory: a object that implements the IFlummeryInventory interface
+        /// </param>
         public UpdateModel(ICart cart, ICartItem cartItem, IFlummeryInventory flummeryInventory)
         {
             _cart = cart;
@@ -26,6 +38,21 @@ namespace ECommerce_App.Pages.Cart
             _flummeryInventory = flummeryInventory;
         }
 
+        /// <summary>
+        /// Gets the flummery's for the cart
+        /// </summary>
+        /// <param name="itemId">
+        /// int: the item ID of the flummery to be updated
+        /// </param>
+        /// <param name="userId">
+        /// string: the current user's ID
+        /// </param>
+        /// <param name="qty">
+        /// int: the new quantity, defaults to 1 if no value is passed
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: redirects back to the Cart
+        /// </returns>
         public async Task<IActionResult> OnGet(int itemId, string userId, int qty = 1)
         {
             if (qty < 1) qty = 1;
@@ -43,6 +70,21 @@ namespace ECommerce_App.Pages.Cart
             return RedirectToPage("/Cart/View");
         }
 
+        /// <summary>
+        /// Updates a flummery's quantity in the cart, and returns back to the cart
+        /// </summary>
+        /// <param name="itemId">
+        /// int: the item ID of the flummery to be updated
+        /// </param>
+        /// <param name="userId">
+        /// string: the current user's ID
+        /// </param>
+        /// <param name="qty">
+        /// int: the new quantity, defaults to 1 if no value is passed
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: redirects back to the Cart
+        /// </returns>
         public async Task<IActionResult> OnPost(int itemId, string userId, int qty = 1)
         {
             if (qty < 1) qty = 1;
@@ -60,6 +102,18 @@ namespace ECommerce_App.Pages.Cart
             return RedirectToPage("/Cart/View");
         }
 
+        /// <summary>
+        /// Updates a cart item
+        /// </summary>
+        /// <param name="cart">
+        /// Models.Cart: the current cart
+        /// </param>
+        /// <param name="itemId">
+        /// int: a flummery's item ID
+        /// </param>
+        /// <param name="qty">
+        /// int: the flummery's new quantity
+        /// </param>
         private async Task UpdateCartItems(Models.Cart cart, int itemId, int qty)
         {
             bool containsCartItem = false;

@@ -27,6 +27,18 @@ namespace ECommerce_App.Pages.Cart
         [BindProperty]
         public string UserId { get; set; }
 
+        /// <summary>
+        /// Instantiates a new ViewModel object.
+        /// </summary>
+        /// <param name="cartItem">
+        /// ICartItem: an object that implements the ICartItem interface
+        /// </param>
+        /// <param name="cart">
+        /// ICart: an object that implements the ICart interface
+        /// </param>
+        /// <param name="signIn">
+        /// SignInManager<ApplicationUser>: a SignInManager object
+        /// </param>
         public ViewModel(ICart cart, ICartItem cartItem, SignInManager<ApplicationUser> signIn)
         {
             _cart = cart;
@@ -35,7 +47,9 @@ namespace ECommerce_App.Pages.Cart
             FlummeriesInCart = new List<CartItem>();
         }
 
-
+        /// <summary>
+        /// Gets the current cart for the current user.
+        /// </summary>
         public async Task<IActionResult> OnGet()
         {
             var currentUser = await _signInManager.UserManager.GetUserAsync(User);
@@ -52,6 +66,15 @@ namespace ECommerce_App.Pages.Cart
             return Page();
         }
 
+        /// <summary>
+        /// Updates a CartItem.
+        /// </summary>
+        /// <param name="userId">
+        /// string: the user ID of the current user
+        /// </param>
+        /// <returns>
+        /// Task<IActionResult>: redirects back to the cart
+        /// </returns>
         public async Task<IActionResult> OnPost(string userId)
         {
             CartItem item = new CartItem()
