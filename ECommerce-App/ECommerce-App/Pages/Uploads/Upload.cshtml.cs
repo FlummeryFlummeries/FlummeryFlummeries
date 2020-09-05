@@ -36,6 +36,10 @@ namespace ECommerce_App.Pages.ImageUpload
         {
         }
 
+        /// <summary>
+        /// Add a new flummery to the database with all information provided
+        /// </summary>
+        /// <returns>Updates database to add flummery</returns>
         public async Task OnPost()
         {
             if (ModelState.IsValid)
@@ -55,6 +59,10 @@ namespace ECommerce_App.Pages.ImageUpload
             }
         }
 
+        /// <summary>
+        /// Handle creation of the Flummery with Bound information from Page.
+        /// </summary>
+        /// <returns>Newly created flummery</returns>
         public async Task<Flummery> CreateFlum()
         {
             Flummery flum = new Flummery

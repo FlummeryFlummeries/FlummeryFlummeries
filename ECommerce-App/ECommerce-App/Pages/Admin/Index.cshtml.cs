@@ -22,7 +22,10 @@ namespace ECommerce_App.Pages.Admin
             _flummery = flummery;
         }
 
-
+        /// <summary>
+        /// Get all Flummeries and display them to the page
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGet()
         {
             Flums = await _flummery.GetAllFlummeries();

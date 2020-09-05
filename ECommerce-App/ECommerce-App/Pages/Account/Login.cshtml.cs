@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
 using ECommerce_App.Models.Services;
-
+using ECommerce_App.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,6 +20,10 @@ namespace ECommerce_App.Pages.Account
     {
         private SignInManager<ApplicationUser> _signInManager;
 
+        /// <summary>
+        /// Constructor method for Login page
+        /// </summary>
+        /// <param name="signInManager">SignInManager from ASP.NET identity</param>
         public LoginModel(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
@@ -33,6 +37,10 @@ namespace ECommerce_App.Pages.Account
 
         }
 
+        /// <summary>
+        /// Sends a login request to ASP.NET identity to attempt to log the user in
+        /// </summary>
+        /// <returns>Redirect to home page after logging in if successful, display errors if not</returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
@@ -51,22 +59,6 @@ namespace ECommerce_App.Pages.Account
 
             }
             return Page();
-        }
-
-        public class LoginViewModel
-        {
-            [Required]
-            //[Display("Email Address")]
-            [EmailAddress]
-            [Display(Name = "Email Address")]
-            public string Email { get; set; }
-
-            // These are like server side versions of adding required and type="password" to the inputs on the front end
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-
-            public bool Persistent { get; set; }
         }
     }
 }

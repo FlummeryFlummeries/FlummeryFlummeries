@@ -14,7 +14,6 @@
     var currentUser = await SignInManager.UserManager.GetUserAsync(User);
 }
 
-@*<h1>Welcome @currentUser.FirstName</h1>*@
 
 <h1>Order History</h1>
 
@@ -27,8 +26,7 @@
 
 @foreach (var order in Model.DisplayedOrders)
 {
-<div class="order-card  order-trigger" id="@order.Id">
-
+<div class="order-card" >
     @{
         decimal grandTotal = 0.0m;
     }
@@ -39,7 +37,7 @@
         </div>
     </div>
 
-    <div class="order-body hide order-trigger" id="order-body-@order.Id">
+    <div class="order-body hide" id="order-body-@order.Id">
         @foreach (var oneItem in order.CartItems)
         {
             <div class="card receipt-card">

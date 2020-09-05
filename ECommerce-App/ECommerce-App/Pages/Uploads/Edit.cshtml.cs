@@ -30,6 +30,12 @@ namespace ECommerce_App.Pages.Uploads
             _imageService = imageService;
             _flummery = flummery;
         }
+
+        /// <summary>
+        /// Get the specified flummeries information and display to the page, redirect to Products if it can't be found
+        /// </summary>
+        /// <param name="id">ID of flummery to edit</param>
+        /// <returns>Page with the specified flummery info or redirection to Admin dash if it's not found</returns>
         public async Task<IActionResult> OnGet(int id)
         {
             Id = id;
@@ -48,10 +54,14 @@ namespace ECommerce_App.Pages.Uploads
                 ImgUrl = flum.ImageUrl;
                 return Page();
             }
-            return RedirectToAction("Index", "Products");
+            return RedirectToPage("/Admin/Index");
 
         }
 
+        /// <summary>
+        /// Handling the updating of the current flummery and upload possible new image to Cloud
+        /// </summary>
+        /// <returns>Redirection to product view page for editted flummery or displays ModelState errors to form</returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
@@ -74,6 +84,11 @@ namespace ECommerce_App.Pages.Uploads
             return Page();
         }
 
+        /// <summary>
+        /// Update the specified flummery in the database
+        /// </summary>
+        /// <param name="id">Id of flummery being updated</param>
+        /// <returns>Updated flummery</returns>
         public async Task<Flummery> UpdateFlum(int id)
         {
             Flummery flum = new Flummery

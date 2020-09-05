@@ -39,10 +39,16 @@ namespace ECommerce_App.Pages.Orders
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Get the current user if the Admin is not the one visiting the page and specifying a user to view
+        /// </summary>
+        /// <param name="page">Current page number</param>
+        /// <param name="userEmail">User email to view if Admin is using page</param>
+        /// <returns>Page with the specified user's Orders bound to display</returns>
         public async Task<IActionResult> OnPost(int page, string userEmail = null)
         {
             ApplicationUser user;
-            if(userEmail == null || userEmail == "")
+            if(User.IsInRole("Admin") && userEmail == null || userEmail == "")
             {
                 user = await _userManager.GetUserAsync(User);
             }
@@ -59,6 +65,12 @@ namespace ECommerce_App.Pages.Orders
             return Page();
         }
 
+        /// <summary>
+        /// Handle getting the user's orders and pagination
+        /// </summary>
+        /// <param name="userEmail">User email to search for</param>
+        /// <param name="page">Current page number</param>
+        /// <returns>Binds Orders and Pages to the view to display</returns>
         private async Task GetOrdersForUserAndPage(string userEmail, int page)
         {
             CurrPage = page;

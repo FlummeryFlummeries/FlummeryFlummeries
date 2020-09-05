@@ -15,8 +15,6 @@
     var currentUser = await SignInManager.UserManager.GetUserAsync(User);
 }
 
-@*<h2>Flummery Flummery Details</h2>*@
-
 <div class="card details-card">
     <div class="card-body">
         <h5 class="card-title">@Model.Flummery.Name</h5>
@@ -35,15 +33,5 @@
 
         }
         <a asp-controller="Products" asp-action="Index" class="btn btn-light">Return to Products</a>
-
-        @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-        {
-            <h5>Admin Options:</h5>
-            <div class="admin-options">
-                <a asp-page="/Images/Upload" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Upload Image</a>
-                <a asp-page="/Uploads/Edit" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Edit Flummery</a>
-                <a asp-page="/Uploads/Delete" asp-route-id="@Model.Flummery.Id" class="btn btn-light">Delete Flummery</a>
-            </div>
-        }*@
     </div>
 </div>

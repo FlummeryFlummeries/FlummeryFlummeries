@@ -107,32 +107,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            $(".cart-icon").click(function () {
-                $(".cart-mini").toggleClass('hide');
-            });
-            $(".address-toggle").change(function () {
-                if ($(".address-info").hasClass("hide")) {
-                    $(".address-info").find("input").attr("required", true);
-                    $(".address-info").find("select").attr("required", true);
-                } else {
-                    $(".address-info").find("input").attr("required", false);
-                    $(".address-info").find("select").attr("required", false);
-                }
-                $(".address-optional").attr("required", false)
-                $(".address-info").toggleClass("hide");
-            });
-            $(".order-trigger").click(function (e) {
-                $("#order-body-" + e.target.id).toggleClass('hide');
-                e.stopPropagation();
-            });
-            $(".header-trigger").find().click(function (e) {
-                $("#order-body-" + e.target.id).toggleClass('hide');
-            });
-            $(':checkbox:checked').prop('checked', false);
-        });
-    </script>
+    <script src="~/Scripts/main.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

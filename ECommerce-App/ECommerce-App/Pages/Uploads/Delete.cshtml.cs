@@ -19,10 +19,15 @@ namespace ECommerce_App.Pages.Uploads
             _flummery = flummery;
         }
 
+        /// <summary>
+        /// Delete a specified flummery from the DB
+        /// </summary>
+        /// <param name="id">ID of flummery to be deleted</param>
+        /// <returns>Redirects user to products page</returns>
         public async Task<IActionResult> OnGet(int id)
         {
             await _flummery.DeleteFlummery(id);
-            return RedirectToAction("Index", "Products");
+            return RedirectToPage("/Admin/Index");
         }
     }
 }

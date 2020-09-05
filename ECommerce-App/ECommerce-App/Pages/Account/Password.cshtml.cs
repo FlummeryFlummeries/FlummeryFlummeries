@@ -32,6 +32,10 @@ namespace ECommerce_App.Pages.Account
 
         }
 
+        /// <summary>
+        /// Allow a user to change their password after confirming current one.
+        /// </summary>
+        /// <returns>Redirect to Account View w/ changed password if successful, display modelstate errors on form if not</returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)

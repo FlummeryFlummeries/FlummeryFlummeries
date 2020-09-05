@@ -28,6 +28,11 @@ namespace ECommerce_App.Pages.Account
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
+        /// <summary>
+        /// Retrieve user account information and display it to the page
+        /// </summary>
+        /// <returns>Page with Input bound to the current user's account information</returns>
         public async Task<IActionResult> OnGet()
         {
             var currentUser = await _userManager.GetUserAsync(User);
@@ -51,6 +56,10 @@ namespace ECommerce_App.Pages.Account
             return Page();
         }
 
+        /// <summary>
+        /// Allow a user to update their account information by submitting the front-end form
+        /// </summary>
+        /// <returns>Page with updated details if the update was successful</returns>
         public async Task<IActionResult> OnPost()
         {
             var currentUser = await _userManager.GetUserAsync(User);

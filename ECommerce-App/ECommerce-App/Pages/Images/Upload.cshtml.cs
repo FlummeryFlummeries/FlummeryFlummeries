@@ -26,9 +26,7 @@ namespace ECommerce_App.Pages.Images
 
         [BindProperty]
         public IFormFile ImageFile { get; set; }
-
         public string Name { get; set; }
-
         public string CurrentImgUrl { get; set; }
 
         public UploadModel(IImage imageService, IFlummeryInventory inventory)
@@ -37,6 +35,11 @@ namespace ECommerce_App.Pages.Images
             _inventory = inventory;
         }
 
+        /// <summary>
+        /// Get the current item's information and image to display
+        /// </summary>
+        /// <param name="id">Item ID</param>
+        /// <returns>Page with item Name and ImgUrl bound to display to user</returns>
         public async Task OnGet(int id)
         {
             var item = await _inventory.GetFlummeryBy(id);
@@ -44,6 +47,11 @@ namespace ECommerce_App.Pages.Images
             CurrentImgUrl = item.ImageUrl;
         }
 
+        /// <summary>
+        /// Upload a new image for the given flummery
+        /// </summary>
+        /// <param name="id">Flummery to be updated</param>
+        /// <returns>User should see the same page with the new image displayed</returns>
         public async Task OnPost(int id)
         {
             var item = await _inventory.GetFlummeryBy(id);
