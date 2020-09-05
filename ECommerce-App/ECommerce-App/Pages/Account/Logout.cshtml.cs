@@ -15,13 +15,21 @@ namespace ECommerce_App.Pages.Account
         {
             _signInManager = signIn;
         }
-
+        
+        /// <summary>
+        /// Log the user out
+        /// </summary>
+        /// <returns>Redirect to homepage after logging out</returns>
         public async Task<IActionResult> OnGet()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Log the user out
+        /// </summary>
+        /// <returns>Redirect to homepage after logging out</returns>
         public async Task<IActionResult> OnPost()
         {
             await _signInManager.SignOutAsync();

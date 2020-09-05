@@ -23,14 +23,13 @@
     }
     @foreach (var order in Model.Orders)
     {
-        <div class="order-card order-trigger" id="@order.Order.Id">
-
+        <div class="order-card">
             @{
                 decimal grandTotal = 0.0m;
             }
 
             <div class="card receipt-card">
-                <div class="card-body header-trigger" id="@order.Order.Id">
+                <div class="card-body">
                     @if (order.User != null)
                     {
                         <h3>User: @order.User.FirstName @order.User.LastName</h3>
@@ -44,7 +43,7 @@
                     <h3>Order Number: @order.Order.Id</h3>
                 </div>
             </div>
-            <div class="order-body hide order-trigger" id="order-body-@order.Order.Id">
+            <div class="order-body hide" id="order-body-@order.Order.Id">
                 @foreach (var oneItem in order.Order.CartItems)
                 {
                     <div class="card receipt-card" id="@order.Order.Id">
@@ -64,14 +63,14 @@
                 }
             </div>
 
-            <div class="card receipt-card order-trigger" id="@order.Order.Id">
+            <div class="card receipt-card">
                 <div class="card-body" id="@order.Order.Id">
                     <h3>Grand Total: $@grandTotal</h3>
                 </div>
             </div>
 
             <div class="card shipping-info">
-                <div class="card-body" id="@order.Order.Id">
+                <div class="card-body" >
                     <h3>Shipping info:</h3>
                     <p>Shipped to: @order.Order.FirstName @order.Order.LastName</p>
                     <p>At: @order.Order.ShippingAddress @order.Order.ShippingCity, @order.Order.ShippingState @order.Order.ShippingZip</p>
@@ -92,15 +91,6 @@
 {
     <div>
         <ul class="pagination justify-content-center">
-            @*@if (Model.CurrPage > 1)
-            {
-                <li class="page-item">
-                    <form method="post">
-                        <input type="hidden" name="page" value="@(Model.CurrPage-1)" />
-                        <button type="submit" class="page-link">&lsaquo;</button>
-                    </form>
-                </li>
-            }*@
             @for (int i = 1; i <= Model.TotalPages; i++)
             {
                 <li class="page-item @(i == Model.CurrPage ? "active" : "")">
@@ -110,28 +100,6 @@
                     </form>
                 </li>
             }
-            @*@if (Model.CurrPage < Model.TotalPages)
-            {
-                <li class="page-item">
-                    <form method="post">
-                        <input type="hidden" name="page" value="@(Model.CurrPage+1)" />
-                        <button type="submit" class="page-link">&rsaquo;</button>
-                    </form>
-                </li>
-            }*@
         </ul>
     </div>
 }
-
-@*@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $(".order-trigger").click(function (e) {
-                $("#order-body-" + e.target.id).toggleClass('hide');
-            });
-            $(".header-trigger").find().click(function (e) {
-                $("#order-body-" + e.target.id).toggleClass('hide');
-            });
-        });
-    </script>
-}*@

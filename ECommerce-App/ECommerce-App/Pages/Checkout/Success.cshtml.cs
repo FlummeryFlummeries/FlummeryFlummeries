@@ -25,6 +25,12 @@ namespace ECommerce_App.Pages.Checkout
             _order = order;
         }
 
+        /// <summary>
+        /// Receive and display the success message and Order from the checkout
+        /// </summary>
+        /// <param name="response">AuthorizeNet success response string</param>
+        /// <param name="cartId">Current user's cartId to get the order</param>
+        /// <returns>Binds Message and Order to page for displaying on front end</returns>
         public async Task OnGet(string response, int cartId)
         {
             Message = response;

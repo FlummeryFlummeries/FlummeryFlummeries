@@ -58,6 +58,10 @@ namespace ECommerce_App.Pages.Cart
             _email = email;
         }
 
+        /// <summary>
+        /// Get a user's cart information and send it to the front end
+        /// </summary>
+        /// <returns>Page with Input bound to the user's currently saved checkout information</returns>
         public async Task<IActionResult> OnGet()
         {
             Input = new CheckoutViewModel();
@@ -83,6 +87,10 @@ namespace ECommerce_App.Pages.Cart
             return Page();
         }
 
+        /// <summary>
+        /// Send a checkout request with the provided information to AuthorizeNet
+        /// </summary>
+        /// <returns>Redirect to Checkout Success page if transation successful, show ModelState errors on form if not</returns>
         public async Task<IActionResult> OnPost()
         {
             #region AddressBuilding

@@ -39,6 +39,10 @@ namespace ECommerce_App.Pages.Account
         {
         }
 
+        /// <summary>
+        /// Register a new user with a given email, first and last name, and password
+        /// </summary>
+        /// <returns>Redirect to home after logging user in if successful, show modelstate errors on form if unsuccessful</returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)

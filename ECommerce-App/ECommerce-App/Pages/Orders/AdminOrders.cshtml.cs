@@ -5,6 +5,7 @@ using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using ECommerce_App.Models;
 using ECommerce_App.Models.Interface;
+using ECommerce_App.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -37,18 +38,32 @@ namespace ECommerce_App.Pages.Orders
             Orders = new List<AdminOrdersViewModel>();
         }
 
-
+        /// <summary>
+        /// Call Handle Pagination to bind items to page and allow pagination
+        /// </summary>
+        /// <param name="page">Current page number</param>
+        /// <returns>View with current page's items</returns>
         public async Task OnGet(int page)
         {
             await HandlePagination(page);
         }
 
+        /// <summary>
+        /// Call Handle Pagination to bind items to page and allow pagination
+        /// </summary>
+        /// <param name="page">Current page number</param>
+        /// <returns>View with current page's items</returns>
         public async Task OnPost(int page)
         {
             await HandlePagination(page);
         }
 
-        public async Task HandlePagination(int page, string userId = null)
+        /// <summary>
+        /// Handle get all orders and adding pagination to display the amount defined by ItemsPerPage on each page.
+        /// </summary>
+        /// <param name="page">Current page number</param>
+        /// <returns>Binds the current Page's items to the view</returns>
+        public async Task HandlePagination(int page)
         {
             CurrPage = page;
             List<OrderCart> orders;
@@ -69,11 +84,4 @@ namespace ECommerce_App.Pages.Orders
         }
     }
 
-    public class AdminOrdersViewModel
-    {
-        [BindProperty]
-        public OrderCart Order { get; set; }
-        [BindProperty]
-        public ApplicationUser User { get; set; }
-    }
 }
